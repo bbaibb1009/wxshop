@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <html>
 <head>
-<title>主页1</title>
+<title>微商城管理后台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap.min.css" />
@@ -15,8 +15,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/basic.js}"></script>
-<script >
+<script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
+<script type="text/javascript" >
+
+	var path = "${pageContext.request.contextPath}";
 	function goUrl(adminMenuId3, url)
 	{
 		var adminMenuId1 = -1;
