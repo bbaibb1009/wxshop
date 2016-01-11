@@ -12,4 +12,6 @@ public class d {
      commitencoding = gbk
 [svn]
      pathnameencoding = gbk
-*/}
+*/
+	//测试一下办公室的中文有没有乱码
+}
