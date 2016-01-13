@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
+import com.wxshop.util.Page;
 
 @Service
 @Transactional
@@ -56,8 +57,21 @@ public class ShopMenuService implements IShopMenuService {
 	{
 		hibernateDao.update(menu);
 		hibernateDao.flush();
-		
+	}
 
+
+	public Page queryShopMenu(WcShopMenu menu) {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder(	"	SELECT   a.WSM_ID, a.WSM_NAME, a.WSM_URL, a.WSM_LEVEL, a.WSM_ORDER,  a.WSM_DESC,  a.WSM_PARENT_ID,  a.WSM_REGISTOR,  DATE_FORMAT(a.WSM_REGIST_DATE ,'%Y-%c-%d') AS WSM_REGIST_DATE ");
+		StringBuilder sqlCnt = new StringBuilder("	select count(*) ");
+		StringBuilder sqlConf = new StringBuilder(" from wc_shop_menu a");
+		List<Object> paraList = new ArrayList<Object>();
+		sql.append(sqlConf);
+		sqlCnt.append(sqlConf);
+		sql.append(" order by a.WSM_ID asc ");
+		Page page = new Page(sql.toString(),sqlCnt.toString(),menu.getCurrentPage(),menu.getPageSize(),paraList.toArray());
+		jdbcDao.queryForPage(page);
+		return page;
 	}
 
 

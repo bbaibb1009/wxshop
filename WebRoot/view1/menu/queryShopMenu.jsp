@@ -24,28 +24,37 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="current">商品分类查询</a> </div>
-    <h1>商品分类查询</h1>
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="current">客户端菜单查询</a> </div>
+    <h1>客户端菜单查询</h1>
   </div>
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/goods/toAddGoodsFenlei/${command.wgfWcsId}'" value="添加"/>
+	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/>
     </div>
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/goods/queryGoodsFenlei" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/menu/queryShopMenu" onsubmit="return false;">
+          	<f:hidden path="wsmId"/>
             <table class="table table-bordered with-check ">
               <thead>
                 <tr>
-                  <th><i class="icon-resize-vertical"></i></th><th>名称</th><th>状态</th><th>录入人</th><th>录入时间</th>
+                  <th><input type="checkbox" onclick="javascript:chkAll(this.checked,'wsmIds');"/></th><th>菜单名称</th><th>菜单URL</th><th>级别</th><th>顺序</th><th>上级菜单</th><th>录入人</th><th>录入时间</th><th>操作</th>
                 </tr>
               </thead>
               <tbody>
-                <c:forEach items="${pageResult.resultList}" var="fenlei">
+                <c:forEach items="${pageResult.resultList}" var="menu">
                 <tr>
-                  <td><input type="checkbox" name=""/></td><td>${fenlei.WGF_NAME}</td><td>${fenlei.WGF_STATUS}</td><td>${fenlei.WGF_REGISTOR}</td><td class="center">${fenlei.WGF_REGISTDATE}</td>
+                	<td><input type="checkbox" name="wsmIds" value="${menu.WSM_ID}"/></td>
+                  	<td>${menu.WSM_NAME}</td>
+                  	<td>${menu.WSM_URL}</td>
+                  	<td>${menu.WSM_LEVEL}</td>
+                  	<td>${menu.WSM_ORDER}</td>
+                  	<td>${menu.WSM_PARENT_ID}</td>
+                  	<td>${menu.WSM_REGISTOR}</td>
+                  	<td class="center">${menu.WSM_REGIST_DATE}</td>
+                  	<td><a href="javascript:upd();" class="btn btn-info">修改</a></td>
                 </tr>
                 </c:forEach> 
               </tbody>
@@ -63,7 +72,7 @@
 <!--Footer-part-->
 
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a> </div>
+  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a></div>
 </div>
 
 <!--end-Footer-part-->
