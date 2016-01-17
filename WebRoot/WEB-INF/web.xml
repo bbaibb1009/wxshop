@@ -39,7 +39,8 @@
   		<param-name>except</param-name>
   		<param-value>
   		/,/admin/adminLogin,/admin/adminLoginSpark,/admin/toForgetPwd,/admin/forgetPwd,/admin/toResetPwd,/admin/resetPwd,/admin/toRegisterAdmin,/admin/registerAdmin,
-  		/weimember/toBindMember/*,/weimember/bindMember,/weimember/toMemberIndex/*,/goods/queryGoodsFenlei/*
+  		/weimember/toBindMember/*,/weimember/bindMember,/weimember/toMemberIndex/*,/goods/queryGoodsFenlei/*,
+  		/shop/menu/queryMenu,/shop/menu/toAddShopMenu,/shop/menu/addShopMenu
   		</param-value>
   	</init-param>
   </filter>

@@ -28,6 +28,12 @@ public class ShopMenuController
 		return "/menu/queryShopMenu";
 	}
 	
+	@RequestMapping("/toAddShopMenu")
+	public String toAddShopMenu()
+	{
+		return "";
+	}
+	
 	
 	
 }

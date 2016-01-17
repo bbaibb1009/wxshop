@@ -64,7 +64,7 @@ public class ShopMenuService implements IShopMenuService {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder(	"	SELECT   a.WSM_ID, a.WSM_NAME, a.WSM_URL, a.WSM_LEVEL, a.WSM_ORDER,  a.WSM_DESC,  a.WSM_PARENT_ID,  a.WSM_REGISTOR,  DATE_FORMAT(a.WSM_REGIST_DATE ,'%Y-%c-%d') AS WSM_REGIST_DATE ");
 		StringBuilder sqlCnt = new StringBuilder("	select count(*) ");
-		StringBuilder sqlConf = new StringBuilder(" from wc_shop_menu a");
+		StringBuilder sqlConf = new StringBuilder(" from WC_SHOP_MENU a");
 		List<Object> paraList = new ArrayList<Object>();
 		sql.append(sqlConf);
 		sqlCnt.append(sqlConf);
