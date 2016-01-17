@@ -17,7 +17,7 @@ import javax.persistence.Transient;
  * @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "wc_shop_role", catalog = "wxcrm")
+@Table(name = "WC_SHOP_ROLE", catalog = "wxcrm")
 public class WcShopRole implements java.io.Serializable {
 
 	// Fields

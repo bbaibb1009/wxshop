@@ -16,6 +16,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "WX_SHOP_ADMIN", catalog = "wxcrm")
+
 public class WcShopAdmin implements java.io.Serializable {
 
 	// Fields
