@@ -31,7 +31,13 @@
     <hr>
     <div class="btn-group">
 	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/>
+   		<!-- 按钮触发模态框 -->
+<button class="btn btn-primary btn-lg" data-toggle="modal"   data-target="#myModal">
+   开始演示模态框
+</button>
     </div>
+    <a data-toggle="modal" href="${pageContext.request.contextPath}/shop/menu/toAddShopmenu" data-target="#myModal">请点击我</a>
+    
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">

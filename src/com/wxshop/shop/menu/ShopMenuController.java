@@ -31,7 +31,8 @@ public class ShopMenuController
 	@RequestMapping("/toAddShopMenu")
 	public String toAddShopMenu()
 	{
-		return "";
+		//跳转到添加菜单
+		return "/menu/addShopMenu";
 	}
 	
 	
