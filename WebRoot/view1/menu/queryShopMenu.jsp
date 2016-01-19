@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 
-
 </head>
 <body>
 
@@ -32,9 +31,8 @@
     <div class="btn-group">
 	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/>
    		<!-- 按钮触发模态框 -->
-<button class="btn btn-primary btn-lg" data-toggle="modal"   data-target="#myModal">
-   开始演示模态框
-</button>
+		<input type="button" value="开始演示模态窗口" class="btn btn-primary btn-lg" data-toggle="modal" onclick="toAddMenu();"  data-target="#myModal">
+		<div id="myModal" >fdsdfsd</div>
     </div>
     <a data-toggle="modal" href="${pageContext.request.contextPath}/shop/menu/toAddShopmenu" data-target="#myModal">请点击我</a>
     
@@ -104,6 +102,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
+<script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
 
 
 
