@@ -42,6 +42,7 @@ public class ShopAdminController
 	
 	@Autowired
 	private IWebsiteService websiteservice;
+	
 	@RequestMapping("/adminLogin")
 	public String adminLogin(@ModelAttribute("command") WcShopAdmin admin, 
 			HttpServletResponse response, HttpSession session, Model model, 
