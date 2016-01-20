@@ -29,14 +29,8 @@
     <div class="btn-group">
 	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/>
    		<!-- 按钮触发模态框 -->
-		<input type="button" value="开始演示模态窗口" class="btn btn-primary " data-toggle="modal" onclick="toAddMenu();"  data-target="#myModal">
-		<div id="myModal" class="modal hide fade in">
-			<div><h3 id="myModalLabel">Modal header</h3></div>
-			<div>
-				<h4>Text in a modal</h4>
-				<p>You can add some text here.</p>		        
-			</div>
-		</div>
+		<input type="button" value="开始演示模态窗口" class="btn btn-primary " data-toggle="modal"   data-target="#myModal" data-show="true">
+		
     </div>
     <div class="row-fluid">
         <div class="widget-box">
@@ -53,6 +47,13 @@
 <div class="row-fluid">
   <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a></div>
 </div>
+<div id="myModal" class="modal hide  in">
+			<div><h3 id="myModalLabel">Modal header</h3></div>
+			<div>
+				<h4>Text in a modal</h4>
+				<p>You can add some text here.</p>		        
+			</div>
+		</div>
 <!--end-Footer-part-->
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery-browser.js"></script> 
@@ -77,10 +78,10 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script>
 <script type="text/javascript">
-	//alert("测试1");
+	var path = "${pageContext.request.contextPath}";
 	$(document).ready(function(){
-		alert("测试!");
-		$("body").off(".data-api");
+		
+		//$("body").off(".data-api");
 	});	
 </script>
 </body>
