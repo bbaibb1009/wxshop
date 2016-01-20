@@ -60,6 +60,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/tabList.js"></script>
 <script src="${pageContext.request.contextPath}/view1/js/jquery.ui.custom.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/bootstrap.js"></script> 
+<script src="${pageContext.request.contextPath}/view1/js/bootstrap-typeahead.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.flot.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.flot.resize.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.peity.min.js"></script> 
