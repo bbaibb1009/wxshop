@@ -6,8 +6,7 @@
 <title>微商城管理后台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/fullcalendar.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/matrix-style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/matrix-media.css" />

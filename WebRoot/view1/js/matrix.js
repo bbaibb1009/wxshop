@@ -133,16 +133,11 @@ $(document).ready(function(){
 	$('.lightbox_trigger').click(function(e) {
 		
 		e.preventDefault();
-		
 		var image_href = $(this).attr("href");
-		
 		if ($('#lightbox').length > 0) {
-			
 			$('#imgbox').html('<img src="' + image_href + '" /><p><i class="icon-remove icon-white"></i></p>');
-		   	
 			$('#lightbox').slideDown(500);
 		}
-		
 		else { 
 			var lightbox = 
 			'<div id="lightbox" style="display:none;">' +

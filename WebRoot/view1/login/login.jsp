@@ -6,8 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/matrix-login.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css" />
 	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' type='text/css'>

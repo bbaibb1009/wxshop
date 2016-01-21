@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/test")
-public class TestController {
-
+public class TestController 
+{
 	@RequestMapping("/test")
 	public String test(HttpServletResponse response, HttpSession session, Model model)
 	{
 		return "/test/test" ;
 	}
+	
 	
 	
 	
