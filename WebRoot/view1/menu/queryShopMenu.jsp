@@ -15,33 +15,26 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript">
 	var path = "${pageContext.request.contextPath}";
-	
 </script>
 </head>
 <body>
-
 <jsp:include page="/view1/login/menuFrame.jsp"></jsp:include>
 <!--main-container-part-->
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="current">客户端菜单查询</a> </div>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">客户端菜单查询</a></div>
     <h1>客户端菜单查询</h1>
   </div>
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
 	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/>
-   		<!-- 按钮触发模态框 -->
-		<input type="button" value="开始演示模态窗口" class="btn btn-primary btn-lg" data-toggle="modal" onclick="toAddMenu();"  data-target="#myModal">
-		<div id="myModal" >fdsdfsd</div>
     </div>
-    <a data-toggle="modal" href="${pageContext.request.contextPath}/shop/menu/toAddShopmenu" data-target="#myModal">请点击我</a>
-    
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/shop/menu/queryShopMenu" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/menu/queryMenu" onsubmit="return false;">
           	<f:hidden path="wsmId"/>
             <table class="table table-bordered with-check ">
               <thead>
@@ -72,18 +65,12 @@
       </div>
   </div>
 </div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
   <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a></div>
 </div>
-
 <!--end-Footer-part-->
-
-
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery-browser.js"></script> 		
 <script src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
@@ -106,8 +93,5 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
-
-
-
 </body>
 </html>
