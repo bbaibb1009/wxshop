@@ -1,10 +1,7 @@
 
 $(document).ready(function(){
 
-	
-	
 	// === Sidebar navigation === //
-	
 	$('.submenu > a').click(function(e)
 	{
 		e.preventDefault();
@@ -35,7 +32,6 @@ $(document).ready(function(){
 	});
 	
 	var ul = $('#sidebar > ul');
-	
 	$('#sidebar > a').click(function(e)
 	{
 		e.preventDefault();

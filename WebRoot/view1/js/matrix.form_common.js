@@ -38,8 +38,8 @@ $(document).ready(function() {
 	$("#mask-eyeScript").mask("~9.99 ~9.99 999");
 	$("#mask-percent").mask("99%");
 
-	//------------- Toggle button  -------------//
-
+	//------------- Toggle button 拨动开关，v3 下貌似改成 bootstrapSwitch -------------//
+	/**
 	$('.normal-toggle-button').toggleButtons();
 	$('.text-toggle-button').toggleButtons({
 	    width: 140,
@@ -55,26 +55,27 @@ $(document).ready(function() {
 	        disabled: "<span class='icon16 icomoon-icon-cancel-3 white marginL5'></span>"
 	    }
 	});
-
-	//------------- Spinners with steps  -------------//
+	**/
+	//------------- Spinners with steps 加减输入框 暂时没有找到替换者 -------------//
+	/**
 	$( "#spinner1" ).spinner();
 
-	/*Demacial*/
+	//Demacial
 	$( "#spinner2" ).spinner({
       step: 0.01,
       numberFormat: "n"
     });
 
-	/*Custom step size*/
+	//Custom step size/
     $( "#spinner3" ).spinner({
       step: 5
     });
 
-    /*Currency spinner*/
+    //Currency spinner/
     $( "#spinner4" ).spinner({ 
     	numberFormat: "C" 
     });
-
+	**/
 	//------------- Colorpicker -------------//
 	if($('div').hasClass('picker')){
 		$('.picker').farbtastic('#color');
@@ -98,20 +99,22 @@ $(document).ready(function() {
 	}
 	
     //------------- Time entry (picker) -------------//
+	/**
 	$('#timepicker').timeEntry({
 		show24Hours: true,
 		spinnerImage: ''
 	});
 	$('#timepicker').timeEntry('setTime', '22:15')
-
+	*/
 	//------------- Select plugin -------------//
 	$("#select1").select2();
 	$("#select2").select2();
 
-	//--------------- Dual multi select ------------------//
-	$.configureBoxes();
+	//--------------- Dual multi select 貌似是日历的选择  ------------------//
+	//$.configureBoxes();
 
 	//--------------- Tinymce ------------------//
+	/*
 	$('textarea.tinymce').tinymce({
 		// Location of TinyMCE script
 		script_url : 'plugins/forms/tiny_mce/tiny_mce.js',
@@ -145,7 +148,7 @@ $(document).ready(function() {
 			staffid : "991234"
 		}
 	});
-
+	*/
 	//Boostrap modal
 	$('#myModal').modal({ show: false});
 	
@@ -156,7 +159,9 @@ $(document).ready(function() {
 
 });//End document ready functions
 
-//sparkline in sidebar area
+//sparkline in sidebar area 波浪线的有关设置 暂时先隐藏掉 没找到相关的源文件  直接隐藏掉 建议删掉
+
+/**
 var positive = [1,5,3,7,8,6,10];
 var negative = [10,6,8,7,3,5,1]
 var negative1 = [7,6,8,7,6,5,4]
@@ -204,4 +209,4 @@ $('#stat6').sparkline(positive, {
 	spotRadius: 3,//Radius of all spot markers, In pixels (default: 1.5) - Integer
 	lineWidth: 2//In pixels (default: 1) - Integer
 });
-
+*/

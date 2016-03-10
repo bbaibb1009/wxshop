@@ -29,10 +29,11 @@ public class ShopMenuController
 	}
 	
 	@RequestMapping("/toAddShopMenu")
-	public String toAddShopMenu()
+	public String toAddShopMenu(@ModelAttribute("command") WcShopMenu menu,Model mode)
 	{
 		//跳转到添加菜单
 		return "/menu/addShopMenu";
+		//return "/menu/select2";
 	}
 	
 	
