@@ -13,10 +13,25 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/select2.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTreeStyle/metro.css"/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
-<script type="text/javascript">
+<script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js"></script>
+<script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js"></script>
+<script >
 	var path = "${pageContext.request.contextPath}";
+	var setting = {
+		check: {
+			enable: true,
+			chkStyle: "radio",
+			radioType: "all"
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
 </script>
 </head>
 <body>
@@ -38,45 +53,55 @@
              <h5>添加客户端菜单</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/menu/addMenu" onsubmit="return false;">
-          	
+          	<f:form action="${pageContext.request.contextPath}/shop/menu/addMenu" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:hidden path="wsmParentId"/>
             <div class="form-group">
-              	<div class="col-ms-2">
-              		<label for="wsmLevel" class="col-ms-4 control-label">菜单级别</label>
-                  	<select name="wsmLevel">
-                  		<option value="">-请选择-</option>
-                  		<option value="1">1级</option>
-                  		<option value="2">2级</option>
-                  	</select>
-	           	</div>
-			</div>	
-            <!--
-            <f:hidden path="wsmParentId"/>
-            <div class="form-group ">
-              	<label for="wsmName" class="col-ms-4 control-label">菜单名称</label>
-              	<div class="col-ms-4">
-                	<f:input path="wsmName" cssClass="form-control input-ms"/>
-            	</div>
+            	<label for="wsmName" class="col-lg-1 control-label">菜单名称</label>
+            	<div class="col-lg-3">
+               	 	<f:input path="wsmName" cssClass="form-control input-ms"/>
+                </div>
             </div>
             <div class="form-group ">
-              	<label for="wsmUrl" class="col-ms-4 control-label">菜单链接</label>
-              	<div class="col-ms-4">
+            	<label for="wsmUrl" class="col-lg-1 control-label">菜单链接</label> 
+            	<div class="col-lg-3">
                 	<f:input path="wsmUrl" cssClass="form-control input-ms"/>
             	</div>
             </div>
-            <div class="form-group ">
-              	<label for="wsmOrder" class="col-ms-4 control-label">菜单顺序</label>
-              	<div class="col-ms-4">
+            <div class="form-group">
+            	<label for="wsmLevel" class="col-lg-1 control-label">菜单级别</label>
+              	<div class="col-lg-3">
+                  	<f:select path="wsmLevel" cssClass=""  cssStyle="width:100%" onchange="getParentMenu(this.value);">
+                  		<f:option value="1">1级</f:option>
+                  		<f:option value="2">2级</f:option>
+                  	</f:select>
+	           	</div>
+			</div>
+			<div class="form-group" id="pmenu">
+            	<label for="" class="col-lg-1 control-label">上级菜单</label>
+              	<div class="col-lg-3">
+                  	<ul id="treeDemo" class="ztree"></ul>
+	           	</div>
+			</div>
+            <div class="form-group  ">
+
+              	<label for="wsmOrder" class="col-lg-1 control-label">菜单顺序</label>
+
+              	<div class="col-lg-3">
                 	<f:input path="wsmOrder" cssClass="form-control input-ms"/>
             	</div>
             </div>	
-            <div class="form-group ">
-              	<label for="wsmDesc" class="col-ms-4 control-label">备注</label>
-              	<div class="col-ms-4">
-                	<f:textarea path="wsmDesc" cssClass="form-control input-ms"></f:textarea>
+            <div class="form-group  ">
+              	<label for="wsmDesc" class="col-lg-1 control-label">备注</label>
+              	<div class="col-lg-3">
+                	<f:textarea path="wsmDesc" cssClass="form-control input-ms" rows="4"></f:textarea>
             	</div>
             </div>
-            -->
+			<div class="form-group  ">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-3">
+					<button class="btn btn-info" onclick="addMenuSubmit();" >保存</button>
+				</div>          	
+            </div>
             </f:form>
           </div>
        </div>
@@ -95,7 +120,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
 <script src="${pageContext.request.contextPath}/view1/js/tabList.js"></script>
 <script src="${pageContext.request.contextPath}/view1/js/jquery.ui.custom.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/js/bootstrap.min.js"></script> 
+<script src="${pageContext.request.contextPath}/view1/js/bootstrap.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/bootstrap-colorpicker.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/bootstrap-datepicker.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/masked.js"></script> 

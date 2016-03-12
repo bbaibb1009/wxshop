@@ -5,7 +5,7 @@ $(document).ready(function(){
 	
 	$('select').select2();
 	
-	// Form Validation
+	//表单的验证函数
     $("#basic_validate").validate({
 		rules:{
 			required:{

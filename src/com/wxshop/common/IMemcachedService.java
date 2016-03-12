@@ -14,6 +14,10 @@ public interface IMemcachedService
 //	public void setAdminNameAll(List<Map<String, Object>> adminNameList);
 	
 	public List<Map<String, Object>> getAdminNameAll();
+	
+	public List<Map<String,Object>> getMenuAll();
+	
+	public void setShopMenuAll();
 
 	
 }

@@ -26,6 +26,7 @@ public class DateUtil
 		return calendar.getTime();
 	}
 	
+
 	/**
 	 * @author wanglei
 	 * created on Jul 26, 2012 8:32:29 PM

@@ -118,7 +118,9 @@ function delChk(chkName, action)
 		}
 		if( selCount == 0 )
 		{
-			alert("请选择您要删除的数据");
+			//alert("请选择您要删除的数据");
+			alert_warn("请选择您要删除的数据");
+			
 		}
 		else
 		{
@@ -129,6 +131,16 @@ function delChk(chkName, action)
 			}
 		}
 	}
+}
+
+function alert_warn()
+{
+	var msg = arguments[0];
+	if(msg==null||msg.length==0)
+	{
+		msg = "您确定吗?";
+	}
+	$("#myModal").modal();
 }
 
 function toUpd(idName, idValue, action)

@@ -37,8 +37,8 @@ public class MemcachedService implements IMemcachedService
 //		{
 //			log.error("memcached清空失败");
 //		}
-//		setMenuAll();
-//		log.info("微信商家管理-系统菜单存入memcached成功");
+		setShopMenuAll();
+		log.info("微信商家管理-系统菜单存入memcached成功");
 //		setAdminNameAll();
 //		log.info("微信商家管理员姓名存入memcached成功");
 	}
@@ -73,6 +73,29 @@ public class MemcachedService implements IMemcachedService
 		return adminNameList;
 	}
 
+
+	public void setShopMenuAll() {
+		// TODO Auto-generated method stub
+		setShopMenuAll(menuService.queryShopMenuToCache());
+	}
+
+	public void setShopMenuAll(List<Map<String, Object>> menuList) {
+		if (!memCachedClient.set(SysConstant.MENU_ALL, menuList, new Date(
+				System.currentTimeMillis() + STORE_TIME))) {
+			log.error("系统菜单存入memcached失败");
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> getShopMenuAll() {
+		List<Map<String, Object>> menuList = (List<Map<String, Object>>) memCachedClient.get(SysConstant.MENU_ALL);
+		if (menuList == null) {
+			menuList = menuService.queryShopMenuToCache();
+			setShopMenuAll(menuList);
+		}
+
+		return menuList;
+	}
 }
 
 

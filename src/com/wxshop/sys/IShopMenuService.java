@@ -18,4 +18,10 @@ public interface IShopMenuService {
 	
 	public Page queryShopMenu(WcShopMenu menu);
 	
+	public void addMenu(WcShopMenu menu);
+	
+	public void delMenu(String[] wsmIds);
+	
+	
+	
 }
