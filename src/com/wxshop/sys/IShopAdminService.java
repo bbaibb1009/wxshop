@@ -1,13 +1,10 @@
 package com.wxshop.sys;
 
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
+import com.wxshop.util.Page;
 
 
 
@@ -21,6 +18,7 @@ public interface IShopAdminService {
 	public WcShopAdmin adminLogin(WcShopAdmin admin);
 	public List<Map<String, Object>> queryShopAdminNameToCache();
 	public boolean chkUsernameRandomStr(WcShopAdmin admin);
+	public Page queryShopAdmin(WcShopAdmin admin);
 	
 	
 }

@@ -74,7 +74,6 @@ public class WeiMemberController
 		return "/member/selmember";
 	}
 	
-	
 	@RequestMapping(value ="/toUpdMember",method = RequestMethod.POST)
 	public String toUpdRole(LzWeiMember weimember_Q, Model model) throws IllegalArgumentException, IllegalAccessException
 	{
@@ -83,6 +82,7 @@ public class WeiMemberController
 		model.addAttribute("command", weimember);
 		return "/member/updMember";
 	} 
+
 	
 	@RequestMapping("/updMember")
 	public String updMember(@ModelAttribute("command") LzWeiMember weimember,HttpServletRequest request,RedirectAttributes redirectAttribute) throws IllegalArgumentException, IllegalAccessException

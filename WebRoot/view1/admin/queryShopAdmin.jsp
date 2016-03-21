@@ -23,44 +23,38 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">客户端菜单查询</a></div>
-    <h1>客户端菜单查询</h1>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">客户端管理员查询</a></div>
+    <h1>客户端管理员查询</h1>
   </div>
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/> 
-	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wsmIds', '${pageContext.request.contextPath}/shop/menu/delShopMenu');" value="删除"/>
+	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/admin/toAddShopAdmin'" value="添加"/> 
+	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wsmIds', '${pageContext.request.contextPath}/shop/admin/delShopAdmin');" value="删除"/>
     </div>
     <div class="row-fluid">
         <div class="widget-box">
- 		 
-		  
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/shop/menu/queryMenu" onsubmit="return false;">
-          	<f:hidden path="wsmId"/>
+          	<f:form action="${pageContext.request.contextPath}/shop/admin/queryShopAdmin" onsubmit="return false;">
+          	<f:hidden path="wsaId"/>
             <table class="table table-bordered with-check">
                 <tr>
-                  <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wsmIds');"/></th>
-                  <th class="small" width="20%">菜单名称</th>
-                  <th class="small" width="25%">菜单URL</th>
-                  <th class="small" width="5%">级别</th>
-                  <th class="small" width="5%">顺序</th>
-                  <th class="small" width="10%">上级菜单</th>
-                  <th class="small" width="5%">录入人</th>
-                  <th class="small" width="8%">录入时间</th>
+                  <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wsaIds');"/></th>
+                  <th class="small" width="20%">用户名</th>
+                  <th class="small" width="25%">姓名</th>
+                  <th class="small" width="5%">性别</th>
+                  <th class="small" width="10%">录入人</th>
+                  <th class="small" width="18%">录入时间</th>
                   <th class="small" width="20%">操作</th>
                 </tr>
-                <c:forEach items="${pageResult.resultList}" var="menu">
+                <c:forEach items="${pageResult.resultList}" var="admin">
                 <tr>
-                	<td class="text-center small"><input type="checkbox"  name="wsmIds" value="${menu.WSM_ID}"/></td>
-                  	<td class="text-center small">${menu.WSM_NAME}</td>
-                  	<td class="text-center small">${menu.WSM_URL}</td>
-                  	<td class="text-center small">${menu.WSM_LEVEL}</td>
-                  	<td class="text-center small">${menu.WSM_ORDER}</td>
-                  	<td class="text-center small">${menu.parent_menu_name}</td>
-                  	<td class="text-center small">${menu.WSA_NAME}</td>
-                  	<td class="text-center small">${menu.WSM_REGIST_DATE}</td>
+                	<td class="text-center small"><input type="checkbox"  name="wsaIds" value="${admin.WSA_ID}"/></td>
+                  	<td class="text-center small">${admin.WSA_USERNAME}</td>
+                  	<td class="text-center small">${admin.WSA_NAME}</td>
+                    <td class="text-center small"><c:if test="${admin.WSA_SEX=='1'}">男</c:if><c:if test="${admin.WSA_SEX=='2'}">女</c:if></td>
+                    <td class="text-center small">${admin.registor}</td>
+                  	<td class="text-center small">${admin.WSA_REGIST_DATE}</td>
                   	<td class="text-center small"><a href="javascript:upd();" class="btn btn-primary btn-xs">修改</a></td>
                 </tr>
                 </c:forEach> 
@@ -97,7 +91,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/admin/js/admin.js" ></script>
 <jsp:include page="/view1/common/modal-dialog.jsp"></jsp:include>
 </body>
 </html>

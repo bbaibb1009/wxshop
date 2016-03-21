@@ -51,7 +51,7 @@
   <!--<a href="#" class="visible-phone"><i class="icon icon-home"></i></a>-->
   
   
-  <ul>
+  <ul >
 	<c:forEach var="menu1" items="${adminMenusLevel1Cust}">
 		<c:set var="menu1Class" value=""></c:set>
 		<c:if test="${menu1.WSM_ISPARENT == '1'}">
@@ -60,7 +60,7 @@
 		<li class="${menu1Class}">
 			<a href="#" onclick=""><i class="icon icon-home"></i><span>${menu1.WSM_NAME}</span></a>
 			<c:if test="${menu1.WSM_ISPARENT == '1'}">
-				<ul>
+				<ul id="${menu1.WSM_ID}">
 					<c:forEach items="${adminMenusLevel2Cust}" var="menu2">
 						<c:if test="${menu2.WSM_PARENT_ID==menu1.WSM_ID}">
 							<c:set var="menu2Class" value=""></c:set>
@@ -70,7 +70,7 @@
 							<li class="${menu2Class}">
 								<a href="javascript: goUrl(${menu2.WSM_ID },'${menu2.WSM_URL }');">${menu2.WSM_NAME}</a>
 								<c:if test="${menu2.WSM_ISPARENT == '1'}">
-									<ul>
+									<ul id="${menu2.WSM_ID}">
 										<c:forEach items="${adminMenusLevel3Cust}" var="menu3">
 										<c:if test="${menu3.WSM_PARENT_ID==menu2.WSM_ID}">
 											<li>

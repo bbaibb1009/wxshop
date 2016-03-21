@@ -29,7 +29,7 @@ import com.wxshop.website.WcWebsite;
 
 @Controller
 @RequestMapping("/admin")
-public class ShopAdminController 
+public class ShopAdminLoginController 
 {
 	@Autowired
 	private IShopAdminService adminService;
@@ -172,13 +172,16 @@ public class ShopAdminController
 		return "/login/adminLoginSuccess";
 	}
 	
-	@RequestMapping("/goUrl/{menuId1}/{menuId2}/{menuId3}/{url}")
-	public String goUrl(@PathVariable Integer menuId1, @PathVariable Integer menuId2, 
-			@PathVariable Integer menuId3, @PathVariable String url, HttpSession session)
+	/**
+	 * @功能介绍 菜单跳转
+	 * @ud_history [20160321][yChoco][只用两级菜单]
+	 * 
+	 * */
+	@RequestMapping("/goUrl/{menuId1}/{menuId2}/{url}")
+	public String goUrl(@PathVariable Integer menuId1, @PathVariable Integer menuId2,  @PathVariable String url, HttpSession session)
 	{
 		session.setAttribute(SysConstant.ADMIN_MENU_ID1_WX, menuId1);
 		session.setAttribute(SysConstant.ADMIN_MENU_ID2_WX, menuId2);
-		session.setAttribute(SysConstant.ADMIN_MENU_ID3_WX, menuId3);
 		return "redirect:" + url.replace("|", "/");
 	}
 	

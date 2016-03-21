@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wxshop.common.IMemcachedService;
+import com.wxshop.member.LzWeiMember;
 import com.wxshop.sys.IShopMenuService;
 import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.sys.WcShopMenu;
@@ -74,6 +75,16 @@ public class ShopMenuController
 		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/menu/queryMenu", menu));
 		return "redirect:/admin/toMsg";
 	}
+	
+	
+	@RequestMapping(value ="/toUpdShopMenu",method = RequestMethod.POST)
+	public String toUpdShopMenu(WcShopMenu menu_Q, Model model) throws IllegalArgumentException, IllegalAccessException
+	{
+		WcShopMenu shopmenu = menuService.getShopMenuById(menu_Q.getWsmId());
+		StringUtil.copyProperties(weimember_Q, weimember);
+		model.addAttribute("command", weimember);
+		return "/member/updMember";
+	} 
 	
 	/**
 	 * @author wanglei

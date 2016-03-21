@@ -1,6 +1,7 @@
 package com.wxshop.sys;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.util.DigestUtils;
 
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
+import com.wxshop.util.Page;
 import com.wxshop.util.StringUtil;
 @Service
 @Transactional
@@ -175,6 +177,16 @@ public class ShopAdminService implements IShopAdminService {
 		// TODO Auto-generated method stub
 		String sql = "select count(*) from WC_SHOP_ADMIN join WC_WEBSITE on WCS_ADMIN_ID = WSA_ID where WCS_RANDOM_NUM = ? and WSA_USERNAME = ?";
 		return jdbcDao.queryForInt(sql, new Object[]{admin.getRandomStr(),admin.getWsaUsername()})>0;
+	}
+	
+	@Transactional(readOnly = true)
+	public Page queryShopAdmin(WcShopAdmin admin) {
+		StringBuilder sql  		= new StringBuilder("select a.WSA_ID,a.WSA_USERNAME,a.WSA_PWD,a.WSA_NAME,a.WSA_SEX,b.WSA_NAME as registor,a.WSA_REGISTDATE,a.WSA_LOGINDATE,a.WSA_STATUS from WC_SHOP_ADMIN a left join WC_SHOP_ADMIN b on a.WSA_REGISTOR = b.WSA_ID where 1=1");
+		StringBuilder sqlCnt 	= new StringBuilder("select count(*) from WC_SHOP_ADMIN a where 1=1");
+		List<Object> paraList 	= new ArrayList<Object>();
+		Page page = new Page(sql.toString(),sqlCnt.toString(),admin.getCurrentPage(),admin.getPageSize(),paraList.toArray());
+		jdbcDao.queryForPage(page);
+		return page;
 	}
 	
 	

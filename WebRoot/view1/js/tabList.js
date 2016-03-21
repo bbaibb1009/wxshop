@@ -118,8 +118,7 @@ function delChk(chkName, action)
 		}
 		if( selCount == 0 )
 		{
-			//alert("请选择您要删除的数据");
-			alert_warn("请选择您要删除的数据");
+			alert_warn("请选择您要删除的数据!");
 			
 		}
 		else
@@ -140,6 +139,9 @@ function alert_warn()
 	{
 		msg = "您确定吗?";
 	}
+	var div = $("<div></div>").addClass("alert alert-warning h3").html(msg);
+	$(".modal-title").html("警告");
+	$(".modal-body").html("").append(div);
 	$("#myModal").modal();
 }
 

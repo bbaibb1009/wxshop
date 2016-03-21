@@ -86,12 +86,11 @@ function showAdminMenu3(menuId1, menuId2)
 	document.getElementById(menuId2).style.display = "";
 }
 
-function goUrl(adminMenuId3, url)
+function goUrl(adminMenuId2, url)
 {
 	var adminMenuId1 = -1;
-	var adminMenuId2 = -1;
 	
-	var adminLeft = $("#adminLeft").children();
+	var adminLeft = $("#sidebar").children();
 	for( var i = 0; i < adminLeft.length; i++ )
 	{
 		if( adminLeft[i].style.display == "" )
@@ -100,17 +99,7 @@ function goUrl(adminMenuId3, url)
 		}
 	}
 	
-	var ulAry = document.getElementById(adminMenuId1).getElementsByTagName("ul");
-	for( var i = 0; i < ulAry.length; i++ )
-	{
-		if( ulAry[i].style.display == "" )
-		{
-			adminMenuId2 = ulAry[i].id;
-		}
-	}
-	
-	window.location.href = path + "/admin/goUrl/" + adminMenuId1 
-		+ "/" + adminMenuId2 + "/" + adminMenuId3 + "/" + url.replace(/\//g, "|");
+	window.location.href = path + "/admin/goUrl/" + adminMenuId1 + "/" + adminMenuId2 + "/" + url.replace(/\//g, "|");
 }
 
 function divAutoHeight()
