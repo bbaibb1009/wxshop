@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/matrix-login.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css" />
 	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' type='text/css'>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/jquery.min.js?v=${applicationScope.sysStartUpTime}"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script>
 	<jsp:include page="/view1/common/includeFiles.jsp"></jsp:include>
 	  	<script type="text/javascript" src="${pageContext.request.contextPath}/view1/login/js/login.js?v=${applicationScope.sysStartUpTime}"></script>
 	    <script type="text/javascript">
@@ -50,22 +50,22 @@
                 </div>
             </f:form>
             <form id="recoverform" action="#" class="form-vertical">
-				<p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
+				<p class="normal_text">填写一个您的邮箱地址,找回您的用户名和密码.</p>
 				
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
+                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail" />
                         </div>
                     </div>
                
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-                    <span class="pull-right"><a class="btn btn-info"/>Reecover</a></span>
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; 继续登录</a></span>
+                    <span class="pull-right"><a class="btn btn-info"/>发送邮件</a></span>
                 </div>
             </form>
         </div>
+        <script src="${pageContext.request.contextPath}/view1/js/jquery-browser.js"></script> 		
         
-        <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script>  
         <script src="${pageContext.request.contextPath}/view1/js/matrix.login.js"></script> 
 
 

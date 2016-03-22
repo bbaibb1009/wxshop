@@ -6,9 +6,10 @@
 <html>
   <head>
   	<title>提示信息</title>
-  	<script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
     <jsp:include page="/view/common/includeFiles.jsp"></jsp:include>
     <script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
+    <jsp:include page="/view/common/includeFiles.jsp"></jsp:include>
     <script type="text/javascript">
 	var path = "${pageContext.request.contextPath}";
 	var msgCode = "${msgCode}";
@@ -36,6 +37,7 @@
   <body>
   	<c:if test="${msgCode == 2}">
   	<div class="wrapper">
+
   	<div class="admin_right" id="adminRight">
   	<div class="content">
   	<span id="formHiddSpan"></span>
