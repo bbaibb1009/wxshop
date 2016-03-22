@@ -24,7 +24,6 @@
 <!--breadcrumbs-->
   <div id="content-header">
     <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">客户端菜单查询</a></div>
-    <h1>客户端菜单查询</h1>
   </div>
   <div class="container-fluid">
     <hr>
@@ -61,7 +60,7 @@
                   	<td class="text-center small">${menu.parent_menu_name}</td>
                   	<td class="text-center small">${menu.WSA_NAME}</td>
                   	<td class="text-center small">${menu.WSM_REGIST_DATE}</td>
-                  	<td class="text-center small"><a href="javascript:upd();" class="btn btn-primary btn-xs">修改</a></td>
+                  	<td class="text-center small"><a href="javascript:toUpd('wsmId', ${menu.WSM_ID}, '${pageContext.request.contextPath}/shop/menu/toUpdShopMenu');" class="btn btn-primary btn-xs">修改</a></td>
                 </tr>
                 </c:forEach> 
 

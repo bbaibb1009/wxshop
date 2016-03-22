@@ -52,8 +52,12 @@
              <h5>添加客户端菜单</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/menu/addMenu" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/menu/updShopMenu" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:hidden path="wsmId"/>
           	<f:hidden path="wsmParentId"/>
+          	<f:hidden path="wsmLevel"/>
+  			<f:hidden path="currentPage"/>
+  			<f:hidden path="pageSize"/>
             <div class="form-group">
             	<label for="wsmName" class="col-lg-1 control-label">菜单名称</label>
             	<div class="col-lg-3">
@@ -69,11 +73,16 @@
             <div class="form-group">
             	<label for="wsmLevel" class="col-lg-1 control-label">菜单级别</label>
               	<div class="col-lg-3">
-                  	<f:select path="wsmLevel" cssClass=""  cssStyle="width:100%" onchange="getParentMenu(this.value);">
-                  		<f:option value="1">1级</f:option>
-                  		<f:option value="2">2级</f:option>
-                  	</f:select>
-	           	</div>
+                  	<c:if test="${command.wsmLevel == '1'}">
+    					一级菜单
+    				</c:if>
+    				<c:if test="${command.wsmLevel == '2'}">
+    					二级菜单
+    				</c:if>
+    				<c:if test="${command.wsmLevel == '3'}">
+    					三级菜单
+    				</c:if>
+                </div>
 			</div>
 			<div class="form-group" id="pmenu">
             	<label for="" class="col-lg-1 control-label">上级菜单</label>
@@ -81,10 +90,9 @@
                   	<ul id="treeDemo" class="ztree"></ul>
 	           	</div>
 			</div>
-            <div class="form-group  ">
-
+			
+            <div class="form-group">
               	<label for="wsmOrder" class="col-lg-1 control-label">菜单顺序</label>
-
               	<div class="col-lg-3">
                 	<f:input path="wsmOrder" cssClass="form-control input-ms"/>
             	</div>
@@ -137,11 +145,9 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.uniform.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
-
 <script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
-
-<script>
-	
+<script type="text/javascript">
+	loadMenuTree("${pageContext.request.contextPath}/shop/menu/getParentMenuTree/${command.wsmLevel}/${command.wsmParentId}");
 </script>
 </body>
 </html>

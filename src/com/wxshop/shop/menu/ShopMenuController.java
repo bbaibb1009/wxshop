@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wxshop.common.IMemcachedService;
-import com.wxshop.member.LzWeiMember;
 import com.wxshop.sys.IShopMenuService;
 import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.sys.WcShopMenu;
@@ -76,15 +75,32 @@ public class ShopMenuController
 		return "redirect:/admin/toMsg";
 	}
 	
-	
+	/**
+	 * @功能介绍 跳转至修改菜单
+	 * 
+	 * */
 	@RequestMapping(value ="/toUpdShopMenu",method = RequestMethod.POST)
 	public String toUpdShopMenu(WcShopMenu menu_Q, Model model) throws IllegalArgumentException, IllegalAccessException
 	{
 		WcShopMenu shopmenu = menuService.getShopMenuById(menu_Q.getWsmId());
-		StringUtil.copyProperties(weimember_Q, weimember);
-		model.addAttribute("command", weimember);
-		return "/member/updMember";
+		StringUtil.copyProperties(menu_Q, shopmenu);
+		model.addAttribute("command", shopmenu);
+		return "/menu/updShopMenu";
 	} 
+	
+	/**
+	 * @功能介绍 修改菜单保存
+	 * */
+	@RequestMapping(value="/updShopMenu",method = RequestMethod.POST)
+	public String updDeviceCompany(WcShopMenu menu_Q, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException 
+	{
+		menuService.updShopMenu(menu_Q);
+		redirectAttributes.addFlashAttribute("msgCode", "2");
+		redirectAttributes.addFlashAttribute("alertMsg", "菜单修改成功");
+		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/menu/queryMenu", menu_Q));
+		return "redirect:/admin/toMsg";
+	}
+	
 	
 	/**
 	 * @author wanglei
@@ -95,7 +111,7 @@ public class ShopMenuController
 	 */
 	@RequestMapping("/getParentMenuTree/{menuLevel}/{parentId}")
 	@ResponseBody
-	public List<Map<String, Object>> getParentMenuTree(@PathVariable String menuLevel, @PathVariable String parentId)
+	public List<Map<String, Object>> getParentMenuTree(@PathVariable String menuLevel,@PathVariable String parentId)
 	{
 		List<Map<String, Object>> menuList = memcachedservice.getMenuAll();
 		for( Map<String, Object> map : menuList )
@@ -104,7 +120,6 @@ public class ShopMenuController
 			{
 				map.put("checked", true);
 			}	
-			
 			if( map.get("menuLevel").toString().equals("1") )
 			{
 				if( menuLevel.equals("3") )
