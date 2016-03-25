@@ -64,7 +64,7 @@ public class SysFilter extends OncePerRequestFilter
 			{
 				if( ! reqUri.contains("/add") && ! reqUri.contains("/upd") && ! reqUri.contains("/del") )
 				{
-					Cookie cookieUri = new Cookie(SysConstant.LOGIN_REDIRECT_URI, reqUri);
+					Cookie cookieUri = new Cookie(SysConstant.LOGIN_REDIRECT_URI_WX, reqUri);
 					cookieUri.setMaxAge(SysConstant.COOKIE_AGE);
 					cookieUri.setPath("/");
 					response.addCookie(cookieUri);
