@@ -16,34 +16,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
 <script type="text/javascript" >
-
 	var path = "${pageContext.request.contextPath}";
-	function goUrl(adminMenuId3, url)
-	{
-		var adminMenuId1 = -1;
-		var adminMenuId2 = -1;
-		
-		var adminLeft = $("#adminLeft").children();
-		for( var i = 0; i < adminLeft.length; i++ )
-		{
-			if( adminLeft[i].style.display == "" )
-			{
-				adminMenuId1 = adminLeft[i].id;
-			}
-		}
-		
-		var ulAry = document.getElementById(adminMenuId1).getElementsByTagName("ul");
-		for( var i = 0; i < ulAry.length; i++ )
-		{
-			if( ulAry[i].style.display == "" )
-			{
-				adminMenuId2 = ulAry[i].id;
-			}
-		}
-		
-		window.location.href = path + "/admin/goUrl/" + adminMenuId1 
-			+ "/" + adminMenuId2 + "/" + adminMenuId3 + "/" + url.replace(/\//g, "|");
-	}
 </script>
 </head>
 <body>
