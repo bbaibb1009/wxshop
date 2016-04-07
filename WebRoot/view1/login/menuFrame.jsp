@@ -48,9 +48,7 @@
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar">
-  <!--<a href="#" class="visible-phone"><i class="icon icon-home"></i></a>-->
-  
-  
+  <a href="#" class="visible-phone"><i class="icon icon-home">系统管理</i></a>
   <ul >
 	<c:forEach var="menu1" items="${adminMenusLevel1Cust}">
 		<c:set var="menu1Class" value=""></c:set>
@@ -58,7 +56,7 @@
 		<c:set var="menu1Class" value="submenu"></c:set>
 		</c:if>
 		<li class="${menu1Class}">
-			<a href="#" onclick=""><i class="icon icon-home"></i><span>${menu1.WSM_NAME}</span></a>
+			<a href="#" onclick=""><i class="icon icon-home"></i><span> ${menu1.WSM_NAME}</span></a>
 			<c:if test="${menu1.WSM_ISPARENT == '1'}">
 				<ul id="${menu1.WSM_ID}">
 					<c:forEach items="${adminMenusLevel2Cust}" var="menu2">
@@ -68,7 +66,7 @@
 							<c:set var="menu2Class" value="submenu"></c:set>
 							</c:if>
 							<li class="${menu2Class}">
-								<a href="javascript: goUrl(${menu2.WSM_ID },'${menu2.WSM_URL }');">${menu2.WSM_NAME}</a>
+								<a href="javascript: goUrl(${menu2.WSM_ID},'${menu2.WSM_URL }');">${menu2.WSM_NAME}</a>
 								<c:if test="${menu2.WSM_ISPARENT == '1'}">
 									<ul id="${menu2.WSM_ID}">
 										<c:forEach items="${adminMenusLevel3Cust}" var="menu3">

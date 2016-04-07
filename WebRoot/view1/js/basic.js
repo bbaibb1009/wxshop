@@ -90,7 +90,7 @@ function goUrl(adminMenuId2, url)
 {
 	var adminMenuId1 = -1;
 	
-	var adminLeft = $("#sidebar").children();
+	var adminLeft = $("#sidebar").children().filter("li");
 	for( var i = 0; i < adminLeft.length; i++ )
 	{
 		if( adminLeft[i].style.display == "" )

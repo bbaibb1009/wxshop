@@ -1321,6 +1321,7 @@ form {
 #my_menu_input {
 	display:block;
 }
+/**这个css影响缩放后的状态导航样式*/
 #user-nav > ul {
 	right: 0px;
 	margin-left:20%!important;
