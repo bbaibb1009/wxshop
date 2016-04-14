@@ -23,10 +23,10 @@
     <li class="dropdown" id="menu-messages">
     <a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle">
     <i class="icon icon-envelope"></i> 
-    	<span class="text">消息 </span> 
-    	<span class="label label-important">5</span> 
-    	<b class="caret"></b>
-    	</a>
+    <span class="text">消息 </span> 
+    <span class="label label-important">5</span> 
+    <b class="caret"></b>
+    </a>
       <ul class="dropdown-menu">
         <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> 未读   <span class="label label-important">5</span></a></li>
         <li class="divider"></li>
@@ -35,8 +35,15 @@
         <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> 回收站</a></li>
       </ul>
     </li>
-    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text"> 个人设置</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text"> 注销</span></a></li>
+    
+    <li class="dropdown">
+    <a title="" href="#">
+    	<i class="icon icon-cog"></i>
+		<span class="text"> 个人设置</span>
+	 	<b style="display: inline-block;  width: 0;  height: 0; " ></b>
+	</a>
+	</li>
+    <li class="dropdown"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text"> 注销</span><b style="display: inline-block;  width: 0;  height: 0; " ></b></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -48,7 +55,7 @@
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar">
-  <a href="#" class="visible-phone"><i class="icon icon-home">系统管理</i></a>
+  <a href="#" class="visible-xs"><i class="icon icon-home">系统管理</i></a>
   <ul >
 	<c:forEach var="menu1" items="${adminMenusLevel1Cust}">
 		<c:set var="menu1Class" value=""></c:set>
