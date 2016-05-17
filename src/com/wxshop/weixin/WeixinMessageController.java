@@ -272,7 +272,11 @@ public class WeixinMessageController {
 //        //发过来的消息
 //        String content		= request.getParameter("Content")==null?"":(String)request.getParameter("Content");
 //        
+
 //        String appId			= request.getParameter("Appid")==null?"":(String)request.getParameter("Appid");  
+
+//        String appId	=  request.getParameter("Appid")==null?"":(String)request.getParameter("Appid");  
+
 //        
 //        requestMap.put("FromUserName", fromUserName);
 //        requestMap.put("ToUserName", toUserName);

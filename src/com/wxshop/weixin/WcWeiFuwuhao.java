@@ -1,5 +1,6 @@
 package com.wxshop.weixin;
 
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 
 /**
  * WcWeiFuwuhao entity. @author MyEclipse Persistence Tools
@@ -39,6 +41,7 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 	
 	private String currentPage;
 	private String pageSize;
+
 
 	// Constructors
 
@@ -243,6 +246,7 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 		this.fwhRegistdate = fwhRegistdate;
 	}
 
+
 	@Transient
 	public String getCurrentPage() {
 		return currentPage;
@@ -261,5 +265,6 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 	}
 	
 	
+
 
 }
