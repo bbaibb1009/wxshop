@@ -55,5 +55,5 @@
 		<property name="defaultErrorView" value="/common/error"/>
 		<property name="warnLogCategory" value="WARN"/>
 	</bean> 
-	
+	<bean id="exceptionHandler" class="com.wxshop.exception.MyExceptionHandler"/>  
 </beans>

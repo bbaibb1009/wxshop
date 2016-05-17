@@ -55,7 +55,10 @@
                     <td class="text-center small"><c:if test="${admin.WSA_SEX=='1'}">男</c:if><c:if test="${admin.WSA_SEX=='2'}">女</c:if></td>
                     <td class="text-center small">${admin.registor}</td>
                   	<td class="text-center small">${admin.WSA_REGIST_DATE}</td>
-                  	<td class="text-center small"><a href="javascript:upd();" class="btn btn-primary btn-xs">修改</a></td>
+                  	<td class="text-center small">
+                  	<a href="javascript:upd();" class="btn btn-primary btn-xs">修改</a>
+                  	<a href="javascript:toUpdRole(${admin.WSA_ID});" class="btn btn-primary btn-xs">权限</a>
+                  	</td>
                 </tr>
                 </c:forEach> 
 

@@ -34,7 +34,7 @@
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> 			<a href="index.html"> 		<i class="icon-dashboard"></i> 		<span class="label label-important">20</span> 	My Dashboard 	</a> </li>
+        <li class="bg_lb"> 			<a href="index.html"> 		<i class="icon-dashboard"></i> 		<span class="label label-important">20</span> 	My Dashboard 11	</a> </li>
         <li class="bg_lg span3"> 	<a href="charts.html"> 		<i class="icon-signal"></i> 														Charts			</a> </li>
         <li class="bg_ly"> 			<a href="widgets.html"> 	<i class="icon-inbox"></i>			<span class="label label-success">101</span> 	Widgets 		</a> </li>
         <li class="bg_lo"> 			<a href="tables.html"> 		<i class="icon-th"></i> 															Tables			</a> </li>
@@ -107,6 +107,8 @@
             </ul>
           </div>
         </div>
+        
+ 
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
             <h5>To Do list</h5>

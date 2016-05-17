@@ -1298,7 +1298,7 @@ form {
 /* Responsive design */
 @media (max-width: 480px) {
 #header h1 {
-	top: 10px; left:5px;
+	top: 20px; left:5px;
 	margin: 3px auto;
 }
 #user-nav {
@@ -1309,7 +1309,7 @@ form {
 	margin-top: -31px;
 	border-top:1px solid #363E48;
 	margin-bottom: 0px;
-	background:#2E363F;
+	background:#1f262d;
 	float:right;
 }
 .navbar > .nav {
@@ -1327,7 +1327,7 @@ form {
 	margin-left:20%!important;
 	margin-top:0px;
 	width:100%;
-	background:#000;
+	background:#1f262d;
 	position: relative;
 }
 #user-nav > ul > li {

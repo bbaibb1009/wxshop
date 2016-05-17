@@ -69,17 +69,7 @@ public class SysFilter extends OncePerRequestFilter
 					cookieUri.setPath("/");
 					response.addCookie(cookieUri);
 				}
-				String aulous = request.getParameter("aulous");
-				if( aulous == null )
-				{
-					request.setAttribute("msgCode", "1");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/view/common/msg.jsp");
-					dispatcher.forward(request, response);
-				}
-				else 
-				{
-					response.sendRedirect(request.getContextPath() + "/admin/adminLoginSpark?username=" + aulous + "&pwd=0&noVali=true");
-				}
+				
 			}
 		}
 	}

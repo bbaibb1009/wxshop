@@ -51,6 +51,11 @@
 			<props>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				
+				<!-- MySql的连接池等待时间是8小时  8小时后自动断掉连接池 所以应该设定autoReconnect-->
+				<prop key="connection.autoReconnect">true</prop>
+				<prop key="connection.autoReconnectForPools">true</prop> 
+				<prop key="connection.is-connection-validation-required">true</prop> 
 			</props>
 		</property>
 	</bean>
