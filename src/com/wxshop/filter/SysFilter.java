@@ -70,6 +70,10 @@ public class SysFilter extends OncePerRequestFilter
 					response.addCookie(cookieUri);
 				}
 				
+				request.setAttribute("msgCode", "1");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/view1/common/msg.jsp");
+				dispatcher.forward(request, response);
+				
 			}
 		}
 	}

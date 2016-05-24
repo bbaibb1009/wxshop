@@ -8,10 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wxshop.common.IMemcachedService;
 import com.wxshop.sys.IShopAdminService;
+import com.wxshop.sys.IShopRoleService;
 import com.wxshop.sys.WcShopAdmin;
+import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
 
 @Controller
@@ -23,6 +26,9 @@ public class ShopAdminController
 	
 	@Autowired 
 	private IMemcachedService memcachedservice;
+	
+	@Autowired
+	private IShopRoleService roleService;
 		
 	@RequestMapping("/queryShopAdmin")
 	public String queryShopAdmin(@ModelAttribute("command") WcShopAdmin admin, HttpServletResponse response, HttpSession session, Model model)
@@ -32,4 +38,17 @@ public class ShopAdminController
 	}
 
 	
+	/**
+	 * @功能介绍 跳转至修改菜单
+	 * 
+	 * */
+	@RequestMapping(value ="/toUpdShopAdmin",method = RequestMethod.POST)
+	public String toUpdShopAdmin(WcShopAdmin admin_Q, Model model) throws IllegalArgumentException, IllegalAccessException
+	{
+		WcShopAdmin shopadmin = adminService.getShopAdminById(admin_Q.getWsaId());
+		StringUtil.copyProperties(admin_Q, shopadmin);
+		model.addAttribute("command", shopadmin);
+		model.addAttribute("roleList1", roleService.queryShopRoleForAdminUpd2(admin_Q.getWsaId()));
+		return "/admin/updShopAdmin2";
+	} 
 }

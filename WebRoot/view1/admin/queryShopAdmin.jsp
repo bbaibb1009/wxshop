@@ -56,8 +56,8 @@
                     <td class="text-center small">${admin.registor}</td>
                   	<td class="text-center small">${admin.WSA_REGIST_DATE}</td>
                   	<td class="text-center small">
-                  	<a href="javascript:upd();" class="btn btn-primary btn-xs">修改</a>
-                  	<a href="javascript:toUpdRole(${admin.WSA_ID});" class="btn btn-primary btn-xs">权限</a>
+                  	<a href="#" onclick="javascript:toUpd('wsaId', ${admin.WSA_ID}, '${pageContext.request.contextPath}/shop/admin/toUpdShopAdmin');" class="btn btn-primary btn-xs">修改</a>
+                  	<a href="#" onclick="javascript:toUpdRole(${admin.WSA_ID});" class="btn btn-primary btn-xs">菜单权限</a>
                   	</td>
                 </tr>
                 </c:forEach> 

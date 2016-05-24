@@ -39,6 +39,7 @@ public class WcShopRole implements java.io.Serializable {
 	
 	private String menuIds;
 	private String adminIds;
+	private String selected;
 
 	// Constructors
 
@@ -159,6 +160,15 @@ public class WcShopRole implements java.io.Serializable {
 
 	public void setAdminIds(String adminIds) {
 		this.adminIds = adminIds;
+	}
+	
+	@Transient
+	public String getSelected() {
+		return selected;
+	}
+
+	public void setSelected(String selected) {
+		this.selected = selected;
 	}
 	
 	

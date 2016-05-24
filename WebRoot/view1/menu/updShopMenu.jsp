@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/select2.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
-<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTreeStyle/metro.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTree/zTreeStyle.css"/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js"></script>
@@ -147,7 +147,9 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
 <script type="text/javascript">
-	loadMenuTree("${pageContext.request.contextPath}/shop/menu/getParentMenuTree/${command.wsmLevel}/${command.wsmParentId}");
+	
+	  loadMenuTree("${pageContext.request.contextPath}/shop/menu/getParentMenuTree/${command.wsmLevel}/${command.wsmParentId}");
+	
 </script>
 </body>
 </html>

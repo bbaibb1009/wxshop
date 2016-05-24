@@ -13,7 +13,6 @@
     <script type="text/javascript">
 	var path = "${pageContext.request.contextPath}";
 	var msgCode = "${msgCode}";
-	alert(msgCode);
 	if( msgCode == "1" )
 	{
 		sysTimeout();

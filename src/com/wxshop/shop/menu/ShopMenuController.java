@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wxshop.common.IMemcachedService;
 import com.wxshop.sys.IShopMenuService;
+import com.wxshop.sys.IShopRoleService;
 import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.sys.WcShopMenu;
 import com.wxshop.util.DateUtil;
@@ -32,6 +33,9 @@ public class ShopMenuController
 {
 	@Autowired
 	private IShopMenuService menuService;
+	
+	@Autowired
+	private IShopRoleService roleService;
 	
 	@Autowired 
 	private IMemcachedService memcachedservice;
@@ -99,6 +103,72 @@ public class ShopMenuController
 		redirectAttributes.addFlashAttribute("alertMsg", "菜单修改成功");
 		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/menu/queryMenu", menu_Q));
 		return "redirect:/admin/toMsg";
+	}
+	
+	@RequestMapping("/getMenuTreeForRole/{disabled}/{roleId}")
+	@ResponseBody
+	public List<Map<String, Object>> getMenuTreeForRole(@PathVariable String disabled, @PathVariable Integer roleId)
+	{
+		List<String> checkedList = null;
+		if( roleId != -1 )
+		{
+			checkedList = roleService.queryShopRoleMenusById(roleId);
+		}
+		
+		return getMenuTree(disabled, null, checkedList);
+	}
+	
+	
+	@RequestMapping("/getMenuTreeForAdmin/{disabled}/{roleIds}/{adminId}")
+	@ResponseBody
+	public List<Map<String, Object>> getMenuTreeForAdmin(@PathVariable String disabled, 
+			@PathVariable String roleIds, @PathVariable Integer adminId)
+	{
+		List<String> disabledList = null;
+		List<String> checkedList = null;
+		if( ! roleIds.equals("-1") )
+		{
+			disabledList = roleService.queryShopRoleMenusForAdmin(roleIds);
+		}
+		if( ! roleIds.equals("-1") || adminId != -1 )
+		{
+			checkedList = roleService.queryShopRoleMenusForAdmin(roleIds, adminId);
+		}
+		
+		return getMenuTree(disabled, disabledList, checkedList);
+	}
+	
+	/**
+	 * @author wanglei
+	 * created on Sep 13, 2013 10:29:32 AM
+	 * @param disabled 若是0则无操作，若是1则全部置灰，若是2则disabledList中的置灰
+	 * @param disabledList 置灰的菜单id列表
+	 * @param checkedList 默认选中的菜单id列表
+	 * @return
+	 */
+	private List<Map<String, Object>> getMenuTree(String disabled, 
+		List<String> disabledList, List<String> checkedList)
+	{
+		List<Map<String, Object>> menuList = memcachedservice.getMenuAll();
+		for( Map<String, Object> map : menuList )
+		{
+			if( disabled.equals("1") )
+			{
+				map.put("chkDisabled", true);
+			}
+			else if( disabled.equals("2") && disabledList != null && 
+					disabledList.contains(map.get("id").toString()) ) 
+			{
+				map.put("chkDisabled", true);
+			}
+			
+			if( checkedList != null && checkedList.contains(map.get("id").toString()) )
+			{
+				map.put("checked", true);
+			}
+		}
+		
+		return menuList;
 	}
 	
 	

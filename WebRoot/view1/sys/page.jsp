@@ -7,13 +7,15 @@
 <tr>
 <td class="span12">
 
-<ul class="pagination">
 	<c:choose>
 	<c:when test="${pageResult == null || pageResult.totalRows == 0}">
-	<li><a href="#">没有满足条件的数据</a></li>
+		<tr>
+       		<td class="text-center small">没有满足条件的数据</td>
+    	</tr>
 	</c:when>
 
 	<c:otherwise>
+		<ul class="pagination">
 		<c:choose>
 			<c:when test="${pageResult.currentPage == 1}">
 			<li><a href="javascript:goPage(1);"><i class="glyphicon glyphicon-step-backward"></i>首页</a></li>
@@ -41,10 +43,10 @@
 		<li><span style="padding-top: 2px; padding-bottom: 0px; border-top-width: 1px; border-bottom-width: 1px; border-left-width: 1px; margin-top: 0px; margin-bottom: 0px; height: 37px;">每页显示<input type="text" style="text-align: center;width: 20px; padding: 0px 1px 0px 0px; margin-bottom: 5px; margin-top: 3px; border-top-width: 0px; border-right-width: 0px; border-left-width: 0px;" value="${pageResult.pageSize}" name="pageSize" id="pageSize">条</span></li>
 		<li><span>共${pageResult.totalRows}条数据</span></li>
 		<li><a href="javascript:goPage(document.getElementById('currentPage').value);">刷新</a></li>
-
+		</ul>
 	</c:otherwise>
 </c:choose>
-</ul>
+
 
 </td>
 </tr>
