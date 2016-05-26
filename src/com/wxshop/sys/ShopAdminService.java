@@ -196,7 +196,6 @@ public class ShopAdminService implements IShopAdminService {
 		hibernateDao.flush();
 		//memcachedservice.setDeptAll();
 		//memcachedservice.setAdminNameAll();
-
 	}
 	
 	
