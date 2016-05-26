@@ -74,7 +74,41 @@
         </div>
       </div>
     </div>
+    
 <!--End-Chart-box--> 
+    
+    <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
+            <h5>To Do List</h5>
+          </div>
+          <div class="widget-content">
+            <div class="todo">
+              <ul>
+                <li class="clearfix">
+                  <div class="txt"> 管理员修改密码操作  <span class="by label">Alex</span></div>
+                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                </li>
+                <li class="clearfix">
+                  <div class="txt"> 马协组织架构功能完善 <span class="date badge badge-warning">今天</span> </div>
+                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                </li>
+                <li class="clearfix">
+                  <div class="txt"> To Do List 数据结构设计  <span class="by label">Admin</span></div>
+                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                </li>
+                <li class="clearfix">
+                  <div class="txt"> Today we celebrate the theme <span class="date badge badge-info">08.03.2013</span> </div>
+                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                </li>
+                <li class="clearfix">
+                  <div class="txt"> Manage all the orders <span class="date badge badge-important">12.03.2013</span> </div>
+                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </div>
+    
     <hr/>
     <div class="row-fluid">
       <div class="span6">
@@ -109,37 +143,7 @@
         </div>
         
  
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
-            <h5>To Do list</h5>
-          </div>
-          <div class="widget-content">
-            <div class="todo">
-              <ul>
-                <li class="clearfix">
-                  <div class="txt"> Luanch This theme on Themeforest <span class="by label">Alex</span></div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Manage Pending Orders <span class="date badge badge-warning">Today</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> MAke your desk clean <span class="by label">Admin</span></div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Today we celebrate the theme <span class="date badge badge-info">08.03.2013</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-                <li class="clearfix">
-                  <div class="txt"> Manage all the orders <span class="date badge badge-important">12.03.2013</span> </div>
-                  <div class="pull-right"> <a class="tip" href="#" title="Edit Task"><i class="icon-pencil"></i></a> <a class="tip" href="#" title="Delete"><i class="icon-remove"></i></a> </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
             <h5>Progress Box</h5>

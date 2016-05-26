@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import com.wxshop.common.IMemcachedService;
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.util.Page;
@@ -22,7 +23,8 @@ import com.wxshop.util.StringUtil;
 @Transactional
 public class ShopAdminService implements IShopAdminService {
 
-	
+	@Autowired
+	private IMemcachedService memcachedservice;
 
 	@Autowired
 	private IJdbcDao jdbcDao;
@@ -50,8 +52,7 @@ public class ShopAdminService implements IShopAdminService {
 	public WcShopAdmin adminLogin(WcShopAdmin admin)
 	{
 		WcShopAdmin result = null;
-		List<WcShopAdmin> list = hibernateDao.query(
-			"from WcShopAdmin where wsaUsername = ? and wsaPwd = ?", 
+		List<WcShopAdmin> list = hibernateDao.query("from WcShopAdmin where wsaUsername = ? and wsaPwd = ?", 
 			new Object[]{admin.getWsaUsername(), admin.getWsaPwdMd5()});
 		if( list.size() > 0 )
 		{
@@ -86,20 +87,7 @@ public class ShopAdminService implements IShopAdminService {
 
 	}
 	
-	private void addShopAdminOther(WcShopAdmin admin)
-	{
-		String adminId = String.valueOf(admin.getWsaId());
-		String[] roleIds = admin.getRoleIds();
-		if( roleIds != null && roleIds.length > 0 )
-		{
-			jdbcDao.batchUpdate("insert into WC_SHOP_ADMIN_ROLE (WSAR_ADMIN_ID, WSAR_ROLE_ID) values (?, ?)", StringUtil.getObjAryList(adminId, roleIds)); 
-		}
-		if( admin.getMenuIds() != null && admin.getMenuIds().length() > 0 )
-		{
-			String[] menuIds = admin.getMenuIds().split(",");
-			jdbcDao.batchUpdate("insert into WC_SHOP_ADMIN_MENU (WSAM_ADMIN_ID, WSAM_MENU_ID) values (?, ?)", StringUtil.getObjAryList(adminId, menuIds)); 
-		}
-	}
+	
 	
 	
 	
@@ -149,8 +137,6 @@ public class ShopAdminService implements IShopAdminService {
 		{
 			admin.setWsaPwd(DigestUtils.md5DigestAsHex(admin.getWsaPwd().getBytes()));
 		}
-		
-		
 		hibernateDao.update(admin);
 		Object[] obj = new Object[]{admin.getWsaId()};
 		jdbcDao.delete("delete from WC_SHOP_ADMIN_ROLE where WSAR_ADMIN_ID = ?", obj);
@@ -189,6 +175,45 @@ public class ShopAdminService implements IShopAdminService {
 		return page;
 	}
 	
+	
+	public void updAdmin(WcShopAdmin admin) throws JsonParseException, JsonMappingException, JsonGenerationException, IOException
+	{
+		if( admin.getWsaPwd().length() == 0 )
+		{
+			admin.setWsaPwd(admin.getWsaPwdMd5());
+		}
+		else
+		{
+			admin.setWsaPwd(DigestUtils.md5DigestAsHex(admin.getWsaPwd().getBytes()));
+		}
+		hibernateDao.update(admin);
+		Object[] obj = new Object[]{admin.getWsaId()};
+		jdbcDao.delete("delete from WC_SHOP_ADMIN_ROLE where WSAR_ADMIN_ID = ?", obj);
+		jdbcDao.delete("delete from WC_SHOP_ADMIN_MENU where WSAM_ADMIN_ID = ?", obj);
+		addShopAdminOther(admin);
+		
+		// 更新缓存 管理员可能由有部门修改为无部门，此时也需更新缓存
+		hibernateDao.flush();
+		//memcachedservice.setDeptAll();
+		//memcachedservice.setAdminNameAll();
+
+	}
+	
+	
+	private void addShopAdminOther(WcShopAdmin admin)
+	{
+		String adminId = String.valueOf(admin.getWsaId());
+		String[] roleIds = admin.getRoleIds();
+		if( roleIds != null && roleIds.length > 0 )
+		{
+			jdbcDao.batchUpdate("insert into WC_SHOP_ADMIN_ROLE (WSAR_ADMIN_ID, WSAR_ROLE_ID) values (?, ?)", StringUtil.getObjAryList(adminId, roleIds)); 
+		}
+		if( admin.getMenuIds() != null && admin.getMenuIds().length() > 0 )
+		{
+			String[] menuIds = admin.getMenuIds().split(",");
+			jdbcDao.batchUpdate("insert into WC_SHOP_ADMIN_MENU (WSAM_ADMIN_ID, WSAM_MENU_ID) values (?, ?)", StringUtil.getObjAryList(adminId, menuIds)); 
+		}
+	}
 	
 	
 }

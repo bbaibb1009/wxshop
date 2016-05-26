@@ -83,13 +83,13 @@ public class ShopRoleController
 		WcShopRole shoprole = roleService.getShopRoleById(role_Q.getWsrRoleId());
 		StringUtil.copyProperties(role_Q, shoprole);
 		model.addAttribute("command", shoprole);
-		return "/menu/updShopRole";
+		return "/role/updShopRole";
 	} 
 	
 	/**
 	 * @功能介绍 修改菜单保存
 	 * */
-	@RequestMapping(value="/updShopMenu",method = RequestMethod.POST)
+	@RequestMapping(value="/updShopRole",method = RequestMethod.POST)
 	public String updShopRole(WcShopRole role_Q, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException 
 	{
 		roleService.updShopRole(role_Q);

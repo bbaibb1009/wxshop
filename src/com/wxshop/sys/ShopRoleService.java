@@ -159,8 +159,7 @@ public class ShopRoleService implements IShopRoleService {
 		String sql =
 			" select b.WSR_ROLE_ID, b.WSR_ROLE_NAME , IFNULL(a.WSAR_ROLE_ID,0) as selected  "
 			+ " from WC_SHOP_ROLE b  "
-			+ " left join WC_SHOP_ADMIN_ROLE a on a.WSAR_ROLE_ID = b.WSR_ROLE_ID "
-			+ " where a.WSAR_ADMIN_ID = ? "
+			+ " left join WC_SHOP_ADMIN_ROLE a on b.WSR_ROLE_ID = a.WSAR_ROLE_ID and a.WSAR_ADMIN_ID = ? "
 			+ " order by b.WSR_ROLE_ID desc ";
 		List<Map<String, Object>> list = jdbcDao.queryForList(sql, new Object[]{adminId});
 		return chgShopRoleList1(list);
@@ -175,18 +174,15 @@ public class ShopRoleService implements IShopRoleService {
 			role = new WcShopRole();
 			role.setWsrRoleId(Integer.valueOf(map.get("WSR_ROLE_ID").toString()));
 			role.setWsrRoleName(map.get("WSR_ROLE_NAME").toString());
-			role.setSelected(((Integer)map.get("selected")).toString());
+			role.setSelected(((Long)map.get("selected")).toString());
 			roleList.add(role);
 		}
-		
 		return roleList;
 	}
 
 
 	public List<String> queryShopRoleMenusForAdmin(String roleIds) {
-		List<Map<String, Object>> menuList = 
-			jdbcDao.queryForList("select distinct WSRM_MENU_ID menu_id from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID in (" + roleIds + ")");
-		
+		List<Map<String, Object>> menuList = jdbcDao.queryForList("select distinct WSRM_MENU_ID menu_id from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID in (" + roleIds + ")");
 		return chgList(menuList, "menu_id");
 	}
 	
@@ -227,7 +223,5 @@ public class ShopRoleService implements IShopRoleService {
 		return page;
 	}
 	
-	
-	
-	
+		
 }

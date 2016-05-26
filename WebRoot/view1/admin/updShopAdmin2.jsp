@@ -32,14 +32,15 @@
 	};
 	
 	$(document).ready(function(){
-		
-		
-		$(".js-example-tags").select2();
+		$("#roleIds").select2();
 		//loadMenuTreeForAdmin(${command.wsaId});
 	});
+	
+	function alertSelect()
+	{
+		alert($("#roleIds").val());
+	}
 </script>
-
-
 
 </head>
 <body>
@@ -62,7 +63,7 @@
           <div class="widget-content ">
           	<f:form action="${pageContext.request.contextPath}/shop/admin/updShopAdmin" cssClass="form-horizontal" onsubmit="return false;">
           	<f:hidden path="wsaId"/>
-          	<f:hidden path="wsaPwd"/>
+          	<f:hidden path="wsaPwdMd5"/>
           	<f:hidden path="wsaRegistor"/>
           	<f:hidden path="wsaRegistdate"/>
           	<f:hidden path="wsaLogindate"/>
@@ -73,6 +74,18 @@
             	<label for="wsaUsername" class="col-lg-1 control-label">用户名</label>
             	<div class="col-lg-3">
                	 	<f:input path="wsaUsername" cssClass="form-control input-ms"/>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label for="wsaUsername" class="col-lg-1 control-label">密码</label>
+            	<div class="col-lg-3">
+               	 	<f:password path="wsaPwd" cssClass="form-control input-ms"/>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label for="wsaUsername" class="col-lg-1 control-label">密码确认</label>
+            	<div class="col-lg-3">
+               	 	<input type="password" id="pwd2" name="pwd2" class="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group ">
@@ -86,15 +99,11 @@
             	<div class="col-lg-3">
                 	<f:input path="wsaSex" cssClass="form-control input-ms"/>
             	</div>
-              	
-			</div>
-			
+            </div>
 			<div class="form-group">
-
 				<label for="wsaSex" class="col-lg-1 control-label">角色设置：</label>
-				<div  class="col-lg-10" style="border: 2px blue solid;">
-					<select class="js-example-tags form-control" multiple="multiple">
-						
+				<div class="col-lg-10">
+					<select id="roleIds" name="roleIds" multiple="multiple">
 						<c:forEach items="${roleList1}" var = "role">
 							<c:set var="selected" value="" />
 							<c:if test="${role.selected != '0'}">
@@ -102,7 +111,7 @@
 							</c:if>
 							<option value="${role.wsrRoleId}" ${selected}>${role.wsrRoleName}</option>
 						</c:forEach>
-				     </select>
+				    </select>
 					<%-- 
 					<div class="col-lg-5" style="border: 1px red solid;">
 						<div>未有角色</div>
@@ -128,19 +137,17 @@
 						</div>
 					</div>
 					--%>
-					
 				</div>
-				
-		</div>
-		<div class="form-group">
-			<div><font color="red"><b>*</b></font>管理员权限：</div>
-			<div><ul id="treeDemo" class="ztree"></ul></div>
-		</div>
+			</div>
+			<div class="form-group">
+				<div><font color="red"><b>*</b></font>管理员权限：</div>
+				<div><ul id="treeDemo" class="ztree"></ul></div>
+			</div>
 			
 			<div class="form-group  ">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button>
+					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button> <button class="btn btn-warn" onclick="alertSelect();">看select值</button>
 				</div>          	
             </div>
             </f:form>

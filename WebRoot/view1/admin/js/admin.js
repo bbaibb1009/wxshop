@@ -9,7 +9,7 @@ function toUpdRole()
 function addAdminSubmit()
 {
 	var myForm = document.forms[0];
-	myFrom.submit();
+	myForm.submit();
 }
 
 
