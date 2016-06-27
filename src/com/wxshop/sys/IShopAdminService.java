@@ -26,5 +26,5 @@ public interface IShopAdminService {
 	public Page queryShopAdmin(WcShopAdmin admin);
 	public void updShopAdmin(WcShopAdmin admin)  throws JsonParseException, JsonMappingException, JsonGenerationException, IOException;
 	
-	
+	public void addShopAdmin(WcShopAdmin admin);
 }

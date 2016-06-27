@@ -31,8 +31,8 @@
 	};
 	
 	$(document).ready(function(){
-		loadMenuTree("${pageContext.request.contextPath}/shop/menu/getMenuTreeForRole/0/-1");
-		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForRole/-1", "treeDemo2", setting);
+		loadMenuTree("${pageContext.request.contextPath}/shop/menu/getMenuTreeForRole/0/${command.wsrRoleId}");
+		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForRole/${command.wsrRoleId}", "treeDemo2", setting);
 	});
 </script>
 </head>
@@ -54,29 +54,32 @@
              <h5>添加客户端角色</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/role/addRole" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/role/updShopRole" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:hidden path="wsrRoleId"/>
+          	<f:hidden path="wsrRegistDate"/>
+          	<f:hidden path="wsrRegistor"/>
           	<f:hidden path="menuIds"/>
   			<f:hidden path="adminIds"/>
             <div class="form-group">
-            	<label for="wsmName" class="col-lg-1 control-label">角色名称</label>
+            	<label for="wsrRoleName" class="col-lg-1 control-label">角色名称</label>
             	<div class="col-lg-3">
                	 	<f:input path="wsrRoleName" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wsmName" class="col-lg-1 control-label">菜单权限</label>
+            	<label for="treeDemo" class="col-lg-1 control-label">菜单权限</label>
             	<div class="col-lg-3">
                	 	<ul id="treeDemo" class="ztree"></ul>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wsmName" class="col-lg-1 control-label">管理员</label>
+            	<label for="treeDemo2" class="col-lg-1 control-label">管理员</label>
             	<div class="col-lg-3">
                	 	<ul id="treeDemo2" class="ztree"></ul>
                 </div>
             </div>
             <div class="form-group  ">
-              	<label for="wsmDesc" class="col-lg-1 control-label">备注</label>
+              	<label for="wsrRoleDesc" class="col-lg-1 control-label">备注</label>
               	<div class="col-lg-3">
                 	<f:textarea path="wsrRoleDesc" cssClass="form-control input-ms" rows="4"></f:textarea>
             	</div>

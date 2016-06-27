@@ -145,6 +145,13 @@ function alert_warn()
 	$("#myModal").modal();
 }
 
+function toAdd(action)
+{
+	document.forms[0].action = action;
+	document.forms[0].submit();
+
+}
+
 function toUpd(idName, idValue, action)
 {
 	if( chkPagePara() )

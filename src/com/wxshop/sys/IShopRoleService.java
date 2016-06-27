@@ -19,6 +19,8 @@ public interface IShopRoleService {
 	 
 	public List<String> queryShopRoleMenusById(Integer roleId);
 	
+	public List<String>	queryShopRoleAdminsById(Integer roleId);
+	
 	public List<WcShopRole> queryShopRoleForAdminUpd1(Integer adminId);
 						    
 	public List<WcShopRole> queryShopRoleForAdminUpd0(Integer adminId);
@@ -30,4 +32,8 @@ public interface IShopRoleService {
 	public List<String> queryShopRoleMenusForAdmin(String roleIds, Integer adminId);
 	
 	public Page queryShopRole(WcShopRole role);
+	
+	
+	public List<WcShopRole> queryShopRoleForAdminAdd();
+	
 }

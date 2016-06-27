@@ -43,6 +43,8 @@ public class WcShopAdmin implements java.io.Serializable {
 	private String[] roleIds;
 	private String menuIds;
 	private String randomStr;
+	private Integer wsaDept;
+	private String wsaDeptName;
 	// Constructors
 
 	/** default constructor */
@@ -229,8 +231,24 @@ public class WcShopAdmin implements java.io.Serializable {
 	public void setRandomStr(String randomStr) {
 		this.randomStr = randomStr;
 	}
-
 	
+	@Column(name = "WSA_DEPT")
+	public Integer getWsaDept() {
+		return wsaDept;
+	}
+
+	public void setWsaDept(Integer wsaDept) {
+		this.wsaDept = wsaDept;
+	}
+
+	@Transient
+	public String getWsaDeptName() {
+		return wsaDeptName;
+	}
+
+	public void setWsaDeptName(String wsaDeptName) {
+		this.wsaDeptName = wsaDeptName;
+	}
 	
 	
 }

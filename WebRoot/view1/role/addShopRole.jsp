@@ -32,7 +32,7 @@
 	
 	$(document).ready(function(){
 		loadMenuTree("${pageContext.request.contextPath}/shop/menu/getMenuTreeForRole/0/-1");
-		//loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForRole/-1", "treeDemo2", setting);
+		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForRole/-1", "treeDemo2", setting);
 	});
 </script>
 </head>

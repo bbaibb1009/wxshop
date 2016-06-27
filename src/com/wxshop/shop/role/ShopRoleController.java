@@ -69,7 +69,7 @@ public class ShopRoleController
 		roleService.delShopRole(role.getWsrRoleIds());
 		redirectAttributes.addFlashAttribute("msgCode", "2");
 		redirectAttributes.addFlashAttribute("alertMsg", "菜单删除成功");
-		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/role/queryShopRole", role));
+		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/role/queryRole", role));
 		return "redirect:/admin/toMsg";
 	}
 	
@@ -95,7 +95,7 @@ public class ShopRoleController
 		roleService.updShopRole(role_Q);
 		redirectAttributes.addFlashAttribute("msgCode", "2");
 		redirectAttributes.addFlashAttribute("alertMsg", "菜单修改成功");
-		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/menu/queryMenu", role_Q));
+		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/role/queryRole", role_Q));
 		return "redirect:/admin/toMsg";
 	}
 	

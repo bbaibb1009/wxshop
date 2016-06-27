@@ -68,35 +68,39 @@ public class SysConstant
 	
 	public static final String JS_API_TICKET_EXPIRE = "wxcrmjsApiTikcetExpire";
 	
-	public static final String OTHERLOG_WEIXIN = "3";
+	public static final String OTHERLOG_WEIXIN 			= "3";
 	
+	public static final String ADMIN_USERNAME_WX 		= "wxcrmAdminUsernameCust";
 
-	public static final String ADMIN_USERNAME_WX = "wxcrmAdminUsernameCust";
+	public static final String ADMIN_PWD_MD5_WX 		= "wxcrmAdminPwdmd5Cust";
 
-	public static final String ADMIN_PWD_MD5_WX = "wxcrmAdminPwdmd5Cust";
+	public static final String ADMIN_PWD_3DES_WX 		= "wxcrmAdminPwd3desCust";
 
-	public static final String ADMIN_PWD_3DES_WX = "wxcrmAdminPwd3desCust";
-
-	public static final String LOGIN_REDIRECT_URI_WX = "wxcrmloginRedirectUriCust";
+	public static final String LOGIN_REDIRECT_URI_WX 	= "wxcrmloginRedirectUriCust";
 	
-	public static final String ADMIN_INFO_COOKIE_WX = "wxcrmadminInfoCookieCust";
+	public static final String ADMIN_INFO_COOKIE_WX 	= "wxcrmadminInfoCookieCust";
 
-	public static final String ADMIN_MENUS_LEVEL1_WX = "adminMenusLevel1Cust";
+	public static final String ADMIN_MENUS_LEVEL1_WX 	= "adminMenusLevel1Cust";
 
-	public static final String ADMIN_MENUS_LEVEL2_WX = "adminMenusLevel2Cust";
+	public static final String ADMIN_MENUS_LEVEL2_WX 	= "adminMenusLevel2Cust";
 	
+	public static final String ADMIN_MENUS_LEVEL3_WX 	= "adminMenusLevel3Cust";
 
-	public static final String ADMIN_MENUS_LEVEL3_WX = "adminMenusLevel3Cust";
+	public static final String ADMIN_MENU_ID1_WX 		= "adminMenuId1Cust";
 
-	public static final String ADMIN_MENU_ID1_WX = "adminMenuId1Cust";
+	public static final String ADMIN_MENU_ID2_WX 		= "adminMenuId2Cust";
 
-	public static final String ADMIN_MENU_ID2_WX = "adminMenuId2Cust";
+	public static final String ADMIN_MENU_ID3_WX 		= "adminMenuId3Cust";
 
-	public static final String ADMIN_MENU_ID3_WX = "adminMenuId3Cust";
+	public static final String WEBSITE_INFO_LIST 		= "webSiteInfoList";
 
-	public static final String WEBSITE_INFO_LIST = "webSiteInfoList";
-
-	public static final String WEBSITE_INFO = "webSiteInfo";
+	public static final String WEBSITE_INFO 			= "webSiteInfo";
+	
+	public static final String DEPT_ALL 				= "dept_all";
+	
+	public static final String SINGLE_DEPT_ALL 			= "single_dept_all";
+	
+	public static final String DEPT_NAME1_ALL 			= "wxcrm_dept_name1_all";
 	
 	public static String chuku= "1";
 	

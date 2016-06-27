@@ -1,6 +1,7 @@
 package com.wxshop.shop.admin;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ import com.wxshop.common.IMemcachedService;
 import com.wxshop.sys.IShopAdminService;
 import com.wxshop.sys.IShopRoleService;
 import com.wxshop.sys.WcShopAdmin;
-import com.wxshop.sys.WcShopRole;
+import com.wxshop.util.DateUtil;
 import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
 
@@ -44,10 +45,6 @@ public class ShopAdminController
 		model.addAttribute(SysConstant.PAGE_RESULT,adminService.queryShopAdmin(admin));
 		return "/admin/queryShopAdmin";
 	}
-
-	
-	
-	
 	/**
 	 * @功能介绍 跳转至修改菜单
 	 * 
@@ -59,7 +56,7 @@ public class ShopAdminController
 		StringUtil.copyProperties(admin_Q, shopadmin);
 		model.addAttribute("command", shopadmin);
 		model.addAttribute("roleList1", roleService.queryShopRoleForAdminUpd2(admin_Q.getWsaId()));
-		return "/admin/updShopAdmin2";
+		return "/admin/updShopAdmin";
 	} 
 	
 	/**
@@ -72,12 +69,36 @@ public class ShopAdminController
 	@RequestMapping(value="/updShopAdmin",method = RequestMethod.POST)
 	public String updShopAdmin(WcShopAdmin admin_Q, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException 
 	{
-		
 		adminService.updShopAdmin(admin_Q);
-		redirectAttributes.addFlashAttribute("msgCode", "2");
-		redirectAttributes.addFlashAttribute("alertMsg", "菜单修改成功");
-		redirectAttributes.addFlashAttribute("formHidden", StringUtil.formPost(request.getContextPath() + "/shop/admin/queryShopAdmin", admin_Q));
-		return "redirect:/admin/toMsg";
+		redirectAttributes.addFlashAttribute("success", "账号修改成功!");
+		return "redirect:/shop/admin/queryShopAdmin";
 	}
+
+	/**
+	 * @功能介绍 跳转至修改菜单
+	 * 
+	 * */
+	@RequestMapping(value ="/toAddShopAdmin",method = RequestMethod.POST)
+	public String toAddShopAdmin(Model model) throws IllegalArgumentException, IllegalAccessException
+	{  
+		WcShopAdmin admin = new WcShopAdmin();
+		model.addAttribute("command", admin);
+		model.addAttribute("roleList", roleService.queryShopRoleForAdminAdd());
+		return "/admin/addShopAdmin";
+	} 
+	
+	@RequestMapping(value ="/addAdmin", method = RequestMethod.POST)
+	public String addAdmin(WcShopAdmin admin, HttpServletRequest request,HttpSession session, RedirectAttributes redirectAttributes)
+	    throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException
+	{
+		WcShopAdmin adminReg = (WcShopAdmin)session.getAttribute(SysConstant.ADMIN_INFO);
+		admin.setWsaRegistor(adminReg.getWsaId());
+		admin.setWsaLogindate(DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+		admin.setWsaStatus("1");
+		adminService.addShopAdmin(admin);
+		redirectAttributes.addFlashAttribute("success", "账号添加成功!");
+		return "redirect:/shop/admin/queryShopAdmin";
+	}
+	
 	
 }

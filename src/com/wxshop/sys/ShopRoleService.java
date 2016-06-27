@@ -37,7 +37,6 @@ public class ShopRoleService implements IShopRoleService {
 		// TODO Auto-generated method stub
 		hibernateDao.add(role);
 		addShopRoleOther(role);
-		
 	}
 
 	private void addShopRoleOther(WcShopRole role)
@@ -58,8 +57,8 @@ public class ShopRoleService implements IShopRoleService {
 		// TODO Auto-generated method stub
 		String roleIdsStr = StringUtils.arrayToCommaDelimitedString(roleIds);
 		jdbcDao.delete("delete from WC_SHOP_ROLE where WSR_ROLE_ID in (" + roleIdsStr + ")");
-		jdbcDao.delete("delete from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID in (" + roleIdsStr + ")");
-		jdbcDao.delete("delete from WC_SHOP_ADMIN_ROLE where WSRM_ROLE_ID in (" + roleIdsStr + ")");
+		jdbcDao.delete("delete from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID in (" 	+ roleIdsStr + ")");
+		jdbcDao.delete("delete from WC_SHOP_ADMIN_ROLE where WSAR_ROLE_ID in (" + roleIdsStr + ")");
 	}
 
 
@@ -68,35 +67,20 @@ public class ShopRoleService implements IShopRoleService {
 		return hibernateDao.get(WcShopRole.class, roleId);
 	}
 
-
-
-
-
 	public void updShopRole(WcShopRole role) {
 		// TODO Auto-generated method stub
 		hibernateDao.update(role);
 		Object[] obj = new Object[]{role.getWsrRoleId()};
 		jdbcDao.delete("delete from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID = ?", obj);
 		// 没有设置部门的管理员不能删除，因为在部门树中没有这部分管理员
-//		jdbcDao.delete(" delete a from WC_ADMIN_ROLE a where a.WAR_ROLE_ID = ? ",obj);
-//		
-//		jdbcDao.delete(
-//			  " delete a from lz_admin_role a where a.role_id = ? "
-//			+ " and exists ( "
-//			+ " 	select 1 from lz_admin b "
-//			+ " 	where a.admin_id = b.admin_id "
-//			+ "		and b.dept_id > 0 "
-//			+ " ) "
-//			, obj);
+		jdbcDao.delete(" delete a from WC_SHOP_ADMIN_ROLE a where a.WSAR_ROLE_ID = ? ",obj);
 		addShopRoleOther(role);
 	}
 
 	@Transactional(readOnly = true)
 	public List<String> queryShopRoleMenusById(Integer roleId)
 	{
-		List<Map<String, Object>> menuList =
-			jdbcDao.queryForList("select WSRM_ROLE_ID, WSRM_MENU_ID from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID = ?", 
-					new Object[]{roleId});
+		List<Map<String, Object>> menuList = jdbcDao.queryForList("select WSRM_ROLE_ID, WSRM_MENU_ID from WC_SHOP_ROLE_MENU where WSRM_ROLE_ID = ?", new Object[]{roleId});
 		return chgList(menuList, "WSRM_MENU_ID");
 	}
 	
@@ -212,9 +196,13 @@ public class ShopRoleService implements IShopRoleService {
 	public Page queryShopRole(WcShopRole role) 
 	{
 		// TODO Auto-generated method stub
-		StringBuilder sql 	= new StringBuilder("select a.WSR_ROLE_ID,a.WSR_ROLE_NAME,a.WSR_ROLE_DESC,a.WSR_REGISTOR,a.WSR_REGIST_DATE"); 
+		StringBuilder sql 	= new StringBuilder("select a.WSR_ROLE_ID, a.WSR_ROLE_NAME, a.WSR_ROLE_DESC, b.WSA_NAME as WSR_REGISTOR, date_format(a.WSR_REGIST_DATE,'%Y-%m-%d') as WSR_REGIST_DATE "); 
 		StringBuilder sqlCnt = new StringBuilder("select count(*) ");
-		StringBuilder sqlConf = new StringBuilder(" from WC_SHOP_ROLE a where 1=1  ");
+		StringBuilder sqlConf = new StringBuilder(
+			" from WC_SHOP_ROLE a " +
+			" left join WC_SHOP_ADMIN b on a.WSR_REGISTOR = b.WSA_ID  " +
+			" where 1=1  "
+		);
 		List<Object> paraList = new ArrayList<Object>();
 		sql.append(sqlConf);
 		sqlCnt.append(sqlConf);
@@ -222,6 +210,14 @@ public class ShopRoleService implements IShopRoleService {
 		jdbcDao.queryForPage(page);
 		return page;
 	}
+
+
+	public List<String> queryShopRoleAdminsById(Integer roleId) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> adminList = jdbcDao.queryForList("select -1 * WSAR_ADMIN_ID admin_id, WSAR_ROLE_ID role_id from WC_SHOP_ADMIN_ROLE where WSAR_ROLE_ID = ?", new Object[]{roleId});
+		return chgList(adminList, "admin_id");
+	}
+	
 	
 		
 }

@@ -17,6 +17,7 @@ import org.springframework.util.DigestUtils;
 import com.wxshop.common.IMemcachedService;
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
+import com.wxshop.util.DateUtil;
 import com.wxshop.util.Page;
 import com.wxshop.util.StringUtil;
 @Service
@@ -76,16 +77,7 @@ public class ShopAdminService implements IShopAdminService {
 		}
 	}
 	
-	public void addShopAdmin(WcShopAdmin admin) 
-	{
-		admin.setWsaPwd(DigestUtils.md5DigestAsHex(admin.getWsaPwd().getBytes()));
-		hibernateDao.add(admin);
-		addShopAdminOther(admin);
 	
-		// 更新缓存
-		hibernateDao.flush();
-
-	}
 	
 	
 	
@@ -123,7 +115,8 @@ public class ShopAdminService implements IShopAdminService {
 	public WcShopAdmin getShopAdminById(Integer id) {
 		// TODO Auto-generated method stub
 		WcShopAdmin admin =  hibernateDao.get(WcShopAdmin.class, id);
-		admin.setWsaPwdMd5(admin.getWsaPwd());
+		if(admin!=null)
+		{admin.setWsaPwdMd5(admin.getWsaPwd());}
 		return admin;
 	}
 	
@@ -167,7 +160,13 @@ public class ShopAdminService implements IShopAdminService {
 	
 	@Transactional(readOnly = true)
 	public Page queryShopAdmin(WcShopAdmin admin) {
-		StringBuilder sql  		= new StringBuilder("select a.WSA_ID,a.WSA_USERNAME,a.WSA_PWD,a.WSA_NAME,a.WSA_SEX,b.WSA_NAME as registor,a.WSA_REGISTDATE,a.WSA_LOGINDATE,a.WSA_STATUS from WC_SHOP_ADMIN a left join WC_SHOP_ADMIN b on a.WSA_REGISTOR = b.WSA_ID where 1=1");
+		StringBuilder sql  		= new StringBuilder(
+			"select " +
+			" a.WSA_ID,a.WSA_USERNAME,a.WSA_PWD,a.WSA_DEPT ,c.WDP_NAME deptname,a.WSA_NAME,a.WSA_SEX,b.WSA_NAME as registor,a.WSA_REGISTDATE,a.WSA_LOGINDATE,a.WSA_STATUS" +
+			" from WC_SHOP_ADMIN a " +
+			" left join WC_SHOP_ADMIN b on a.WSA_REGISTOR = b.WSA_ID " +
+			" left join WC_SHOP_DEPT c on a.WSA_DEPT = c.WDP_ID " +
+			" where 1=1");
 		StringBuilder sqlCnt 	= new StringBuilder("select count(*) from WC_SHOP_ADMIN a where 1=1");
 		List<Object> paraList 	= new ArrayList<Object>();
 		Page page = new Page(sql.toString(),sqlCnt.toString(),admin.getCurrentPage(),admin.getPageSize(),paraList.toArray());
@@ -185,6 +184,10 @@ public class ShopAdminService implements IShopAdminService {
 		else
 		{
 			admin.setWsaPwd(DigestUtils.md5DigestAsHex(admin.getWsaPwd().getBytes()));
+		}
+		if(admin.getWsaLogindate().length()==0)
+		{
+			admin.setWsaLogindate(null);
 		}
 		hibernateDao.update(admin);
 		Object[] obj = new Object[]{admin.getWsaId()};
@@ -213,6 +216,27 @@ public class ShopAdminService implements IShopAdminService {
 			jdbcDao.batchUpdate("insert into WC_SHOP_ADMIN_MENU (WSAM_ADMIN_ID, WSAM_MENU_ID) values (?, ?)", StringUtil.getObjAryList(adminId, menuIds)); 
 		}
 	}
+	
+	
+	public void addShopAdmin(WcShopAdmin admin)
+	{
+		admin.setWsaPwd(DigestUtils.md5DigestAsHex(admin.getWsaPwd().getBytes()));
+		admin.setWsaRegistdate(DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+		
+		hibernateDao.add(admin);
+		addShopAdminOther(admin);
+		
+		// 更新缓存
+		hibernateDao.flush();
+//		if( admin.getDeptId() != null && admin.getDeptId() > 0 )
+//		{
+//			memcachedservice.setDeptAll();
+//		}
+		memcachedservice.setShopAdminNameAll();
+		
+		
+	}
+	
 	
 	
 }

@@ -36,15 +36,9 @@
   
   <body>
   	<c:if test="${msgCode == 2}">
-  	<div class="wrapper">
-
-  	<div class="admin_right" id="adminRight">
   	<div class="content">
   	<span id="formHiddSpan"></span>
   	</div>
-    </div>
-    <jsp:include page="/view/sys/footer.jsp"></jsp:include>
-    </div>
     </c:if>
   </body>
 </html>

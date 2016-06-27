@@ -26,17 +26,17 @@ function addRoleSubmit()
 	{
 		menuIdStr += "," + zNodes[i].id;
 	}
-	//var zTree2 = $.fn.zTree.getZTreeObj("treeDemo2");
-	//var zNodes2 = zTree2.getCheckedNodes(true);
+	var zTree2 = $.fn.zTree.getZTreeObj("treeDemo2");
+	var zNodes2 = zTree2.getCheckedNodes(true);
 	var adminIdStr = "";
-	//for( var i = 0; i < zNodes2.length; i++ )
-	//{
-	//	adminIdStr += "," + zNodes2[i].id * -1;
-	//}
-	//if( adminIdStr.length > 0 )
-	//{
-	//	adminIdStr = adminIdStr.substring(1, adminIdStr.length);
-	//}
+	for( var i = 0; i < zNodes2.length; i++ )
+	{
+		adminIdStr += "," + zNodes2[i].id * -1;
+	}
+	if( adminIdStr.length > 0 )
+	{
+		adminIdStr = adminIdStr.substring(1, adminIdStr.length);
+	}
 	
 	myform.wsrRoleName.value = myform.wsrRoleName.value.trim();
 	myform.wsrRoleDesc.value = myform.wsrRoleDesc.value.trim();

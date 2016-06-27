@@ -15,32 +15,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTree/zTreeStyle.css"/>
 <link rel='stylesheet' href="${pageContext.request.contextPath}/view1/css/select2.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/icheck/all.css"/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
-<script>
-	var path = "${pageContext.request.contextPath}";
-	var setting = {
-		check: {
-			enable: true,
-			chkboxType: { "Y" : "ps", "N" : "ps" }
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		}
-	};
-	
-	$(document).ready(function(){
-		$("#roleIds").select2();
-		//loadMenuTreeForAdmin(${command.wsaId});
-	});
-	
-	function alertSelect()
-	{
-		alert($("#roleIds").val());
-	}
-</script>
+
 
 </head>
 <body>
@@ -70,6 +48,7 @@
           	<f:hidden path="wsaStatus"/>
  			<f:hidden path="currentPage"/>
   			<f:hidden path="pageSize"/>
+  			<f:hidden path="menuIds"/>
             <div class="form-group">
             	<label for="wsaUsername" class="col-lg-1 control-label">用户名</label>
             	<div class="col-lg-3">
@@ -97,13 +76,23 @@
             <div class="form-group">
             	<label for="wsaSex" class="col-lg-1 control-label">性别</label>
             	<div class="col-lg-3">
-                	<f:input path="wsaSex" cssClass="form-control input-ms"/>
+                	<label><f:radiobutton path="wsaSex" value="1"/> 男士</label>
+            		<label><f:radiobutton path="wsaSex" value="0"/> 女士</label>
+            	</div>
+            </div>
+            
+            <div class="form-group">
+            	<label for="wsaSex" class="col-lg-1 control-label">部门</label>
+            	<div class="col-lg-3">
+            		<f:hidden path="wsaDept" />
+                	<ul id="treeDemo1" class="ztree"></ul>
             	</div>
             </div>
 			<div class="form-group">
 				<label for="wsaSex" class="col-lg-1 control-label">角色设置：</label>
 				<div class="col-lg-10">
-					<select id="roleIds" name="roleIds" multiple="multiple">
+					
+					<select id="roleIds" name="roleIds" multiple="multiple" onchange="loadMenuTreeForAdmin(${command.wsaId});">
 						<c:forEach items="${roleList1}" var = "role">
 							<c:set var="selected" value="" />
 							<c:if test="${role.selected != '0'}">
@@ -112,42 +101,22 @@
 							<option value="${role.wsrRoleId}" ${selected}>${role.wsrRoleName}</option>
 						</c:forEach>
 				    </select>
-					<%-- 
-					<div class="col-lg-5" style="border: 1px red solid;">
-						<div>未有角色</div>
-						<div>
-							<f:select path="roleIds2" multiple="true" size="20" cssStyle="width: 250px;">
-								<f:options items="${roleList0}" itemValue="roleId" 	itemLabel="roleName"/>
-							</f:select>
-						</div>
-					</div>
-									
-					<div class="col-lg-1"  style="border: 1px red solid;">
-						<img src="${applicationScope.jsPath}/oilchem/view/image/goright.gif" onclick="changeRole(document.getElementById('roleIds2'), document.getElementById('roleIds'), ${command.wsaId});" title="添加角色" style="cursor: pointer;"/>
-						<br/><br/>
-						<img src="${applicationScope.jsPath}/oilchem/view/image/goleft.gif"  onclick="changeRole(document.getElementById('roleIds'), document.getElementById('roleIds2'), ${command.wsaId});" title="删除角色" style="cursor: pointer;"/>
-					</div>
-					
-					<div class="col-lg-4"  style="border: 1px red solid;">
-						<div>已有角色</div>
-						<div>
-							<f:select path="roleIds" size="20" cssStyle="width: 250px;">
-								<f:options items="${roleList1}" itemValue="roleId" itemLabel="roleName"/>
-							</f:select>
-						</div>
-					</div>
+				    <%-- 
+				    <f:select path="roleIds" multiple="true" size="20" cssStyle="width: 250px;" onchange="loadMenuTreeForAdmin(${command.wsaId});">
+						<f:options items="${roleList1}" itemValue="wsrRoleId" itemLabel="wsrRoleName"/>
+					</f:select>
 					--%>
 				</div>
 			</div>
 			<div class="form-group">
-				<div><font color="red"><b>*</b></font>管理员权限：</div>
-				<div><ul id="treeDemo" class="ztree"></ul></div>
+				<label for="treeDemo" class="col-lg-1 control-label">管理员权限：</label>
+				<div class="col-lg-3"><ul id="treeDemo" class="ztree"></ul></div>
 			</div>
 			
 			<div class="form-group  ">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button> <button class="btn btn-warn" onclick="alertSelect();">看select值</button>
+					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button>
 				</div>          	
             </div>
             </f:form>
@@ -161,7 +130,48 @@
 <!--Footer-part-->
 <jsp:include page="/view1/common/footer.jsp"></jsp:include>
 <!--end-Footer-part-->
-
+<script>
+	var path = "${pageContext.request.contextPath}";
+	var setting = {
+		check: {
+			enable: true,
+			chkboxType: { "Y" : "ps", "N" : "ps" }
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+	
+	
+	var setting1 = {
+		check: {
+			chkStyle : "radio" ,
+			enable: true,
+			radioType : "all"
+			
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+	
+	$(document).ready(function(){
+		$("#roleIds").select2();
+		$('input[type=radio]').iCheck({
+             radioClass: 	'iradio_minimal',
+             increaseArea: 	'10%'
+        });
+		
+		loadMenuTreeForAdmin(${command.wsaId});
+		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForAdmin/${command.wsaId}", "treeDemo1", setting1);
+	});
+	
+	
+</script>
 <script src="${pageContext.request.contextPath}/view1/js/jquery-browser.js"></script> 		
 <script src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
 <script src="${pageContext.request.contextPath}/view1/js/tabList.js"></script>
@@ -188,8 +198,10 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/admin/js/admin.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/dept/js/dept.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
+<script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
 	
 
 </body>
