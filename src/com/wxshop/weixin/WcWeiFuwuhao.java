@@ -15,11 +15,15 @@ import javax.persistence.Transient;
  * WcWeiFuwuhao entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "WC_WEI_FUWUHAO", catalog = "wxcrm")
+@Table(name = "WC_WEI_FUWUHAO")
 public class WcWeiFuwuhao implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer fwhId;
 	private String fwhAppName;
 	private String fwhAppId;
@@ -41,6 +45,7 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 	
 	private String currentPage;
 	private String pageSize;
+	private String[] fwhIds;
 
 
 	// Constructors
@@ -255,6 +260,7 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 	public void setCurrentPage(String currentPage) {
 		this.currentPage = currentPage;
 	}
+	
 	@Transient
 	public String getPageSize() {
 		return pageSize;
@@ -262,6 +268,15 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 
 	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
+	}
+	
+	@Transient
+	public String[] getFwhIds() {
+		return fwhIds;
+	}
+
+	public void setFwhIds(String[] fwhIds) {
+		this.fwhIds = fwhIds;
 	}
 	
 	

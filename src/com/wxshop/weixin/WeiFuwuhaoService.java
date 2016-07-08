@@ -37,6 +37,16 @@ public class WeiFuwuhaoService implements IWeiFuwuhaoService {
 		jdbcDao.queryForPage(page);
 		return page;
 	}
+
+	public WcWeiFuwuhao getFuwuhaoById(Integer id) {
+		// TODO Auto-generated method stub
+		return hibernateDao.get(WcWeiFuwuhao.class, id);
+	}
+
+	public void updFuwuhao(WcWeiFuwuhao fuwuhaoQ) {
+		// TODO Auto-generated method stub
+		hibernateDao.update(fuwuhaoQ);
+	}
 	
 	
 

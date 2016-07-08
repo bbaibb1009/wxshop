@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'>
+<script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script type="text/javascript">
 	var path = "${pageContext.request.contextPath}";
 </script>
@@ -25,111 +26,45 @@
   <div id="content-header">
     <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">服务号查询</a></div>
   </div>
+  <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/menu/toAddShopMenu'" value="添加"/> 
-	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wsmIds', '${pageContext.request.contextPath}/shop/menu/delShopMenu');" value="删除"/>
+	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/fuwuhao/toAddFuwuhao'" value="添加"/> 
+	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('fwhIds', '${pageContext.request.contextPath}/fuwuhao/delFuwuhao');" value="删除"/>
     </div>
     <div class="row-fluid">
         <div class="widget-box">
- 		 
-		  
           <div class="widget-content nopadding">
           	<f:form action="${pageContext.request.contextPath}/fuwuhao/queryFuwuhao" onsubmit="return false;">
-          	<f:hidden path="wsmId"/>
-            <table class="table table-bordered with-check">
-                <tr>
-                  <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wsmIds');"/></th>
-                  <th class="small" width="20%">应用名称</th>
-                  <th class="small" width="25%">APPID</th>
-                  <th class="small" width="5%">AppSecret</th>
-                  <th class="small" width="5%">URL(服务器回调地址)</th>
-                  <th class="small" width="10%">Token(令牌)</th>
-                  <th class="small" width="10%">EncodingAESKey</th>
-                  <th class="small" width="10%">消息加解密方式</th>
-                  <th class="small" width="10%">应用类型</th>
-                  <th class="small" width="10%">客户类型</th>
-                  <th class="small" width="10%">账户类型</th>
-                  <th class="small" width="10%">商家ID</th>
-                  <th class="small" width="10%">默认回复消息</th>
-                  <th class="small" width="10%">关注消息回复</th>
-                  <th class="small" width="10%">状态</th> 
-                  <th class="small" width="10%">备注</th> 
-                  <th class="small" width="5%">录入人</th>
-                  <th class="small" width="8%">录入时间</th>
-                  <th class="small" width="20%">操作</th>
-                </tr>
-                <c:forEach items="${pageResult.resultList}" var="fuwuhao">
-                <tr>
-                	<td class="text-center small"><input type="checkbox"  name="wsmIds" value="${fuwuhao.FWH_ID}"/></td>
-                  	<td class="text-center small">${fuwuhao.FWH_APP_NAME}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_APP_ID}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_APP_SECRET}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_REDERECT_URL}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_TOKEN}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_ENCODING_AES_KEY}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_AES_TYPE}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_APP_TYPE}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_CUS_TYPE}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_ACCOUNT_TYPE}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_ENTER_ID}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_DEFAULT_MSG}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_SUBSCRIBE_MSG}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_STATUS}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_DESC}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_REGISTOR}</td>
-                  	<td class="text-center small">${fuwuhao.FWH_REGISTDATE}</td>
-                  	<td class="text-center small"><a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-xs">修改</a></td>
-                </tr>
-                </c:forEach> 
-
-            </table>
-            
-        <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-file"></i> </span>
-            <h5>Recent Posts</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <ul class="recent-posts">
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av1.jpg"> </div>
-                <div class="article-post">
-                  <div class="fr"><a href="#" class="btn btn-primary btn-mini">Edit</a> <a href="#" class="btn btn-success btn-mini">Publish</a> <a href="#" class="btn btn-danger btn-mini">Delete</a></div>
-                  <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av2.jpg"> </div>
-                <div class="article-post">
-                  <div class="fr"><a href="#" class="btn btn-primary btn-mini">Edit</a> <a href="#" class="btn btn-success btn-mini">Publish</a> <a href="#" class="btn btn-danger btn-mini">Delete</a></div>
-                  <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="img/demo/av3.jpg"> </div>
-                <div class="article-post">
-                  <div class="fr"><a href="#" class="btn btn-primary btn-mini">Edit</a> <a href="#" class="btn btn-success btn-mini">Publish</a> <a href="#" class="btn btn-danger btn-mini">Delete</a></div>
-                  <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
-                </div>
-              <li>
-                <button class="btn btn-warning btn-mini">View All</button>
-              </li>
-            </ul>
-          </div>
+          	<f:hidden path="fwhId"/>
+	        <div class="span6">
+	          <div class="widget-title"> <span class="icon"> <i class="icon-file"></i> </span>
+	            <h5>公众号</h5>
+	          </div>
+	          <div class="widget-content nopadding">
+	            <ul class=" recent-fuwuhao">
+	              <c:forEach items="${pageResult.resultList}" var="fuwuhao">	
+		              <li>
+		                <div class="" style="padding-bottom: 20px;"> 
+		                	<input type="checkbox" name="fwhIds" style="float: left;margin-left:-30px;margin-top:-30px;"/>
+		                	<img width="80" height="80" alt="User" src="${pageContext.request.contextPath}/view1/img/demo/av1.jpg" class="fl" style="margin-left:-10px;margin-top:-30px;"> 
+		                  	<div class="invoice fl" style="padding-left:15px;margin-top:-30px;font-size:14px;color:#e0a;">${fuwuhao.FWH_APP_NAME}</div>
+		                  	<span class="invoice">${fuwuhao.FWH_ACCOUNT_TYPE}</span>
+		                  	<p style="padding:15px;float:left;"><a href="#">${fuwuhao.FWH_DESC}</a> </p>
+		                </div>
+		                <div class="article-post" style="margin-top: -10px;padding-bottom:10px;">
+		                  <div class="fr"><a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> <a href="#" class="btn btn-success btn-mini">粉丝</a> <a href="#" class="btn btn-danger btn-mini">消息</a></div>
+		                </div>
+		              </li>
+	              </c:forEach>
+	            </ul>
+	          </div>
+	        </div>
         </div>
-        </div>
-            
-            
-            <jsp:include page="/view1/sys/page.jsp"></jsp:include>
             </f:form>
           </div>
         </div>
-      </div>
   </div>
 </div>
 
@@ -138,7 +73,7 @@
 
 <jsp:include page="/view1/common/footer.jsp"></jsp:include>
 <!--end-Footer-part-->
-<script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
+
 <script src="${pageContext.request.contextPath}/view1/js/jquery-browser.js"></script> 		
 <script src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
 <script src="${pageContext.request.contextPath}/view1/js/tabList.js"></script>

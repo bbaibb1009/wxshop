@@ -47,7 +47,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">团队添加</a></div>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">团队修改</a></div>
   </div>
   <div class="container-fluid">
   <hr>
@@ -56,10 +56,12 @@
      <div class="span6">
       <div class="widget-box">
       	  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-             <h5>添加团队</h5>
+             <h5>修改团队</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/dept/addDept" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/dept/updDept" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:hidden path="wdpId"/>
+          	
             <div class="form-group">
             	<label for="wdpName" class="col-lg-1 control-label">名称</label>
             	<div class="col-lg-3">

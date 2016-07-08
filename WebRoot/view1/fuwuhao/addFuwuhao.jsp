@@ -15,30 +15,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTree/zTreeStyle.css"/>
 <link rel='stylesheet' href="${pageContext.request.contextPath}/view1/css/select2.css" />
-<link rel='stylesheet' href="${pageContext.request.contextPath}/view1/css/jquery.autocomplete.css?v=${applicationScope.sysStartUpTime}"></script>	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/icheck/all.css"/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
-<script>
-	var path = "${pageContext.request.contextPath}";
-	var setting = {
-		check: {
-			enable: true,
-			chkboxType: { "Y" : "ps", "N" : "ps" }
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		}
-	};
-	
-	$(document).ready(function(){
 
-		getAdminNameList("wdpAdminName");
-	});
-	
-	
-</script>
 
 </head>
 <body>
@@ -47,7 +27,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">团队添加</a></div>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">公众号修改</a></div>
   </div>
   <div class="container-fluid">
   <hr>
@@ -56,58 +36,102 @@
      <div class="span6">
       <div class="widget-box">
       	  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-             <h5>添加团队</h5>
+             <h5>修改公众号</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/dept/addDept" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/fuwuhao/updFuwuhao" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:hidden path="fwhId"/>
+          	<f:hidden path="fwhRegistor"/>
+          	<f:hidden path="fwhRegistdate"/>
+           	<f:hidden path="fwhStatus"/>
+ 			<f:hidden path="currentPage"/>
+  			<f:hidden path="pageSize"/>
             <div class="form-group">
-            	<label for="wdpName" class="col-lg-1 control-label">名称</label>
+            	<label for="fwhAppName" class="col-lg-1 control-label">应用名称</label>
             	<div class="col-lg-3">
-               	 	<f:input path="wdpName" cssClass="form-control input-ms"/>
+               	 	<f:input path="fwhAppName" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wdpLevel" class="col-lg-1 control-label">级别</label>
+            	<label for="fwhAppId" class="col-lg-1 control-label">AppId</label>
             	<div class="col-lg-3">
-                   	<f:select path="wdpLevel" onchange="showParentDept(this.value);">
-	    				<f:option value="1">协会</f:option>
-	    				<f:option value="2">分部</f:option>
-	    			</f:select>
+               	 	<f:input path="fwhAppId" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wdpOrder" class="col-lg-1 control-label">顺序</label>
+            	<label for="fwhAppSecret" class="col-lg-1 control-label">fwhAppSecret</label>
             	<div class="col-lg-3">
-               	 	<f:input path="wdpOrder"  cssClass="form-control input-ms"/>
+               	 	<f:password path="fwhAppSecret" cssClass="form-control input-ms"/>
                 </div>
             </div>
-            <div id="pdept1" class="form-group " style="display: none;">
-            	<label for="wdpParentName" class="col-lg-1 control-label">选择上级部门：</label> 
+            <div class="form-group ">
+            	<label for="fwhRederectUrl" class="col-lg-1 control-label">fwhRederectUrl</label> 
             	<div class="col-lg-3">
-            		<f:input path="wdpParentName"  cssClass="form-control input-ms"/>
-                	<f:input path="wdpParentId"/>
+                	<f:input path="fwhRederectUrl" cssClass="form-control input-ms"/>
             	</div>
             </div>
-            <div id="pdept2" class="form-group " style="display: none;">
-            	<label for="tdDeptName1" class="col-lg-1 control-label"><font color="red"><b>*</b></font>上级部门：</label> 
+            <div class="form-group">
+            	<label for="fwhToken" class="col-lg-1 control-label">fwhToken</label>
             	<div class="col-lg-3">
-            		<span id="tdDeptName1"></span>
+                	<f:input path="fwhToken" cssClass="form-control input-ms"/>
             	</div>
             </div>
-
             
             <div class="form-group">
-            	<label for="wdpAdminName" class="col-lg-1 control-label">负责人</label>
+            	<label for="fwhEncodingAesKey" class="col-lg-1 control-label">fwhEncodingAesKey</label>
             	<div class="col-lg-3">
-            		<f:input path="wdpAdminName" cssClass="form-control input-ms"/>
-                	<f:hidden path="wdpAdminId" />
+            		<f:input path="fwhEncodingAesKey"  cssClass="form-control input-ms"/>
             	</div>
             </div>
-           
+                  
+			<div class="form-group ">
+            	<label for="fwhAppType" class="col-lg-1 control-label">fwhAppType</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhAppType" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+			<div class="form-group ">
+            	<label for="fwhCusType" class="col-lg-1 control-label">fwhCusType</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhCusType" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+            
+            <div class="form-group ">
+            	<label for="fwhAccountType" class="col-lg-1 control-label">fwhAccountType</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhAccountType" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+            <div class="form-group ">
+            	<label for="fwhEnterId" class="col-lg-1 control-label">fwhEnterId</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhEnterId" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+            <div class="form-group ">
+            	<label for="fwhDefaultMsg" class="col-lg-1 control-label">fwhDefaultMsg</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhDefaultMsg" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+            <div class="form-group ">
+            	<label for="fwhSubscribeMsg" class="col-lg-1 control-label">fwhSubscribeMsg</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhSubscribeMsg" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+             <div class="form-group ">
+            	<label for="fwhDesc" class="col-lg-1 control-label">fwhDesc</label> 
+            	<div class="col-lg-3">
+                	<f:input path="fwhDesc" cssClass="form-control input-ms"/>
+            	</div>
+            </div>
+            
 			<div class="form-group  ">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addDeptSubmit();" >保存</button> 
+					<button class="btn btn-info" onclick="updFuwuhaoSubmit();" >提交</button>
 				</div>          	
             </div>
             </f:form>
@@ -121,7 +145,15 @@
 <!--Footer-part-->
 <jsp:include page="/view1/common/footer.jsp"></jsp:include>
 <!--end-Footer-part-->
-
+<script>
+	var path = "${pageContext.request.contextPath}";
+	
+	
+	$(document).ready(function(){
+		
+	});
+	
+</script>
 <script src="${pageContext.request.contextPath}/view1/js/jquery-browser.js"></script> 		
 <script src="${pageContext.request.contextPath}/view1/js/basic.js"></script>
 <script src="${pageContext.request.contextPath}/view1/js/tabList.js"></script>
@@ -146,11 +178,11 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.uniform.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/admin/js/admin.js" ></script>
-<script src="${pageContext.request.contextPath}/view1/dept/js/dept.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/fuwuhao/js/fuwuhao.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
-<script src="${pageContext.request.contextPath}/view1/js/jquery.autocomplete.min.js?v=${applicationScope.sysStartUpTime}"></script>	
+<script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
+	
 
 </body>
 </html>
