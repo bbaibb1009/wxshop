@@ -16,8 +16,6 @@
         <li><a href="#"><i class="icon-user"></i>  我的配置文件</a>	</li>
         <li class="divider"></li>
         <li><a href="#"><i class="icon-check"></i> 我的任务</a>	</li>
-        <li class="divider"></li>
-        <li><a href="login.html"><i class="icon-key"></i> 注销</a></li>
       	</ul>
     </li>
     <li class="dropdown" id="menu-messages">
@@ -43,7 +41,7 @@
 	 	<b style="display: inline-block;  width: 0;  height: 0; " ></b>
 	</a>
 	</li>
-    <li class="dropdown"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text"> 注销</span><b style="display: inline-block;  width: 0;  height: 0; " ></b></a></li>
+    <li class="dropdown"><a title="" href="${pageContext.request.contextPath}/admin/adminLogout"><i class="icon icon-share-alt"></i> <span class="text"> 注销</span><b style="display: inline-block;  width: 0;  height: 0; " ></b></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->

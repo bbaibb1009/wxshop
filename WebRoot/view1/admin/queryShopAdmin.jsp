@@ -33,7 +33,7 @@
     <div class="row-fluid">
     	
 	   <input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/shop/admin/toAddShopAdmin');" value="添加"/> 
-	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wsmIds', '${pageContext.request.contextPath}/shop/admin/delShopAdmin');" value="删除"/>
+	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wsaIds', '${pageContext.request.contextPath}/shop/admin/delShopAdmin');" value="删除"/>
 	   
     </div>
     <div class="row-fluid">

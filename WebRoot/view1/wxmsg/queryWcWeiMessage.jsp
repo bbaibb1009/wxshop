@@ -25,57 +25,51 @@
 <!--breadcrumbs-->
   
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">团队查询</a></div>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">微信回复信息管理</a></div>
   </div>
-  <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
+ <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
-     
     <div class="row-fluid">
     	
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/shop/dept/toAddShopDept'" value="添加"/> 
-	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wdpIds', '${pageContext.request.contextPath}/shop/dept/delShopDept');" value="删除"/>
+	   <input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/wxmsg/toAddWxMsg');" value="添加"/> 
+	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wmgIds', '${pageContext.request.contextPath}/wxmsg/delWxMsg');" value="删除"/>
 	   
     </div>
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/shop/admin/queryShopAdmin" onsubmit="return false;">
-          	<f:hidden path="wdpId"/>
-          	<f:hidden path="wdpRegistdate"/>
-          	<f:hidden path="wdpRegistor"/>
-          	
-          	
+          	<f:form action="${pageContext.request.contextPath}/wxmsg/queryWcWeiMessage" onsubmit="return false;">
+          	<f:hidden path="wmgId"/>
             <table class="table table-bordered with-check">
                 <tr>
-                  <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wdpIds');"/></th>
-                  <th class="small" width="10%">团队名称</th>
-                  <th class="small" width="10%">上级团队</th>
-                  <th class="small" width="5%">团队级别</th>
-                  <th class="small" width="5%">顺序</th>
-                  <th class="small" width="5%">负责人</th>
-                  <th class="small" width="5%">状态</th>
-                  <th class="small" width="40%">备注</th>
-                  <th class="small" width="5%">录入人</th>
-                  <th class="small" width="5%">录入时间</th>
-                  <th class="small" width="10%">操作</th>
+                  <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wmgIds');"/></th>
+                  <th class="small" width="7%">所属APPID</th>
+                  <th class="small" width="7%">回复内容</th>
+                  <th class="small" width="15%">回复内容XML</th>
+                  <th class="small" width="4%">回复类型</th>
+                  <th class="small" width="7%">消息类型</th>
+                  <th class="small" width="10%">加密类型</th>
+                  <th class="small" width="10%">状态</th>
+                  <th class="small" width="10%">备注</th>
+                  <th class="small" width="10%">录入人</th>
+                  <th class="small" width="10%">录入时间</th>
+                  <th class="small" width="50%">操作</th>
                 </tr>
-                <c:forEach items="${pageResult.resultList}" var="dept">
+                <c:forEach items="${pageResult.resultList}" var="msg">
                 <tr>
-                	<td class="text-center small"><input type="checkbox"  name="wdpIds" value="${dept.WDP_ID}"/></td>
-                  	<td class="text-center small">${dept.WDP_NAME}</td>
-                  	<td class="text-center small">${dept.PARENT_NAME == null ?'' : dept.PARENT_NAME}</td>
-                  	<td class="text-center small"><c:if test="${dept.WDP_LEVEL=='1'}">协会</c:if><c:if test="${dept.WDP_LEVEL=='2'}">分部</c:if></td>
-                    <td class="text-center small">${dept.WDP_ORDER}</td>
-                    <td class="text-center small">${dept.ADMIN_NAME}</td>
-                    <td class="text-center small">
-                    <c:if test="${dept.WDP_STATUS == '1000'}">可用</c:if>
-                    <c:if test="${dept.WDP_STATUS == '2000'}">不可用</c:if>
-                    </td>
-                    <td class="text-center small">${dept.WDP_DESC}</td>
-                    <td class="text-center small">${dept.WDP_REGISTOR_NAME}</td>
-                  	<td class="text-center small">${dept.WDP_REGISTDATE}</td>
+                	<td class="text-center small"><input type="checkbox"  name="wsaIds" value="${msg.WMG_ID}"/></td>
+                 	<td class="text-center small">${msg.WMG_APP_ID}</td>
+                  	<td class="text-center small">${msg.WMG_CONTENT}</td>
+                  	<td class="text-center small">${msg.WMG_CONTENT_XML}</td>
+                    <td class="text-center small"><c:if test="${msg.WMG_REPLY_TYPE=='1'}">男</c:if><c:if test="${msg.WMG_REPLY_TYPE=='2'}">女</c:if></td>
+                    <td class="text-center small">${msg.WMG_MSG_TYPE}</td>
+                  	<td class="text-center small">${msg.WMG_AES_TYPE}</td>
+                  	<td class="text-center small">${msg.WMG_STATUS}</td>
+                  	<td class="text-center small">${msg.WMG_DESC}</td>
+                  	<td class="text-center small">${msg.WMG_REGISTOR}</td>
+                  	<td class="text-center small">${msg.WMG_REGISTDATE}</td>
                   	<td class="text-center small">
-                  		<a href="#" onclick="javascript:toUpd('wdpId', ${dept.WDP_ID}, '${pageContext.request.contextPath}/shop/dept/toUpdShopDept');" class="btn btn-primary btn-xs">修改</a>
+                  		<a href="#" onclick="javascript:toUpd('wmgId', ${msg.WMG_ID}, '${pageContext.request.contextPath}/wxmsg/toUpdWxMsg');" class="btn btn-primary btn-xs">修改</a>
                   	</td>
                 </tr>
                 </c:forEach> 
@@ -112,6 +106,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/dept/js/dept.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/wxmsg/js/wxmsg.js" ></script>
+<jsp:include page="/view1/common/modal-dialog.jsp"></jsp:include>
 </body>
 </html>

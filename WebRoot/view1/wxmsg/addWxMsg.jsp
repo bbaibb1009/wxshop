@@ -14,8 +14,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTree/zTreeStyle.css"/>
-<link rel='stylesheet' href="${pageContext.request.contextPath}/view1/css/select2.css" />
-<link rel='stylesheet' href="${pageContext.request.contextPath}/view1/css/jquery.autocomplete.css?v=${applicationScope.sysStartUpTime}"></script>	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/icheck/all.css"/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script>
@@ -31,13 +30,21 @@
 			}
 		}
 	};
-	
-	$(document).ready(function(){
 
-		getAdminNameList("wdpAdminName");
+	$(document).ready(function(){
+		$("#roleIds").select2();
+		loadMenuTree("${pageContext.request.contextPath}/shop/menu/getMenuTreeForAdmin/0/-1/-1");
+		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForAdmin/0", "treeDemo1", setting);
+		 $('input[type=radio]').iCheck({
+             radioClass: 	'iradio_minimal',
+             increaseArea: 	'10%'
+         });
 	});
 	
-	
+	function alertSelect()
+	{
+		alert($("#roleIds").val());
+	}
 </script>
 
 </head>
@@ -47,7 +54,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">团队添加</a></div>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">账户添加</a></div>
   </div>
   <div class="container-fluid">
   <hr>
@@ -56,58 +63,67 @@
      <div class="span6">
       <div class="widget-box">
       	  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-             <h5>添加团队</h5>
+             <h5>添加新账号</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/dept/addDept" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/admin/addAdmin" cssClass="form-horizontal" onsubmit="return false;">
+            <f:hidden path="menuIds"/>
             <div class="form-group">
-            	<label for="wdpName" class="col-lg-1 control-label">名称</label>
+            	<label for="wsaUsername" class="col-lg-1 control-label">用户名</label>
             	<div class="col-lg-3">
-               	 	<f:input path="wdpName" cssClass="form-control input-ms"/>
+               	 	<f:input path="wsaUsername" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wdpLevel" class="col-lg-1 control-label">级别</label>
+            	<label for="wsaUsername" class="col-lg-1 control-label">密码</label>
             	<div class="col-lg-3">
-                   	<f:select path="wdpLevel" onchange="showParentDept(this.value);">
-	    				<f:option value="1">协会</f:option>
-	    				<f:option value="2">分部</f:option>
-	    			</f:select>
+               	 	<f:password path="wsaPwd" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wdpOrder" class="col-lg-1 control-label">顺序</label>
+            	<label for="wsaUsername" class="col-lg-1 control-label">密码确认</label>
             	<div class="col-lg-3">
-               	 	<f:input path="wdpOrder"  cssClass="form-control input-ms"/>
+               	 	<input type="password" id="pwd2" name="pwd2" class="form-control input-ms"/>
                 </div>
             </div>
-            <div id="pdept1" class="form-group " style="display: none;">
-            	<label for="wdpParentName" class="col-lg-1 control-label">选择上级部门：</label> 
+            <div class="form-group ">
+            	<label for="wsaName" class="col-lg-1 control-label">姓名</label> 
             	<div class="col-lg-3">
-            		<f:input path="wdpParentName"  cssClass="form-control input-ms"/>
-                	<f:input path="wdpParentId"/>
+                	<f:input path="wsaName" cssClass="form-control input-ms"/>
             	</div>
             </div>
-            <div id="pdept2" class="form-group " style="display: none;">
-            	<label for="tdDeptName1" class="col-lg-1 control-label"><font color="red"><b>*</b></font>上级部门：</label> 
-            	<div class="col-lg-3">
-            		<span id="tdDeptName1"></span>
-            	</div>
-            </div>
-
-            
             <div class="form-group">
-            	<label for="wdpAdminName" class="col-lg-1 control-label">负责人</label>
+            	<label for="wsaSex" class="col-lg-1 control-label">性别</label> 
             	<div class="col-lg-3">
-            		<f:input path="wdpAdminName" cssClass="form-control input-ms"/>
-                	<f:hidden path="wdpAdminId" />
+                	<label><f:radiobutton path="wsaSex" value="1"/> 男士</label>
+            		<label><f:radiobutton path="wsaSex" value="0"/> 女士</label>
             	</div>
             </div>
-           
-			<div class="form-group  ">
+            <div class="form-group">
+            	<label for="wsaSex" class="col-lg-1 control-label">分部</label> 
+            	<div class="col-lg-3">
+            		<f:hidden path="wsaDept" />
+                   	<ul id="treeDemo1" class="ztree"></ul>
+            	</div>
+            </div>
+			<div class="form-group">
+				<label for="roleIds" class="col-lg-1 control-label">角色设置：</label>
+				<div class="col-lg-10">
+					<select id="roleIds" name="roleIds" multiple="multiple">
+						<c:forEach items="${roleList}" var = "role">
+							<option value="${role.wsrRoleId}">${role.wsrRoleName}</option>
+						</c:forEach>
+				    </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="treeDemo" class="col-lg-1 control-label">管理员权限：</label>
+				<div class="col-lg-10"><ul id="treeDemo" class="ztree"></ul></div>
+			</div>
+			<div class="form-group">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addDeptSubmit();" >保存</button> 
+					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button> 
 				</div>          	
             </div>
             </f:form>
@@ -139,18 +155,15 @@
 <script src="${pageContext.request.contextPath}/view1/js/matrix.interface.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.chat.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.validate.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/js/matrix.form_common.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/js/matrix.form_validation.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.wizard.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/js/jquery.uniform.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/admin/js/admin.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/dept/js/dept.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
-<script src="${pageContext.request.contextPath}/view1/js/jquery.autocomplete.min.js?v=${applicationScope.sysStartUpTime}"></script>	
-
+<script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
 </body>
 </html>

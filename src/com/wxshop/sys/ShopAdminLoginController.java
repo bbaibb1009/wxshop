@@ -51,6 +51,16 @@ public class ShopAdminLoginController
 			@CookieValue(value = SysConstant.ADMIN_PWD_3DES, required = false) String pwd3desCookie,
 			@CookieValue(value = SysConstant.LOGIN_REDIRECT_URI, required = false) String rediUriCookie)
 	{
+		
+		
+		//先验证session 是不是有登录 如果有登陆 直接跳转主页
+		WcShopAdmin adminResult = (WcShopAdmin)session.getAttribute(SysConstant.ADMIN_INFO);
+		if(adminResult!=null)
+		{
+			return "redirect:/admin/adminLoginSuccess";
+		}
+		
+		
 		//先验证登陆码是否合法
 		// cookie登陆
 		if( usernameCookie != null && pwdMd5Cookie != null && pwd3desCookie != null )
@@ -82,7 +92,7 @@ public class ShopAdminLoginController
 			model.addAttribute("usernameError", "用户名不存在");
 			return "/login/login";
 		}
-		WcShopAdmin adminResult = adminService.adminLogin(admin); 
+		adminResult = adminService.adminLogin(admin); 
 		if( adminResult == null )
 		{
 			model.addAttribute("alertMsg", "密码错误");
@@ -196,12 +206,10 @@ public class ShopAdminLoginController
 	
 	
 	@RequestMapping("/adminLogout")
-	public void adminLogout(HttpServletResponse response, HttpSession session) throws IOException
+	public String adminLogout(HttpServletResponse response, HttpSession session) throws IOException
 	{
 		session.invalidate();
-		PrintWriter writer = response.getWriter();
-		writer.write("<script type='text/javascript'>window.close();</script>");
-		writer.close();
+		return "redirect:/";
 	}
 	
 	

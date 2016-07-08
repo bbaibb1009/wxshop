@@ -33,34 +33,32 @@
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lg"><i class="icon-user"></i></span><f:input path="wsaUsername" />
+                            <span class="add-on bg_lg"><i class="icon-user"></i></span><f:input path="wsaUsername" placeholder="用户名"/>
                         </div>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_ly"><i class="icon-lock"></i></span><f:password path="wsaPwd" />
+                            <span class="add-on bg_ly"><i class="icon-lock"></i></span><f:password path="wsaPwd" placeholder="密码"/>
                         </div>
                     </div>
                 </div>
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">忘记密码?</a></span>
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">扫码</a></span>
                     <span class="pull-right"><a type="button" href="javascript:void(0);" onclick="javascript:login();" class="btn btn-success">登陆</a></span>
                 </div>
             </f:form>
             <form id="recoverform" action="#" class="form-vertical">
-				<p class="normal_text">填写一个您的邮箱地址,找回您的用户名和密码.</p>
-				
+				<p class="normal_text">微信扫一扫</p>
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail" />
+                            	这是一个二维码
                         </div>
                     </div>
-               
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; 继续登录</a></span>
-                    <span class="pull-right"><a class="btn btn-info"/>发送邮件</a></span>
+                    <%-- <span class="pull-right"><a class="btn btn-info"/>保存</a></span>--%>
                 </div>
             </form>
         </div>
