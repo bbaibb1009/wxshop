@@ -19,32 +19,12 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script>
 	var path = "${pageContext.request.contextPath}";
-	var setting = {
-		check: {
-			enable: true,
-			chkboxType: { "Y" : "ps", "N" : "ps" }
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		}
-	};
-
 	$(document).ready(function(){
-		$("#roleIds").select2();
-		loadMenuTree("${pageContext.request.contextPath}/shop/menu/getMenuTreeForAdmin/0/-1/-1");
-		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForAdmin/0", "treeDemo1", setting);
 		 $('input[type=radio]').iCheck({
              radioClass: 	'iradio_minimal',
              increaseArea: 	'10%'
          });
 	});
-	
-	function alertSelect()
-	{
-		alert($("#roleIds").val());
-	}
 </script>
 
 </head>
@@ -54,7 +34,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">账户添加</a></div>
+    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">回复消息添加</a></div>
   </div>
   <div class="container-fluid">
   <hr>
@@ -63,10 +43,10 @@
      <div class="span6">
       <div class="widget-box">
       	  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-             <h5>添加新账号</h5>
+             <h5>添加回复消息</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/admin/addAdmin" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/wxmsg/addWxMsg" cssClass="form-horizontal" onsubmit="return false;">
             <f:hidden path="menuIds"/>
             <div class="form-group">
             	<label for="wsaUsername" class="col-lg-1 control-label">用户名</label>
@@ -123,7 +103,7 @@
 			<div class="form-group">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button> 
+					<button class="btn btn-info" onclick="addWxMsgSubmit();" >保存</button> 
 				</div>          	
             </div>
             </f:form>
@@ -158,10 +138,6 @@
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.wizard.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/admin/js/admin.js" ></script>
-<script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
-<script src="${pageContext.request.contextPath}/view1/dept/js/dept.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
