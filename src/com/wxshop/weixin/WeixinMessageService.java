@@ -16,13 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oilchem.weixin.Constant;
-import com.oilchem.weixin.message.response.LzNewsMsgResp;
 import com.oilchem.weixin.message.response.LzWeiBaseMsgResp;
 import com.oilchem.weixin.message.response.LzWeiTextMsgResp;
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
-import com.wxshop.util.DateUtil;
 import com.wxshop.util.Page;
+import com.wxshop.wxchat.msg.WcWeiMessage;
 
 @Service
 @Transactional
@@ -480,52 +479,53 @@ public class WeixinMessageService implements IWeixinMessageService {
 //     }
 //    
 //    
-//    public Page queryLzWeiMsg(LzWeiMessage msg) {
-//		// TODO Auto-generated method stub
-//    	String wmgReplyType_Q = msg.getWmgReplyType_Q();
-//    	String wmgMsgType_Q = msg.getWmgMsgType_Q();
-//    	String wmgAesType_Q = msg.getWmgAesType_Q();
-//    	StringBuilder sql =new StringBuilder(
-//    		" select " +
-//    		" a.WMG_ID," +
-//    		" a.WMG_CONTENT," +
-//    		" a.WMG_REPLY_TYPE," +
-//    		" a.WMG_MSG_TYPE," +
-//    		" a.WMG_AES_TYPE," +
-//    		" a.WMG_STATUS," +
-//    		" a.WMG_DESC," +
-//    		" a.WMG_REGISTOR," +
-//    		" a.WMG_REGISTDATE " +
-//    		" from LZ_WEI_MESSAGE a " +
-//    		" where 1=1 "
-//    	);
-//    	StringBuilder sqlCnt = new StringBuilder(
-//    		" select count(*) from LZ_WEI_MESSAGE a " +
-//    		" where 1=1 "
-//    	);
-//    	List<Object> paraList = new ArrayList<Object>(){};
-//    	if(wmgReplyType_Q!=null && wmgReplyType_Q.length()>0)
-//    	{
-//    		sql.append(" and a.WMG_REPLY_TYPE =  ? ");
-//    		sqlCnt.append(" and a.WMG_REPLY_TYPE = ? ");
-//    		paraList.add(wmgReplyType_Q);
-//    	}
-//    	if(wmgMsgType_Q!=null && wmgMsgType_Q.length()>0)
-//    	{
-//    		sql.append(" and a.WMG_MSG_TYPE =  ? ");
-//    		sqlCnt.append(" and a.WMG_MSG_TYPE = ? ");
-//    		paraList.add(wmgMsgType_Q);
-//    	}
-//    	if(wmgAesType_Q!=null && wmgAesType_Q.length()>0)
-//    	{
-//    		sql.append(" and a.WMG_AES_TYPE =  ? ");
-//    		sqlCnt.append(" and a.WMG_AES_TYPE = ? ");
-//    		paraList.add(wmgAesType_Q);
-//    	}
-//    	Page page = new Page(sql.toString(),sqlCnt.toString(),msg.getCurrentPage(),msg.getPageSize(),paraList.toArray());
-//    	jdbcDao.queryForPage(page);
-//		return page;
-//	}
+    public Page queryWcWeiMsg(WcWeiMessage msg) {
+		// TODO Auto-generated method stub
+    	String wmgReplyType_Q = msg.getWmgReplyType_Q();
+    	String wmgMsgType_Q = msg.getWmgMsgType_Q();
+    	String wmgAesType_Q = msg.getWmgAesType_Q();
+    	StringBuilder sql =new StringBuilder(
+  			
+    		" select " +
+    		" a.WMG_ID," +
+    		" a.WMG_CONTENT," +
+    		" a.WMG_REPLY_TYPE," +
+    		" a.WMG_MSG_TYPE," +
+    		" a.WMG_AES_TYPE," +
+    		" a.WMG_STATUS," +
+    		" a.WMG_DESC," +
+    		" a.WMG_REGISTOR," +
+    		" a.WMG_REGISTDATE " +
+    		" from WC_WEI_MESSAGE a " +
+    		" where 1=1 "
+    	);
+    	StringBuilder sqlCnt = new StringBuilder(
+    		" select count(*) from WC_WEI_MESSAGE a " +
+    		" where 1=1 "
+    	);
+    	List<Object> paraList = new ArrayList<Object>(){};
+    	if(wmgReplyType_Q!=null && wmgReplyType_Q.length()>0)
+    	{
+    		sql.append(" and a.WMG_REPLY_TYPE =  ? ");
+    		sqlCnt.append(" and a.WMG_REPLY_TYPE = ? ");
+    		paraList.add(wmgReplyType_Q);
+    	}
+    	if(wmgMsgType_Q!=null && wmgMsgType_Q.length()>0)
+    	{
+    		sql.append(" and a.WMG_MSG_TYPE =  ? ");
+    		sqlCnt.append(" and a.WMG_MSG_TYPE = ? ");
+    		paraList.add(wmgMsgType_Q);
+    	}
+    	if(wmgAesType_Q!=null && wmgAesType_Q.length()>0)
+    	{
+    		sql.append(" and a.WMG_AES_TYPE =  ? ");
+    		sqlCnt.append(" and a.WMG_AES_TYPE = ? ");
+    		paraList.add(wmgAesType_Q);
+    	}
+    	Page page = new Page(sql.toString(),sqlCnt.toString(),msg.getCurrentPage(),msg.getPageSize(),paraList.toArray());
+    	jdbcDao.queryForPage(page);
+		return page;
+	}
 //
 //	public void addLzWeiMsg(LzWeiMessage msg) 
 //	{

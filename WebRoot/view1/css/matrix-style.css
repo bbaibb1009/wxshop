@@ -632,26 +632,64 @@ hr{ border-top-color:#dadada;}
 	margin: 0;
 	padding: 0;
 }
+
 .recent-posts li, .recent-comments li, .article-post li, .recent-users li {
 	border-bottom: 1px dotted #AEBDC8;
 	list-style: none outside none;
 	padding: 10px;
 }
+
+
+
 .recent-posts li.viewall, .recent-comments li.viewall, .recent-users li.viewall {
 	padding: 0;
 }
+
+
 .recent-posts li.viewall a, .recent-comments li.viewall a, .recent-users li.viewall a {
 	padding: 5px;
 	text-align: center;
 	display: block;
 	color: #888888;
 }
+
+
+
 .recent-posts li.viewall a:hover, .recent-comments li.viewall a:hover, .recent-users li.viewall a:hover {
 	background-color: #eeeeee;
 }
+
+
+
 .recent-posts li:last-child, .recent-comments li:last-child, .recent-users li:last-child {
 	border-bottom: none !important;
 }
+
+.recent-fuwuhao {
+	margin: 0;
+	padding: 0;
+}
+.recent-fuwuhao li {
+	border-bottom: 1px dotted #AEBDC8;
+	list-style: none outside none;
+	padding: 40px;
+}
+.recent-fuwuhao li.viewall {
+	padding: 0;
+}
+.recent-fuwuhao li.viewall a {
+	padding: 5px;
+	text-align: center;
+	display: block;
+	color: #888888;
+}
+.recent-fuwuhao li.viewall a:hover {
+	background-color: #eeeeee;
+}
+.recent-fuwuhao li:last-child {
+	border-bottom: none !important;
+}
+
 .user-thumb {
 	background: none repeat scroll 0 0 #FFFFFF;
 	float: left;
