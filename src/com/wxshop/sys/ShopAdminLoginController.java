@@ -1,7 +1,6 @@
 package com.wxshop.sys;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +25,7 @@ import com.wxshop.util.SysConstant;
 import com.wxshop.util.ThreeDes;
 import com.wxshop.website.IWebsiteService;
 import com.wxshop.website.WcWebsite;
-
+import com.wxshop.util.SysConstant;
 @Controller
 @RequestMapping("/admin")
 public class ShopAdminLoginController 
