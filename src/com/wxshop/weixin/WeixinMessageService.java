@@ -484,6 +484,7 @@ public class WeixinMessageService implements IWeixinMessageService {
     	String wmgReplyType_Q = msg.getWmgReplyType_Q();
     	String wmgMsgType_Q = msg.getWmgMsgType_Q();
     	String wmgAesType_Q = msg.getWmgAesType_Q();
+    	String wmgAppId_Q = msg.getWmgAppId_Q();
     	StringBuilder sql =new StringBuilder(
   			
     		" select " +
@@ -504,6 +505,12 @@ public class WeixinMessageService implements IWeixinMessageService {
     		" where 1=1 "
     	);
     	List<Object> paraList = new ArrayList<Object>(){};
+    	if(wmgAppId_Q!=null && wmgAppId_Q.length()>0)
+    	{
+    		sql.append(" and a.WMG_APP_ID =  ? ");
+    		sqlCnt.append(" and a.WMG_APP_ID = ? ");
+    		paraList.add(wmgAppId_Q);
+    	}
     	if(wmgReplyType_Q!=null && wmgReplyType_Q.length()>0)
     	{
     		sql.append(" and a.WMG_REPLY_TYPE =  ? ");
@@ -526,12 +533,12 @@ public class WeixinMessageService implements IWeixinMessageService {
     	jdbcDao.queryForPage(page);
 		return page;
 	}
-//
-//	public void addLzWeiMsg(LzWeiMessage msg) 
-//	{
-//		// TODO Auto-generated method stub
-//		hibernateDao.add(msg);
-//	}
+
+	public void addWcWeiMessage(WcWeiMessage msg) 
+	{
+		// TODO Auto-generated method stub
+		hibernateDao.add(msg);
+	}
 //
 //	public LzWeiMessage getLzWeiMessageById(Integer id)
 //	{

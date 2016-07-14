@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
 
@@ -33,6 +33,9 @@ public class FuwuhaoController
 		model.addAttribute(SysConstant.PAGE_RESULT,fuwuhaoService.queryFuwuhao(fuwuhao));
 		return "/fuwuhao/queryFuwuhao" ;
 	}
+	
+	
+	
 	
 	/**
 	 * @功能介绍 跳转至修改菜单

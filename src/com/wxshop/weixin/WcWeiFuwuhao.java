@@ -46,6 +46,7 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 	private String currentPage;
 	private String pageSize;
 	private String[] fwhIds;
+	private Integer fwhId_Q;
 
 
 	// Constructors
@@ -277,6 +278,14 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 
 	public void setFwhIds(String[] fwhIds) {
 		this.fwhIds = fwhIds;
+	}
+	@Transient
+	public Integer getFwhId_Q() {
+		return fwhId_Q;
+	}
+
+	public void setFwhId_Q(Integer fwhIdQ) {
+		fwhId_Q = fwhIdQ;
 	}
 	
 	
