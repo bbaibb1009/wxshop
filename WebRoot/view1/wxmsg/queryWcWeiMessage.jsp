@@ -61,9 +61,24 @@
                  	<td class="text-center small">${msg.WMG_APP_ID}</td>
                   	<td class="text-center small">${msg.WMG_CONTENT}</td>
                   	<td class="text-center small">${msg.WMG_CONTENT_XML}</td>
-                    <td class="text-center small"><c:if test="${msg.WMG_REPLY_TYPE=='1'}">男</c:if><c:if test="${msg.WMG_REPLY_TYPE=='2'}">女</c:if></td>
-                    <td class="text-center small">${msg.WMG_MSG_TYPE}</td>
-                  	<td class="text-center small">${msg.WMG_AES_TYPE}</td>
+                    <td class="text-center small">
+                    <c:if test="${msg.WMG_REPLY_TYPE=='1'}">关键字回复</c:if>
+                    <c:if test="${msg.WMG_REPLY_TYPE=='2'}">默认回复</c:if>
+                    <c:if test="${msg.WMG_REPLY_TYPE=='3'}">关注回复</c:if>
+                    </td>
+                    <td class="text-center small">
+                    <c:if test="${msg.WMG_MSG_TYPE=='1'}">图文信息</c:if>
+                    <c:if test="${msg.WMG_MSG_TYPE=='2'}">文字信息</c:if>
+                    <c:if test="${msg.WMG_MSG_TYPE=='3'}">图片信息</c:if>
+                    <c:if test="${msg.WMG_MSG_TYPE=='4'}">语音信息</c:if>
+                    <c:if test="${msg.WMG_MSG_TYPE=='5'}">视频信息</c:if>
+                    <c:if test="${msg.WMG_MSG_TYPE=='6'}">音乐信息</c:if>
+                    </td>
+                  	<td class="text-center small">
+                  	 <c:if test="${msg.WMG_AES_TYPE=='1'}">加密</c:if>
+                    <c:if test="${msg.WMG_AES_TYPE=='2'}">明文</c:if>
+                    <c:if test="${msg.WMG_AES_TYPE=='3'}">兼容</c:if>
+                  	</td>
                   	<td class="text-center small">${msg.WMG_STATUS}</td>
                   	<td class="text-center small">${msg.WMG_DESC}</td>
                   	<td class="text-center small">${msg.WMG_REGISTOR}</td>
