@@ -47,65 +47,63 @@
           </div>
           <div class="widget-content ">
           	<f:form action="${pageContext.request.contextPath}/wxmsg/addWxMsg" cssClass="form-horizontal" onsubmit="return false;">
-            <f:hidden path="menuIds"/>
-            <div class="form-group">
-            	<label for="wsaUsername" class="col-lg-1 control-label">用户名</label>
-            	<div class="col-lg-3">
-               	 	<f:input path="wsaUsername" cssClass="form-control input-ms"/>
-                </div>
-            </div>
-            <div class="form-group">
-            	<label for="wsaUsername" class="col-lg-1 control-label">密码</label>
-            	<div class="col-lg-3">
-               	 	<f:password path="wsaPwd" cssClass="form-control input-ms"/>
-                </div>
-            </div>
-            <div class="form-group">
-            	<label for="wsaUsername" class="col-lg-1 control-label">密码确认</label>
-            	<div class="col-lg-3">
-               	 	<input type="password" id="pwd2" name="pwd2" class="form-control input-ms"/>
-                </div>
-            </div>
-            <div class="form-group ">
-            	<label for="wsaName" class="col-lg-1 control-label">姓名</label> 
-            	<div class="col-lg-3">
-                	<f:input path="wsaName" cssClass="form-control input-ms"/>
+	        	<div class="form-group">
+            		<label for="wmgAppId" class="col-lg-1 control-label">所属APPID</label>
+            		<div class="col-lg-3">
+               	 		<f:input path="wmgAppId" 		cssClass="form-control input-ms"/>
+                	</div>
             	</div>
-            </div>
-            <div class="form-group">
-            	<label for="wsaSex" class="col-lg-1 control-label">性别</label> 
-            	<div class="col-lg-3">
-                	<label><f:radiobutton path="wsaSex" value="1"/> 男士</label>
-            		<label><f:radiobutton path="wsaSex" value="0"/> 女士</label>
-            	</div>
-            </div>
-            <div class="form-group">
-            	<label for="wsaSex" class="col-lg-1 control-label">分部</label> 
-            	<div class="col-lg-3">
-            		<f:hidden path="wsaDept" />
-                   	<ul id="treeDemo1" class="ztree"></ul>
-            	</div>
-            </div>
-			<div class="form-group">
-				<label for="roleIds" class="col-lg-1 control-label">角色设置：</label>
-				<div class="col-lg-10">
-					<select id="roleIds" name="roleIds" multiple="multiple">
-						<c:forEach items="${roleList}" var = "role">
-							<option value="${role.wsrRoleId}">${role.wsrRoleName}</option>
-						</c:forEach>
-				    </select>
+	            <div class="form-group">
+	            	<label for="wmgContent" class="col-lg-1 control-label">回复内容</label>
+	            	<div class="col-lg-3">
+	               	 	<f:input path="wmgContent" 		cssClass="form-control input-ms"/>
+	                </div>
+	            </div>
+	            <div class="form-group">
+	            	<label for="wmgContentXml" class="col-lg-1 control-label">回复内容XML</label>
+	            	<div class="col-lg-3">
+	               	 	<f:input path="wmgContentXml" 	cssClass="form-control input-ms"/>
+	                </div>
+	            </div>
+	            <div class="form-group ">
+	            	<label for="wmgReplyType" class="col-lg-1 control-label">回复类型</label> 
+	            	<div class="col-lg-3">
+		                <label><f:radiobutton path="wmgReplyType" value="1"/>关键字回复</label>
+	            		<label><f:radiobutton path="wmgReplyType" value="2"/>默认回复</label>
+	            		<label><f:radiobutton path="wmgReplyType" value="3"/>关注回复</label>
+	            	</div>
+	            </div>
+	            <div class="form-group">
+	            	<label for="wmgMsgType" class="col-lg-1 control-label">消息类型</label> 
+	            	<div class="col-lg-3">
+	                	<label><f:radiobutton path="wmgMsgType" value="1"/>图文信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="2"/>文字信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="3"/>图片信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="4"/>语音信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="5"/>视频信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="6"/>音乐信息</label>
+	               	</div>
+	            </div>
+	            <div class="form-group">
+	            	<label for="wmgAesType" class="col-lg-1 control-label">加密类型</label> 
+	            	<div class="col-lg-3">
+	            		<label><f:radiobutton path="wmgAesType" value="1"/>加密</label>
+	            		<label><f:radiobutton path="wmgAesType" value="2"/>明文</label>
+	            		<label><f:radiobutton path="wmgAesType" value="3"/>兼容</label>
+	            	</div>
+	            </div>
+				<div class="form-group">
+					<label for="treeDemo" class="col-lg-1 control-label">备注</label>
+					<div class="col-lg-10">
+						<f:textarea path="wmgDesc" cssClass="form-control input-ms"></f:textarea>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="treeDemo" class="col-lg-1 control-label">管理员权限：</label>
-				<div class="col-lg-10"><ul id="treeDemo" class="ztree"></ul></div>
-			</div>
-			<div class="form-group">
-				<div class="col-lg-1"></div>
-				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addWxMsgSubmit();" >保存</button> 
-				</div>          	
-            </div>
+				<div class="form-group">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-3">
+						<button class="btn btn-info" onclick="addWxMsgSubmit();" >保存</button> 
+					</div>          	
+	            </div>
             </f:form>
           </div>
        </div>
@@ -141,5 +139,6 @@
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/wxmsg/js/wxmsg.js"></script> 
 </body>
 </html>
