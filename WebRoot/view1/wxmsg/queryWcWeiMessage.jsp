@@ -29,6 +29,10 @@
   </div>
  <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
+  
+  	<div class="row-fluid">
+  		<span>${fuwuhao.fwhAppName}</span><span>${fuwuhao.fwhAppId}</span>
+  	</div>
     <div class="row-fluid">
     	
 	   <input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/wxmsg/toAddWxMsg');" value="添加"/> 
@@ -40,6 +44,7 @@
           <div class="widget-content nopadding">
           	<f:form action="${pageContext.request.contextPath}/wxmsg/queryWcWeiMessage" onsubmit="return false;">
           	<f:hidden path="wmgId"/>
+          	<f:hidden path="wmgAppId_Q"/>
             <table class="table table-bordered with-check">
                 <tr>
                   <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wmgIds');"/></th>

@@ -35,6 +35,8 @@ public class WcWeiMessage implements java.io.Serializable {
 	private String  wmgAesType_Q;
 	private String[] wmgIds;
 	
+	private String wmgAppId_Q;
+	
 	private String currentPage;
 	private String pageSize;
 
@@ -210,6 +212,14 @@ public class WcWeiMessage implements java.io.Serializable {
 
 	public void setWmgIds(String[] wmgIds) {
 		this.wmgIds = wmgIds;
+	}
+	@Transient
+	public String getWmgAppId_Q() {
+		return wmgAppId_Q;
+	}
+
+	public void setWmgAppId_Q(String wmgAppIdQ) {
+		wmgAppId_Q = wmgAppIdQ;
 	}
 
 	

@@ -50,11 +50,13 @@
 		                	<input type="checkbox" name="fwhIds" style="float: left;margin-left:-30px;margin-top:-30px;"/>
 		                	<img width="80" height="80" alt="User" src="${pageContext.request.contextPath}/view1/img/demo/av1.jpg" class="fl" style="margin-left:-10px;margin-top:-30px;"> 
 		                  	<div class="invoice fl" style="padding-left:15px;margin-top:-30px;font-size:14px;color:#e0a;">${fuwuhao.FWH_APP_NAME}</div>
-		                  	<span class="invoice">${fuwuhao.FWH_ACCOUNT_TYPE}</span>
+		                  	<!-- <span class="invoice">${fuwuhao.FWH_ACCOUNT_TYPE}</span> -->
 		                  	<p style="padding:15px;float:left;"><a href="#">${fuwuhao.FWH_DESC}</a> </p>
 		                </div>
 		                <div class="article-post" style="margin-top: -10px;padding-bottom:10px;">
-		                  <div class="fr"><a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> <a href="#" class="btn btn-success btn-mini">粉丝</a> <a href="#" class="btn btn-danger btn-mini">消息</a></div>
+		                  <div class="fr"><a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> 
+		                  <a href="#" class="btn btn-success btn-mini">粉丝</a> 
+		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">消息</a></div>
 		                </div>
 		              </li>
 	              </c:forEach>
@@ -91,6 +93,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/fuwuhao/js/fuwuhao.js" ></script>
 <jsp:include page="/view1/common/modal-dialog.jsp"></jsp:include>
 </body>
 </html>

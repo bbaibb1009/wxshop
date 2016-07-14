@@ -14,7 +14,7 @@ public interface IWeixinMessageService {
 	public String processRequest_Jar(HttpServletRequest request,String token,String encodingAESKey,String appId) throws IOException;
 	public LzWeiBaseMsgResp fenleiReq_Jar(Map<String, String> requestMap,String appId);
 	public Page queryWcWeiMsg(WcWeiMessage msg);
-//	public void addLzWeiMsg(LzWeiMessage msg);
+	public void addWcWeiMessage(WcWeiMessage msg);
 //	public LzWeiMessage getLzWeiMessageById(Integer id);
 //	public List<Map<String,Object>> queryKeywordListByWei(Integer wecId);
 //	public void updLzWeiMsg(LzWeiMessage msg);
