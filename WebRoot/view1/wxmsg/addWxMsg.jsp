@@ -27,6 +27,8 @@
 	});
 </script>
 
+
+
 </head>
 <body>
 <jsp:include page="/view1/login/menuFrame.jsp"></jsp:include>
@@ -34,7 +36,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">回复消息添加</a></div>
+    <div id="breadcrumb"><a  href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">回复消息添加</a></div>
   </div>
   <div class="container-fluid">
   <hr>
@@ -50,7 +52,7 @@
 	        	<div class="form-group">
             		<label for="wmgAppId" class="col-lg-1 control-label">所属APPID</label>
             		<div class="col-lg-3">
-               	 		<f:input path="wmgAppId" 		cssClass="form-control input-ms"/>
+               	 		<f:input path="wmgAppId" 	cssClass="form-control input-ms"/>
                 	</div>
             	</div>
 	            <div class="form-group">

@@ -24,14 +24,14 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">服务号查询</a></div>
+    <div id="breadcrumb"><a href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">服务号查询</a></div>
   </div>
   <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/fuwuhao/toAddFuwuhao'" value="添加"/> 
-	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('fwhIds', '${pageContext.request.contextPath}/fuwuhao/delFuwuhao');" value="删除"/>
+	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/fuwuhao/toAddFuwuhao'" value="配置一个新的服务号"/> 
+	   <input type="button" class="btn btn-danger" onclick="javascript:delChk('fwhIds', '${pageContext.request.contextPath}/fuwuhao/delFuwuhao');" value="服务号注销"/>
     </div>
     <div class="row-fluid">
         <div class="widget-box">

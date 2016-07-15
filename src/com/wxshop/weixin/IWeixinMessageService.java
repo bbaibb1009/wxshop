@@ -15,9 +15,9 @@ public interface IWeixinMessageService {
 	public LzWeiBaseMsgResp fenleiReq_Jar(Map<String, String> requestMap,String appId);
 	public Page queryWcWeiMsg(WcWeiMessage msg);
 	public void addWcWeiMessage(WcWeiMessage msg);
-//	public LzWeiMessage getLzWeiMessageById(Integer id);
+	public WcWeiMessage getWcWeiMessageById(Integer id);
 //	public List<Map<String,Object>> queryKeywordListByWei(Integer wecId);
-//	public void updLzWeiMsg(LzWeiMessage msg);
+	public void updWxMsg(WcWeiMessage wxmsg_Q);
 	
 	
 }

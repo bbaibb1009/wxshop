@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.wxshop.common.IMemcachedService;
 import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.util.DateUtil;
+import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
 import com.wxshop.weixin.IWeixinMessageService;
 import com.wxshop.weixin.IWeixinService;
@@ -54,39 +55,39 @@ public class WeiMessageController
 		WcWeiFuwuhao fuwuhao = weixinFuwuhaoService.getWeiFwhByAppId(appId);
 		msg.setWmgAppId_Q(appId);
 		model.addAttribute(SysConstant.PAGE_RESULT,weiMessageService.queryWcWeiMsg(msg));
+		model.addAttribute("command",msg);
 		model.addAttribute("fuwuhao", fuwuhao);
 		return "/wxmsg/queryWcWeiMessage" ;
 	}
 	
-//	/**
-//	 * @功能介绍 跳转至修改菜单
-//	 * 
-//	 * */
-//	@RequestMapping(value ="/toUpdShopAdmin",method = RequestMethod.POST)
-//	public String toUpdShopAdmin(WcWeiMessage admin_Q, Model model) throws IllegalArgumentException, IllegalAccessException
-//	{
-//		WcShopAdmin shopadmin = adminService.getShopAdminById(admin_Q.getWsaId());
-//		StringUtil.copyProperties(admin_Q, shopadmin);
-//		model.addAttribute("command", shopadmin);
-//		model.addAttribute("roleList1", roleService.queryShopRoleForAdminUpd2(admin_Q.getWsaId()));
-//		return "/admin/updShopAdmin";
-//	} 
-//	
-//	/**
-//	 * @throws IOException 
-//	 * @throws JsonGenerationException 
-//	 * @throws JsonMappingException 
-//	 * @throws JsonParseException 
-//	 * @功能介绍 修改菜单保存
-//	 * */
-//	@RequestMapping(value="/updShopAdmin",method = RequestMethod.POST)
-//	public String updShopAdmin(WcShopAdmin admin_Q, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException 
-//	{
-//		adminService.updShopAdmin(admin_Q);
-//		redirectAttributes.addFlashAttribute("success", "账号修改成功!");
-//		return "redirect:/shop/admin/queryShopAdmin";
-//	}
-//
+	/**
+	 * @功能介绍 跳转至修改菜单
+	 * 
+	 * */
+	@RequestMapping(value ="/toUpdWxMsg",method = RequestMethod.POST)
+	public String toUpdWxMsg(WcWeiMessage wxmsg_Q, Model model) throws IllegalArgumentException, IllegalAccessException
+	{
+		WcWeiMessage wxmsg = weiMessageService.getWcWeiMessageById(wxmsg_Q.getWmgId());
+		StringUtil.copyProperties(wxmsg_Q, wxmsg);
+		model.addAttribute("command", wxmsg);
+		return "/wxmsg/updWxMsg";
+	} 
+	
+	/**
+	 * @throws IOException 
+	 * @throws JsonGenerationException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 * @功能介绍 修改菜单保存
+	 * */
+	@RequestMapping(value="/updWxMsg",method = RequestMethod.POST)
+	public String updWxMsg(WcWeiMessage wxmsg_Q, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException 
+	{
+		weiMessageService.updWxMsg(wxmsg_Q);
+		redirectAttributes.addFlashAttribute("success", "回复消息修改成功!");
+		return "redirect:/wxmsg/queryWcWeiMessage/"+wxmsg_Q.getWmgAppId_Q();
+	}
+
 	/**
 	 * @功能介绍 跳转至修改菜单
 	 * 
@@ -111,7 +112,7 @@ public class WeiMessageController
 		msg.setWmgStatus("1000");
 		weiMessageService.addWcWeiMessage(msg);
 		redirectAttributes.addFlashAttribute("success", "回复消息添加成功!");
-		return "redirect:/wxmsg/queryWcWeiMessage";
+		return "redirect:/wxmsg/queryWcWeiMessage/"+msg.getWmgAppId_Q();
 	}
 	
 	

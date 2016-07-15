@@ -488,6 +488,7 @@ public class WeixinMessageService implements IWeixinMessageService {
     	StringBuilder sql =new StringBuilder(
   			
     		" select " +
+    		" a.WMG_APP_ID, " +
     		" a.WMG_ID," +
     		" a.WMG_CONTENT," +
     		" a.WMG_REPLY_TYPE," +
@@ -495,9 +496,10 @@ public class WeixinMessageService implements IWeixinMessageService {
     		" a.WMG_AES_TYPE," +
     		" a.WMG_STATUS," +
     		" a.WMG_DESC," +
-    		" a.WMG_REGISTOR," +
-    		" a.WMG_REGISTDATE " +
+    		" b.WSA_NAME WMG_REGISTOR," +
+    		" date_format(a.WMG_REGISTDATE, '%Y-%m-%d %H:%i:%s') as WMG_REGISTDATE" +
     		" from WC_WEI_MESSAGE a " +
+    		" left join WC_SHOP_ADMIN b on a.WMG_REGISTOR = b.WSA_ID " +
     		" where 1=1 "
     	);
     	StringBuilder sqlCnt = new StringBuilder(
@@ -540,10 +542,10 @@ public class WeixinMessageService implements IWeixinMessageService {
 		hibernateDao.add(msg);
 	}
 //
-//	public LzWeiMessage getLzWeiMessageById(Integer id)
-//	{
-//		return hibernateDao.get(LzWeiMessage.class, id);
-//	}
+	public WcWeiMessage getWcWeiMessageById(Integer id)
+	{
+		return hibernateDao.get(WcWeiMessage.class, id);
+	}
 //	
 //	public LzWeiMessage getKeyWordMsgByContent(String content,String appId)
 //	{
@@ -600,10 +602,10 @@ public class WeixinMessageService implements IWeixinMessageService {
 //		return jdbcDao.queryForList(sql, new Object[]{wecId});
 //	}
 //
-//	public void updLzWeiMsg(LzWeiMessage msg) {
-//		// TODO Auto-generated method stub
-//		hibernateDao.update(msg);
-//	}
+	public void updWxMsg(WcWeiMessage msg) {
+		// TODO Auto-generated method stub
+		hibernateDao.update(msg);
+	}
 	
 	
 	
