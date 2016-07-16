@@ -27,7 +27,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">客户端管理员修改</a></div>
+    <div id="breadcrumb"><a  href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a><a href="#" class="current">回复消息修改</a></div>
   </div>
   <div class="container-fluid">
   <hr>
@@ -36,87 +36,78 @@
      <div class="span6">
       <div class="widget-box">
       	  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-             <h5>修改管理员</h5>
+             <h5>修改回复消息</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/admin/updShopAdmin" cssClass="form-horizontal" onsubmit="return false;">
-          	<f:hidden path="wsaId"/>
-          	<f:hidden path="wsaPwdMd5"/>
-          	<f:hidden path="wsaRegistor"/>
-          	<f:hidden path="wsaRegistdate"/>
-          	<f:hidden path="wsaLogindate"/>
-          	<f:hidden path="wsaStatus"/>
+          	<f:form action="${pageContext.request.contextPath}/wxmsg/updWxMsg" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:hidden path="wmgId"/>
+          	<f:hidden path="wmgAppId"/>
+          	<f:hidden path="wmgRegistor"/>
+          	<f:hidden path="wmgRegistdate"/>
+          	
  			<f:hidden path="currentPage"/>
   			<f:hidden path="pageSize"/>
-  			<f:hidden path="menuIds"/>
+			<f:hidden path="wmgReplyType_Q"/>  
+			<f:hidden path="wmgMsgType_Q"/>  
+			<f:hidden path="wmgAesType_Q"/> 
+			<f:hidden path="wmgAppId_Q"/>
             <div class="form-group">
-            	<label for="wsaUsername" class="col-lg-1 control-label">用户名</label>
+            	<label for="wmgContent" class="col-lg-1 control-label">回复内容</label>
             	<div class="col-lg-3">
-               	 	<f:input path="wsaUsername" cssClass="form-control input-ms"/>
+               	 	<f:input path="wmgContent" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wsaUsername" class="col-lg-1 control-label">密码</label>
+            	<label for="wmgContentXml" class="col-lg-1 control-label">回复内容XML</label>
             	<div class="col-lg-3">
-               	 	<f:password path="wsaPwd" cssClass="form-control input-ms"/>
+               	 	<f:input path="wmgContentXml" cssClass="form-control input-ms"/>
                 </div>
             </div>
             <div class="form-group">
-            	<label for="wsaUsername" class="col-lg-1 control-label">密码确认</label>
+            	<label for="wmgReplyType" class="col-lg-1 control-label">回复类型</label>
             	<div class="col-lg-3">
-               	 	<input type="password" id="pwd2" name="pwd2" class="form-control input-ms"/>
+               	 	<label><f:radiobutton path="wmgReplyType" value="1"/>关键字回复</label>
+	            		<label><f:radiobutton path="wmgReplyType" value="2"/>默认回复</label>
+	            		<label><f:radiobutton path="wmgReplyType" value="3"/>关注回复</label>
                 </div>
             </div>
             <div class="form-group ">
-            	<label for="wsaName" class="col-lg-1 control-label">姓名</label> 
+            	<label for="wmgMsgType" class="col-lg-1 control-label">消息类型</label> 
             	<div class="col-lg-3">
-                	<f:input path="wsaName" cssClass="form-control input-ms"/>
+                	<label><f:radiobutton path="wmgMsgType" value="1"/>图文信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="2"/>文字信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="3"/>图片信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="4"/>语音信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="5"/>视频信息</label>
+	            		<label><f:radiobutton path="wmgMsgType" value="6"/>音乐信息</label>
             	</div>
             </div>
             <div class="form-group">
-            	<label for="wsaSex" class="col-lg-1 control-label">性别</label>
+            	<label for="wmgAesType" class="col-lg-1 control-label">加密类型</label>
             	<div class="col-lg-3">
-                	<label><f:radiobutton path="wsaSex" value="1"/> 男士</label>
-            		<label><f:radiobutton path="wsaSex" value="0"/> 女士</label>
+                	<label><f:radiobutton path="wmgAesType" value="1"/>加密</label>
+	            		<label><f:radiobutton path="wmgAesType" value="2"/>明文</label>
+	            		<label><f:radiobutton path="wmgAesType" value="3"/>兼容</label>
             	</div>
             </div>
-            
+            <f:hidden path=""/>
+             <div class="form-group">
+            	<label for="wmgStatus" class="col-lg-1 control-label">状态</label>
+            	<div class="col-lg-3">
+                	<label><f:radiobutton path="wmgStatus" value="1000"/>启用</label>
+	            	<label><f:radiobutton path="wmgStatus" value="2000"/>禁用</label>
+            	</div>
+            </div>
             <div class="form-group">
-            	<label for="wsaSex" class="col-lg-1 control-label">部门</label>
+            	<label for="wmgDesc" class="col-lg-1 control-label">备注</label>
             	<div class="col-lg-3">
-            		<f:hidden path="wsaDept" />
-                	<ul id="treeDemo1" class="ztree"></ul>
+            	<f:textarea path="wmgDesc" cssClass="form-control input-ms"></f:textarea>            	
             	</div>
             </div>
-			<div class="form-group">
-				<label for="wsaSex" class="col-lg-1 control-label">角色设置：</label>
-				<div class="col-lg-10">
-					
-					<select id="roleIds" name="roleIds" multiple="multiple" onchange="loadMenuTreeForAdmin(${command.wsaId});">
-						<c:forEach items="${roleList1}" var = "role">
-							<c:set var="selected" value="" />
-							<c:if test="${role.selected != '0'}">
-								<c:set var="selected" value="selected=selected" />
-							</c:if>
-							<option value="${role.wsrRoleId}" ${selected}>${role.wsrRoleName}</option>
-						</c:forEach>
-				    </select>
-				    <%-- 
-				    <f:select path="roleIds" multiple="true" size="20" cssStyle="width: 250px;" onchange="loadMenuTreeForAdmin(${command.wsaId});">
-						<f:options items="${roleList1}" itemValue="wsrRoleId" itemLabel="wsrRoleName"/>
-					</f:select>
-					--%>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="treeDemo" class="col-lg-1 control-label">管理员权限：</label>
-				<div class="col-lg-3"><ul id="treeDemo" class="ztree"></ul></div>
-			</div>
-			
 			<div class="form-group  ">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-3">
-					<button class="btn btn-info" onclick="addAdminSubmit();" >保存</button>
+					<button class="btn btn-info" onclick="updWxMsgSubmit();" >保存</button>
 				</div>          	
             </div>
             </f:form>
@@ -132,42 +123,11 @@
 <!--end-Footer-part-->
 <script>
 	var path = "${pageContext.request.contextPath}";
-	var setting = {
-		check: {
-			enable: true,
-			chkboxType: { "Y" : "ps", "N" : "ps" }
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		}
-	};
-	
-	
-	var setting1 = {
-		check: {
-			chkStyle : "radio" ,
-			enable: true,
-			radioType : "all"
-			
-		},
-		data: {
-			simpleData: {
-				enable: true
-			}
-		}
-	};
-	
 	$(document).ready(function(){
-		$("#roleIds").select2();
 		$('input[type=radio]').iCheck({
              radioClass: 	'iradio_minimal',
              increaseArea: 	'10%'
         });
-		
-		loadMenuTreeForAdmin(${command.wsaId});
-		loadDeptTree("${pageContext.request.contextPath}/shop/dept/getDeptTreeForAdmin/${command.wsaId}", "treeDemo1", setting1);
 	});
 	
 	
@@ -196,13 +156,10 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.uniform.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
-<script src="${pageContext.request.contextPath}/view1/admin/js/admin.js" ></script>
-<script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
-<script src="${pageContext.request.contextPath}/view1/dept/js/dept.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.core-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
-	
+<script src="${pageContext.request.contextPath}/view1/wxmsg/js/wxmsg.js" ></script>
 
 </body>
 </html>

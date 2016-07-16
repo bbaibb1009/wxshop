@@ -26,7 +26,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+    <div id="breadcrumb"> <a href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a></div>
   </div>
 <!--End-breadcrumbs-->
 
@@ -34,8 +34,8 @@
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> 	<a href="index.html"> 	<i class="icon-comments"></i><span class="label label-important">20</span>公众号</a></li>
-        <li class="bg_ly"> 	<a href="widgets.html"> <i class="icon-group"></i><span class="label label-success">101</span>跑团</a></li>
+        <li class="bg_lb"> 	<a href="${pageContext.request.contextPath}/fuwuhao/queryFuwuhao"> 	<i class="icon-comments"></i><span class="label label-important">20</span>公众号</a></li>
+        <li class="bg_ly"> 	<a href="${pageContext.request.contextPath}/shop/dept/queryDept"> <i class="icon-group"></i><span class="label label-success">101</span>跑团</a></li>
         <li class="bg_lo"> 	<a href="tables.html"> 	<i class="icon-th"></i> 赛事	</a></li>
         <li class="bg_ls"> 	<a href="grid.html"> 	<i class="icon-fullscreen"></i>活动 </a></li>
         <li class="bg_lg"> 	<a href="charts.html"> 	<i class="icon-edit"></i>设置 </a></li>

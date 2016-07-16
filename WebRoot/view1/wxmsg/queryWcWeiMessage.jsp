@@ -25,13 +25,18 @@
 <!--breadcrumbs-->
   
   <div id="content-header">
-    <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">微信回复信息管理</a></div>
+    <div id="breadcrumb"><a  href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">微信回复信息管理</a></div>
   </div>
  <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
   
   	<div class="row-fluid">
-  		<span>${fuwuhao.fwhAppName}</span><span>${fuwuhao.fwhAppId}</span>
+  		<table class="table table-bordered">
+			<tr>
+			 	<th width="12%">应用名称</th><td>${fuwuhao.fwhAppName}</td>
+			 	<th width="12%">APPID</th><td>${fuwuhao.fwhAppId}</td>
+			</tr>  		
+  		</table>
   	</div>
     <div class="row-fluid">
     	
@@ -42,30 +47,26 @@
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/wxmsg/queryWcWeiMessage" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/wxmsg/queryWcWeiMessage/${fuwuhao.fwhAppId}" onsubmit="return false;">
           	<f:hidden path="wmgId"/>
           	<f:hidden path="wmgAppId_Q"/>
-            <table class="table table-bordered with-check">
+            <table class="table table-bordered ">
                 <tr>
                   <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wmgIds');"/></th>
-                  <th class="small" width="7%">所属APPID</th>
-                  <th class="small" width="7%">回复内容</th>
-                  <th class="small" width="15%">回复内容XML</th>
-                  <th class="small" width="4%">回复类型</th>
+                  <th class="small" width="20%">回复内容</th>
+                  <th class="small" width="7%">回复类型</th>
                   <th class="small" width="7%">消息类型</th>
-                  <th class="small" width="10%">加密类型</th>
-                  <th class="small" width="10%">状态</th>
-                  <th class="small" width="10%">备注</th>
-                  <th class="small" width="10%">录入人</th>
+                  <th class="small" width="5%">加密类型</th>
+                  <th class="small" width="5%">状态</th>
+                  <th class="small" width="20%">备注</th>
+                  <th class="small" width="7%">录入人</th>
                   <th class="small" width="10%">录入时间</th>
                   <th class="small" width="50%">操作</th>
                 </tr>
                 <c:forEach items="${pageResult.resultList}" var="msg">
                 <tr>
                 	<td class="text-center small"><input type="checkbox"  name="wsaIds" value="${msg.WMG_ID}"/></td>
-                 	<td class="text-center small">${msg.WMG_APP_ID}</td>
-                  	<td class="text-center small">${msg.WMG_CONTENT}</td>
-                  	<td class="text-center small">${msg.WMG_CONTENT_XML}</td>
+                  	<td class="text-center small"><a class="text-primary" href="javacript:alert('haha');">${msg.WMG_CONTENT}</a></td>
                     <td class="text-center small">
                     <c:if test="${msg.WMG_REPLY_TYPE=='1'}">关键字回复</c:if>
                     <c:if test="${msg.WMG_REPLY_TYPE=='2'}">默认回复</c:if>
@@ -84,7 +85,10 @@
                     <c:if test="${msg.WMG_AES_TYPE=='2'}">明文</c:if>
                     <c:if test="${msg.WMG_AES_TYPE=='3'}">兼容</c:if>
                   	</td>
-                  	<td class="text-center small">${msg.WMG_STATUS}</td>
+                  	<td class="text-center small">
+                  		<c:if test="${msg.WMG_STATUS=='1000'}">正常</c:if>
+                    	<c:if test="${msg.WMG_STATUS=='2000'}">异常</c:if>
+                  	</td>
                   	<td class="text-center small">${msg.WMG_DESC}</td>
                   	<td class="text-center small">${msg.WMG_REGISTOR}</td>
                   	<td class="text-center small">${msg.WMG_REGISTDATE}</td>
