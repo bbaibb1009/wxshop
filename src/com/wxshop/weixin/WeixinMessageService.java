@@ -190,29 +190,38 @@ public class WeixinMessageService implements IWeixinMessageService {
 
 	public String processRequest_Jar(HttpServletRequest request,String token,String encodingAESKey,String appId)throws IOException 
 	{
+		log.error("11");
 		String respMessage 		= null;  
-        String encrypt_type 	= (String)request.getParameter("encrypt_type")==null? "":(String)request.getParameter("encrypt_type");
+		log.error("12");
+		String encrypt_type 	= (String)request.getParameter("encrypt_type")==null? "":(String)request.getParameter("encrypt_type");
     	String msg_signature 	= (String)request.getParameter("msg_signature")==null?"":(String)request.getParameter("msg_signature");
     	String timestamp 		= (String)request.getParameter("timestamp")==null? "":(String)request.getParameter("timestamp");
     	String nonce 			= (String)request.getParameter("nonce")==null? "":(String)request.getParameter("nonce");
         // 默认返回的文本消息内容  
         String respContent = "请求处理异常，请稍候尝试！";  
+        log.error("13");
         InputStream inputStream = request.getInputStream();
         // xml请求解析  
         Map<String, String> requestMap = new HashMap<String,String>();
         //按照加密方式的不同进行消息的预处理
         if(encrypt_type.equals("aes"))
         {
+        	log.error("14");
             requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         else
         {
+        	log.error("15");
             requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         // 不同的消息内容返回不同的响应
-        LzWeiBaseMsgResp respMsg = fenleiReq_Jar(requestMap,appId);  
+        log.error("16");
+        log.error(requestMap);
+        LzWeiBaseMsgResp respMsg = fenleiReq_Jar(requestMap,appId); 
+        log.error("17");
         //再根据加密方式的不同进行消息的相应前封装
         respMessage = com.oilchem.weixin.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
+        log.error("18");
         return respMessage; 
 	}
     
@@ -242,40 +251,8 @@ public class WeixinMessageService implements IWeixinMessageService {
         {  
             //在这里将发送过来的消息进行分类处理
         	//先根据appid 取出默认回复信息
-        	//respMessage = this.queryDefaultMsgByAppId(respMessage,content,appId);
-        	//respMessage = com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
-//        	//先判断是不是关键字 如果是 就回复对应内容 如果不是就 回复默认内容 
-//        	if(content.startsWith("会议")||content.startsWith("隆众会议")||content.startsWith("石化通")
-//        		||content.startsWith("供求")||content.startsWith("供需")||content.startsWith("下载"))
-//        	{
-//        		LzNewsMsgResp newsMsg = new LzNewsMsgResp(respMessage);
-//        		List<Article>  articleLst = new ArrayList<Article>();
-//        		Article article1 = new Article();
-//        		article1.setTitle("2015年是晴朗的天");
-//        		article1.setPicUrl("http://mmbiz.qpic.cn/mmbiz/COJCmkcJvOAIpkRLNAQPBuhKm872GPkIyn2zcysXpo6iaicbHWS3G6Ac4IohIa0lyhzeKAuVfp7SibgxUZkXhRphQ/0");
-//        		article1.setUrl("http://mp.weixin.qq.com/s?__biz=MzA3MDU3OTgzMA==&mid=201324402&idx=1&sn=e9dd73c47bd3a5060d1393fe88ab564f#rd");
-//        		article1.setDescription("");
-//        		articleLst.add(article1);
-//        		Article article2 = new Article();
-//        		article2.setTitle("New!!隆众石化通下载");
-//        		article2.setPicUrl("http://mmbiz.qpic.cn/mmbiz/COJCmkcJvOAIpkRLNAQPBuhKm872GPkIpDO9HuAfKibNIC2IIa1iaxsgPsM6Uiayz3C1O9lofWyZ3c8qV0FH4xKiaw/0");
-//        		article2.setUrl("http://mp.weixin.qq.com/s?__biz=MzA3MDU3OTgzMA==&mid=201324402&idx=3&sn=9f78a6b935d996ccf1ae3d929ed613ba#rd");
-//        		article2.setDescription("");
-//        		articleLst.add(article2);
-//        		Article article3 = new Article();
-//        		article3.setTitle("New!!隆众石化通优势");
-//        		article3.setPicUrl("http://mmbiz.qpic.cn/mmbiz/COJCmkcJvOAIpkRLNAQPBuhKm872GPkIpDO9HuAfKibNIC2IIa1iaxsgPsM6Uiayz3C1O9lofWyZ3c8qV0FH4xKiaw/0");
-//        		article3.setUrl("http://mp.weixin.qq.com/s?__biz=MzA3MDU3OTgzMA==&mid=201324402&idx=2&sn=13fa531ffefd916616173a22f1ef6912#rd");
-//        		article3.setDescription("");
-//        		articleLst.add(article3);
-//        		newsMsg.setArticleCount(articleLst.size());
-//        		newsMsg.setArticles(articleLst);
-//        		respMessage = newsMsg;
-//        	}
-//        	else
-//        	{
-//        		respMessage = com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
-//        	}
+        	respMessage = this.queryDefaultMsgByAppId(respMessage,content,appId);
+        
         }  
         // 图片消息  
         else if (msgType.equals(Constant.REQ_MESSAGE_TYPE_IMAGE)) 
@@ -390,66 +367,65 @@ public class WeixinMessageService implements IWeixinMessageService {
 //    	weixinservice.updWatcher(watcher);
 //    }
 //    
-//    public LzWeiBaseMsgResp queryDefaultMsgByAppId(LzWeiBaseMsgResp respMessage,String content,String appId)
-//    {
-//    	LzWeiMessage msg = this.getKeyWordMsgByContent(content, appId);
-//    	//先判断content是不是关键字
-//    	if(msg!=null)
-//    	{
-//    		String msgType = msg.getWmgMsgType();
-//    		if(msgType.equals("2"))
-//    		{
-//    			//log.error("***********************318行：是关键字且是文本信息***********************");
-//    			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
-//    			msgResp.setContent(msg.getWmgContent());
-//    			return msgResp;
-//    		}
-//    		else if(msgType.equals("2"))
-//    		{
-//    			//log.error("***********************318行：是关键字且是图文信息***********************");
-//    			LzNewsMsgResp msgResp = new LzNewsMsgResp(respMessage);
-//    			return msgResp;
-//    		}
-//    		else
-//    		{
-//    			//log.error("***********************318行：是关键字 但不是文本信息***********************");
-//    			return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
-//    		}
-//    	}
-//    	//不是关键字的就返回默认回复信息
-//    	else
-//    	{
-//        	String sql = 
-//        		" select b.WMG_ID, b.WMG_MSG_TYPE,b.WMG_CONTENT " +
-//        		" from LZ_WEI_ENTER a " +
-//        		" join LZ_WEI_MESSAGE b on a.WEC_DEFAULT_MSG = b.WMG_ID  " +
-//        		" where a.WEC_APP_ID = ? ";
-//        	List<Map<String,Object>> list = jdbcDao.queryForList(sql,new Object[]{appId});
-//        	if(list.size()>0)
-//        	{
-//        		Map<String,Object> map = list.get(0);
-//        		Integer wmgId = (Integer)map.get("WMG_ID");
-//        		msg = this.getLzWeiMessageById(wmgId);
-//        		String msgType = msg.getWmgMsgType() ;
-//        		if(msgType.equals("2"))
-//        		{
-//        			//log.error("***********************338行***********************");
-//        			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
-//        			msgResp.setContent(msg.getWmgContent());
-//        			return msgResp;
-//        		}
-//        		else
-//        		{
-//        			//log.error("***********************345行：不是返回文本信息***********************");
-//        			return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
-//        		}
-//        	}
-//        	else
-//        	{
-//        		return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
-//        	}
-//    	}
-//    }
+    public LzWeiBaseMsgResp queryDefaultMsgByAppId(LzWeiBaseMsgResp respMessage,String content,String appId)
+    {
+    	WcWeiMessage msg = this.getKeyWordMsgByContent(content, appId);
+    	//先判断content是不是关键字
+    	if(msg!=null)
+    	{
+    		String msgType = msg.getWmgMsgType();
+    		if(msgType.equals("2"))
+    		{
+    			//log.error("***********************318行：是关键字且是文本信息***********************");
+    			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
+    			msgResp.setContent(msg.getWmgContent());
+    			return msgResp;
+    		}
+    		else if(msgType.equals("2"))
+    		{
+    			//log.error("***********************318行：是关键字且是图文信息***********************");
+    			//LzNewsMsgResp msgResp = new LzNewsMsgResp(respMessage);
+    			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
+    			msgResp.setContent(msg.getWmgContent());
+    			return msgResp;
+    		}
+    		else
+    		{
+    			//log.error("***********************318行：是关键字 但不是文本信息***********************");
+    			return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+    		}
+    	}
+    	//不是关键字的就返回默认回复信息
+    	else
+    	{
+        	String sql = 
+        		" SELECT b.WMG_ID, b.WMG_MSG_TYPE,b.WMG_CONTENT  FROM WC_WEI_FUWUHAO a  JOIN WC_WEI_MESSAGE b ON a.FWH_APP_ID = b.WMG_APP_ID   WHERE a.FWH_APP_ID = ? AND b.WMG_REPLY_TYPE = '2' ";
+        	List<Map<String,Object>> list = jdbcDao.queryForList(sql,new Object[]{appId});
+        	if(list.size()>0)
+        	{
+        		Map<String,Object> map = list.get(0);
+        		Integer wmgId = (Integer)map.get("WMG_ID");
+        		msg = this.getWcWeiMessageById(wmgId);
+        		String msgType = msg.getWmgMsgType() ;
+        		if(msgType.equals("2"))
+        		{
+        			//log.error("***********************338行***********************");
+        			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
+        			msgResp.setContent(msg.getWmgContent());
+        			return msgResp;
+        		}
+        		else
+        		{
+        			//log.error("***********************345行：不是返回文本信息***********************");
+        			return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+        		}
+        	}
+        	else
+        	{
+        		return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+        	}
+    	}
+    }
 //    
 //    
 //    public LzWeiBaseMsgResp  querySubscribeMsgByAppId(LzWeiBaseMsgResp respMessage,String appId)
@@ -548,25 +524,26 @@ public class WeixinMessageService implements IWeixinMessageService {
 		return hibernateDao.get(WcWeiMessage.class, id);
 	}
 //	
-//	public LzWeiMessage getKeyWordMsgByContent(String content,String appId)
-//	{
-//		String sql = 
-//			" select a.WKG_WMG_ID from LZ_WEI_KEYWORD_MESSAGE a " +
-//			" join LZ_WEI_ENTER b on a.WKG_WEC_ID = b.WEC_ID  " +
-//			" where b.WEC_APP_ID = ? and a.WKG_KEYWORDS = ? ";
-//		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId,content});
-//		if(list.size()>0)
-//		{
-//			Map<String,Object> map = list.get(0);
-//			Integer wmgId = (Integer)map.get("WKG_WMG_ID");
-//			LzWeiMessage msgWei = this.getLzWeiMessageById(wmgId); 
-//			return msgWei;
-//		}
-//		else
-//		{
-//			return null;
-//		}
-//	}
+	public WcWeiMessage getKeyWordMsgByContent(String content,String appId)
+	{
+		String sql = 
+			" select a.WKG_WMG_ID " +
+			" from WC_WEI_KEYWORD_MESSAGE a " +
+			" join WC_WEI_FUWUHAO b on a.WKG_WEC_ID = b.FWH_ID  " +
+			" where b.FWH_APP_ID = ? and a.WKG_KEYWORDS = ? ";
+		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId,content});
+		if(list.size()>0)
+		{
+			Map<String,Object> map = list.get(0);
+			Integer wmgId = (Integer)map.get("WKG_WMG_ID");
+			WcWeiMessage msgWei = this.getWcWeiMessageById(wmgId); 
+			return msgWei;
+		}
+		else
+		{
+			return null;
+		}
+	}
 //	
 //	public LzWeiMessage getSubScribeMsgByApp(String appId)
 //	{
