@@ -141,7 +141,8 @@ public class WeixinMessageService implements IWeixinMessageService {
             String eventType = requestMap.get("Event");  
             //log.error("##########################事件类型:"+eventType);
             // 订阅  
-            if (eventType.equals(Constant.EVENT_TYPE_SUBSCRIBE)) {  
+            if (eventType.equals(Constant.EVENT_TYPE_SUBSCRIBE)) 
+            {  
             	String EventKey = requestMap.get("EventKey"); 
             	//log.error("##########################qrscene_:"+EventKey);
             	if(EventKey.startsWith("qrscene_"))
@@ -189,29 +190,37 @@ public class WeixinMessageService implements IWeixinMessageService {
 
 	public String processRequest_Jar(HttpServletRequest request,String token,String encodingAESKey,String appId)throws IOException 
 	{
+		log.error("11");
 		String respMessage 		= null;  
-        String encrypt_type 	= (String)request.getParameter("encrypt_type")==null? "":(String)request.getParameter("encrypt_type");
+		log.error("12");
+		String encrypt_type 	= (String)request.getParameter("encrypt_type")==null? "":(String)request.getParameter("encrypt_type");
     	String msg_signature 	= (String)request.getParameter("msg_signature")==null?"":(String)request.getParameter("msg_signature");
     	String timestamp 		= (String)request.getParameter("timestamp")==null? "":(String)request.getParameter("timestamp");
     	String nonce 			= (String)request.getParameter("nonce")==null? "":(String)request.getParameter("nonce");
         // 默认返回的文本消息内容  
         String respContent = "请求处理异常，请稍候尝试！";  
+        log.error("13");
         InputStream inputStream = request.getInputStream();
         // xml请求解析  
         Map<String, String> requestMap = new HashMap<String,String>();
         //按照加密方式的不同进行消息的预处理
         if(encrypt_type.equals("aes"))
         {
+        	log.error("14");
             requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         else
         {
+        	log.error("15");
             requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         // 不同的消息内容返回不同的响应
-        LzWeiBaseMsgResp respMsg = fenleiReq_Jar(requestMap,appId);  
+        log.error("16");
+        LzWeiBaseMsgResp respMsg = fenleiReq_Jar(requestMap,appId); 
+        log.error("17");
         //再根据加密方式的不同进行消息的相应前封装
         respMessage = com.oilchem.weixin.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
+        log.error("18");
         return respMessage; 
 	}
     

@@ -113,16 +113,24 @@ public class WeixinMessageController {
 	public String getServeEchoTestPost(@PathVariable String appId,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException
 	{
         //先根据appId查出所属的微信账号
+		log.error("试试我进来了吗?");
 		WcWeiFuwuhao fwh = weixinservice.getWeiFwhByAppId(appId);
+		log.error("1");
         String token_test 			= fwh.getFwhToken();//pudding
+        log.error("2");
         String encodingAESKey_test 	= fwh.getFwhEncodingAesKey();//
+        log.error("3");
         // 将请求、响应的编码均设置为UTF-8（防止中文乱码）   
 		request.setCharacterEncoding("UTF-8");  
+		log.error("4");
         response.setCharacterEncoding("UTF-8");  
+        log.error("5");
         // 调用核心业务类接收消息、处理消息   
         String respMessage = weixinmsgservice.processRequest_Jar(request,token_test,encodingAESKey_test,appId); 
+        log.error("6");
         // 响应消息   
         PrintWriter out = response.getWriter();  
+        log.error("7");
         out.print(respMessage);  
         out.close();
         return null;
