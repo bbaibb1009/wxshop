@@ -21,14 +21,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.oilchem.weixin.mp.aes.AesException;
-import com.oilchem.weixin.mp.aes.SHA1;
+import cn.pudding.weichat.mp.aes.AesException;
+import cn.pudding.weichat.mp.aes.SHA1;
+
+
 
 
 @Controller
