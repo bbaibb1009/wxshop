@@ -3,12 +3,23 @@ package com.wxshop.weixin;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import net.sf.json.JSONObject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cn.pudding.weichat.http.HttpUtil;
+
+import com.wxshop.wxchat.accesstoken.IWeiAccessTokenService;
 
 
 /**
@@ -286,6 +297,61 @@ public class WcWeiFuwuhao implements java.io.Serializable {
 
 	public void setFwhId_Q(Integer fwhIdQ) {
 		fwhId_Q = fwhIdQ;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private IWeiAccessTokenService weiAccessTokenService;
+	
+	public Map<String,Object> queryUserInfo(String openId)
+	{
+		// TODO Auto-generated method stub
+		try
+		{
+			Map<String,Object> resMap= new HashMap<String, Object>();
+			String access_token = weiAccessTokenService.getCurrentAccessTokenStr(this.fwhAppId);
+			String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+access_token+"&openid="+openId+"&lang=zh_CN";
+			JSONObject jsonToken = HttpUtil.httpRequestJson(url, "GET", null);
+			if(jsonToken!=null)
+			{
+				if(jsonToken.has("subscribe"))
+				{
+					String subscribe = jsonToken.getString("subscribe"); 
+					if(subscribe!=null&&subscribe.equals("1"))
+					{	
+						resMap.put("subscribe", 		jsonToken.getString("subscribe"));
+						resMap.put("openid", 			jsonToken.getString("openid"));
+						resMap.put("nickname",			jsonToken.getString("nickname"));
+						resMap.put("sex", 				jsonToken.getInt("sex"));
+						resMap.put("language", 			jsonToken.getString("language"));
+						resMap.put("city", 				jsonToken.getString("city"));
+						resMap.put("province", 			jsonToken.getString("province"));
+						resMap.put("country", 			jsonToken.getString("country"));
+						resMap.put("headimgurl", 		jsonToken.getString("headimgurl"));
+						resMap.put("subscribe_time", 	jsonToken.getString("subscribe_time"));
+						return resMap;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+		
 	}
 	
 	

@@ -24,8 +24,8 @@ import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.util.DateUtil;
 import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
+import com.wxshop.weixin.IWeiFuwuhaoService;
 import com.wxshop.weixin.IWeixinMessageService;
-import com.wxshop.weixin.IWeixinService;
 import com.wxshop.weixin.WcWeiFuwuhao;
 
 @Controller
@@ -39,7 +39,7 @@ public class WeiMessageController
 	private IMemcachedService memcachedservice;
 	
 	@Autowired
-	private IWeixinService weixinFuwuhaoService;
+	private IWeiFuwuhaoService weixinFuwuhaoService;
 	
 	
 	@RequestMapping("/queryWcWeiMessage")

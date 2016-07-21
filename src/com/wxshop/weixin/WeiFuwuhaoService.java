@@ -64,5 +64,7 @@ public class WeiFuwuhaoService implements IWeiFuwuhaoService {
 			return null;
 		}
 	}
+	
+	
 
 }

@@ -21,7 +21,10 @@ import cn.pudding.weichat.message.response.WcWeiTextMsgResp;
 
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
+import com.wxshop.util.DateUtil;
 import com.wxshop.util.Page;
+import com.wxshop.weichat.fans.IWeiFansService;
+import com.wxshop.weichat.fans.WcWeiFans;
 import com.wxshop.wxchat.msg.WcWeiMessage;
 
 @Service
@@ -33,6 +36,12 @@ public class WeixinMessageService implements IWeixinMessageService {
 	
 	@Autowired
 	private IHibernateDao hibernateDao;
+	
+	@Autowired
+	private IWeiFuwuhaoService weiFuwuhaoService;
+	
+	@Autowired
+	private IWeiFansService weiFansService;
 	
 	private static Logger log = Logger.getLogger(WeixinMessageService.class);
 	
@@ -283,17 +292,11 @@ public class WeixinMessageService implements IWeixinMessageService {
             // 订阅  
             if (eventType.equals(Constant.EVENT_TYPE_SUBSCRIBE)) 
             {  
-//                respContent = 
-//                    "您好！欢迎添加隆众资讯微信公共平台/:8-)/:8-)/:8-)。\n"+
-//                    "为了更好的方便您的工作咨询，烦请告知您的姓名、公司名称、联系电话，以便接受更全面的信息服务/:gift/:gift/:gift。\n"+
-//                    "回复【会议】即可知晓最新会议内容安排，如果您有更好的建议、需求，请拨打：0533-2591688       联系我们/磕头/磕头/磕头。\n"+
-//                    "谢谢您的支持/:,@-D/:,@-D/:,@-D！\n"+
-//                    "点击自定义菜单  石化通  即可免费下载隆众石化最新供需平台APP——【隆众石化通】/:gift/:gift/:gift\n"+
-//                    "点击自定义菜单  短讯通  即可免费下载隆众资讯短信APP——【隆众短讯通】/:gift/:gift/:gift";  
-//                respMessage = com.oilchem.weixin.message.TextMsgUtil.getTextMsg(respMessage,respContent);
-                //关注后就添加一条用户记录到数据库
-//            	this.addWatcherBySubscribe(respMessage,appId);
-//            	respMessage = this.querySubscribeMsgByAppId(respMessage,appId);
+      
+               // 关注后就添加一条用户记录到数据库
+            	String openId =  respMessage.getToUserName();
+            	weiFansService.addFansBySubscribe(openId,appId);
+            	respMessage = this.querySubscribeMsgByAppId(respMessage,appId);
             }  
             // 取消订阅  
             else if (eventType.equals(Constant.EVENT_TYPE_UNSUBSCRIBE)) 
@@ -314,47 +317,8 @@ public class WeixinMessageService implements IWeixinMessageService {
     
     
     
-//    
-//    public void addWatcherBySubscribe(LzWeiBaseMsgResp respMessage,String appId) 
-//    {
-//    	try
-//    	{
-//    		//先根据appId 查出企业微信对象来
-//        	LzWeiEnter wec= weixinservice.getWeiEnterByAppId(appId);
-//        	String openId = respMessage.getToUserName();
-//        	LzWeiWatcher watcher = weixinservice.getWatcherByOpenId(openId,wec.getWecId());
-//    		if(watcher==null)
-//    		{
-//    			watcher = new LzWeiWatcher();
-//    			watcher.setWacOpenid(openId);
-//    			watcher.setWacStatus("0");
-//    			watcher.setWacAppid(wec.getWecAppId());
-//    			watcher.setWacWecId(wec.getWecId());
-//    			weixinservice.addWatcher(watcher);
-//    		}
-//    		Map<String,Object> userMap = weixinservice.querUserInfo(openId,wec.getWecId());
-//    		if(userMap!=null)
-//    		{
-//    			watcher.setWacSubscribe(Integer.parseInt((String)userMap.get("subscribe")));
-//    			watcher.setWacNickName((String)userMap.get("nickname"));
-//    			watcher.setWacSex(userMap.get("sex").toString());
-//    			watcher.setWacLanguage((String)userMap.get("language"));
-//    			watcher.setWacCity((String)userMap.get("city"));
-//    			watcher.setWacProvince((String)userMap.get("province"));
-//    			watcher.setWacCountry((String)userMap.get("country"));
-//    			watcher.setWacHeadImgUrl((String)userMap.get("headimgurl"));
-//    			watcher.setWacStatus("1");
-//    			Date subscribeTime = new Date();
-//    			subscribeTime.setTime((Long.parseLong((String)userMap.get("subscribe_time")))*(long)1000);
-//    			watcher.setWacSubscribeTime(DateUtil.parseString(subscribeTime,"yyyy-MM-dd HH:mm:ss"));
-//    			weixinservice.updWatcher(watcher);
-//    		}
-//    	}
-//    	catch(Exception e)
-//    	{
-//    		e.printStackTrace();
-//    	}
-//    }
+    
+   
 
 
     
