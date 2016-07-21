@@ -15,9 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oilchem.weixin.Constant;
-import com.oilchem.weixin.message.response.LzWeiBaseMsgResp;
-import com.oilchem.weixin.message.response.LzWeiTextMsgResp;
+import cn.pudding.weichat.Constant;
+import cn.pudding.weichat.message.response.WcWeiBaseMsgResp;
+import cn.pudding.weichat.message.response.WcWeiTextMsgResp;
+
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.util.Page;
@@ -56,16 +57,16 @@ public class WeixinMessageService implements IWeixinMessageService {
         //按照加密方式的不同进行消息的预处理
         if(encrypt_type.equals("aes"))
         {
-            requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
+            requestMap = cn.pudding.weichat.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         else
         {
-            requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
+            requestMap = cn.pudding.weichat.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         // 回复不同类型的结构1
-        LzWeiBaseMsgResp respMsg = fenleiReq(requestMap);  
+        WcWeiBaseMsgResp respMsg = fenleiReq(requestMap);  
         // respMessage = MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce,type);
-        respMessage = com.oilchem.weixin.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
+        respMessage = cn.pudding.weichat.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
         return respMessage;  
     }
     
@@ -74,7 +75,7 @@ public class WeixinMessageService implements IWeixinMessageService {
      * @param request 
      * @return 
      */
-    public LzWeiBaseMsgResp fenleiReq(Map<String, String> requestMap)
+    public WcWeiBaseMsgResp fenleiReq(Map<String, String> requestMap)
     {
     	// 发送方帐号（open_id）  
         String fromUserName = requestMap.get("FromUserName")==null?"":requestMap.get("FromUserName");  
@@ -85,7 +86,7 @@ public class WeixinMessageService implements IWeixinMessageService {
         //发过来的消息
         String content		= requestMap.get("Content")==null?"":requestMap.get("Content");
         String respContent = "";
-        LzWeiBaseMsgResp respMessage = new LzWeiBaseMsgResp();
+       WcWeiBaseMsgResp respMessage = new WcWeiBaseMsgResp();
         respMessage.setToUserName(fromUserName);  
         respMessage.setFromUserName(toUserName);  
         respMessage.setCreateTime(new Date().getTime());  
@@ -97,7 +98,7 @@ public class WeixinMessageService implements IWeixinMessageService {
             //在这里将发送过来的消息进行分类处理
         	if(content.startsWith("会议")||content.startsWith("隆众会议"))
         	{
-        		LzWeiTextMsgResp txtMsg = new LzWeiTextMsgResp(respMessage);
+        		WcWeiTextMsgResp txtMsg = new WcWeiTextMsgResp(respMessage);
         		txtMsg.setContent("http://meeting.oilchem.net/");
         		respMessage = txtMsg;
         	}
@@ -160,7 +161,7 @@ public class WeixinMessageService implements IWeixinMessageService {
                         "谢谢您的支持/:,@-D/:,@-D/:,@-D！\n"+
                         "点击自定义菜单  石化通  即可免费下载隆众石化最新供需平台APP——【隆众石化通】/:gift/:gift/:gift\n"+
                         "点击自定义菜单  短讯通  即可免费下载隆众资讯短信APP——【隆众短讯通】/:gift/:gift/:gift";  
-                    respMessage = com.oilchem.weixin.message.TextMsgUtil.getTextMsg(respMessage,respContent);
+                    respMessage = cn.pudding.weichat.message.TextMsgUtil.getTextMsg(respMessage,respContent);
             	}
             }  
             // 取消订阅  
@@ -190,38 +191,34 @@ public class WeixinMessageService implements IWeixinMessageService {
 
 	public String processRequest_Jar(HttpServletRequest request,String token,String encodingAESKey,String appId)throws IOException 
 	{
-		log.error("11");
+
 		String respMessage 		= null;  
-		log.error("12");
+
 		String encrypt_type 	= (String)request.getParameter("encrypt_type")==null? "":(String)request.getParameter("encrypt_type");
     	String msg_signature 	= (String)request.getParameter("msg_signature")==null?"":(String)request.getParameter("msg_signature");
     	String timestamp 		= (String)request.getParameter("timestamp")==null? "":(String)request.getParameter("timestamp");
     	String nonce 			= (String)request.getParameter("nonce")==null? "":(String)request.getParameter("nonce");
         // 默认返回的文本消息内容  
         String respContent = "请求处理异常，请稍候尝试！";  
-        log.error("13");
+
         InputStream inputStream = request.getInputStream();
         // xml请求解析  
         Map<String, String> requestMap = new HashMap<String,String>();
         //按照加密方式的不同进行消息的预处理
         if(encrypt_type.equals("aes"))
         {
-        	log.error("14");
-            requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
+
+            requestMap = cn.pudding.weichat.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         else
         {
-        	log.error("15");
-            requestMap = com.oilchem.weixin.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
+
+            requestMap = cn.pudding.weichat.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
         }
         // 不同的消息内容返回不同的响应
-        log.error("16");
-        log.error(requestMap);
-        LzWeiBaseMsgResp respMsg = fenleiReq_Jar(requestMap,appId); 
-        log.error("17");
+        WcWeiBaseMsgResp respMsg = fenleiReq_Jar(requestMap,appId); 
         //再根据加密方式的不同进行消息的相应前封装
-        respMessage = com.oilchem.weixin.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
-        log.error("18");
+        respMessage = cn.pudding.weichat.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
         return respMessage; 
 	}
     
@@ -230,7 +227,7 @@ public class WeixinMessageService implements IWeixinMessageService {
      * @param request 
      * @return 
      */
-    public LzWeiBaseMsgResp fenleiReq_Jar(Map<String, String> requestMap,String appId)
+    public WcWeiBaseMsgResp fenleiReq_Jar(Map<String, String> requestMap,String appId)
     {
     	//发送方帐号(open_id)  
         String fromUserName = requestMap.get("FromUserName")==null?"":requestMap.get("FromUserName");  
@@ -241,7 +238,7 @@ public class WeixinMessageService implements IWeixinMessageService {
         //发过来的消息
         String content		= requestMap.get("Content")==null?"":requestMap.get("Content");
         String respContent 	= "";
-        LzWeiBaseMsgResp 	respMessage = new LzWeiBaseMsgResp();
+        WcWeiBaseMsgResp 	respMessage = new WcWeiBaseMsgResp();
         respMessage.setToUserName(fromUserName);  
         respMessage.setFromUserName(toUserName);  
         respMessage.setCreateTime(new Date().getTime());  
@@ -314,6 +311,9 @@ public class WeixinMessageService implements IWeixinMessageService {
         }
         return respMessage;
     }
+    
+    
+    
 //    
 //    public void addWatcherBySubscribe(LzWeiBaseMsgResp respMessage,String appId) 
 //    {
@@ -355,7 +355,9 @@ public class WeixinMessageService implements IWeixinMessageService {
 //    		e.printStackTrace();
 //    	}
 //    }
-//    
+
+
+    
 //    public void updWatcherByUnSubscribe(LzWeiBaseMsgResp respMessage,String appId)
 //    {
 //    	//根据openId和appid找到相应的watcher
@@ -366,8 +368,9 @@ public class WeixinMessageService implements IWeixinMessageService {
 //    	watcher.setWacSubscribe(0);
 //    	weixinservice.updWatcher(watcher);
 //    }
-//    
-    public LzWeiBaseMsgResp queryDefaultMsgByAppId(LzWeiBaseMsgResp respMessage,String content,String appId)
+
+   
+    public WcWeiBaseMsgResp queryDefaultMsgByAppId(WcWeiBaseMsgResp respMessage,String content,String appId)
     {
     	WcWeiMessage msg = this.getKeyWordMsgByContent(content, appId);
     	//先判断content是不是关键字
@@ -377,7 +380,7 @@ public class WeixinMessageService implements IWeixinMessageService {
     		if(msgType.equals("2"))
     		{
     			//log.error("***********************318行：是关键字且是文本信息***********************");
-    			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
+    			WcWeiTextMsgResp msgResp = new WcWeiTextMsgResp(respMessage);
     			msgResp.setContent(msg.getWmgContent());
     			return msgResp;
     		}
@@ -385,21 +388,20 @@ public class WeixinMessageService implements IWeixinMessageService {
     		{
     			//log.error("***********************318行：是关键字且是图文信息***********************");
     			//LzNewsMsgResp msgResp = new LzNewsMsgResp(respMessage);
-    			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
+    			WcWeiTextMsgResp msgResp = new WcWeiTextMsgResp(respMessage);
     			msgResp.setContent(msg.getWmgContent());
     			return msgResp;
     		}
     		else
     		{
     			//log.error("***********************318行：是关键字 但不是文本信息***********************");
-    			return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+    			return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
     		}
     	}
     	//不是关键字的就返回默认回复信息
     	else
     	{
-        	String sql = 
-        		" SELECT b.WMG_ID, b.WMG_MSG_TYPE,b.WMG_CONTENT  FROM WC_WEI_FUWUHAO a  JOIN WC_WEI_MESSAGE b ON a.FWH_APP_ID = b.WMG_APP_ID   WHERE a.FWH_APP_ID = ? AND b.WMG_REPLY_TYPE = '2' ";
+        	String sql = " SELECT b.WMG_ID, b.WMG_MSG_TYPE,b.WMG_CONTENT  FROM WC_WEI_FUWUHAO a  JOIN WC_WEI_MESSAGE b ON a.FWH_APP_ID = b.WMG_APP_ID   WHERE a.FWH_APP_ID = ? AND b.WMG_REPLY_TYPE = '2' ";
         	List<Map<String,Object>> list = jdbcDao.queryForList(sql,new Object[]{appId});
         	if(list.size()>0)
         	{
@@ -410,22 +412,23 @@ public class WeixinMessageService implements IWeixinMessageService {
         		if(msgType.equals("2"))
         		{
         			//log.error("***********************338行***********************");
-        			LzWeiTextMsgResp msgResp = new LzWeiTextMsgResp(respMessage);
+        			WcWeiTextMsgResp msgResp = new WcWeiTextMsgResp(respMessage);
         			msgResp.setContent(msg.getWmgContent());
         			return msgResp;
         		}
         		else
         		{
         			//log.error("***********************345行：不是返回文本信息***********************");
-        			return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+        			return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
         		}
         	}
         	else
         	{
-        		return com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+        		return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
         	}
     	}
     }
+    
 //    
 //    
 //    public LzWeiBaseMsgResp  querySubscribeMsgByAppId(LzWeiBaseMsgResp respMessage,String appId)
