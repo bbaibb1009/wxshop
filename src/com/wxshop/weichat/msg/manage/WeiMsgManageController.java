@@ -1,4 +1,4 @@
-package com.wxshop.wxchat.msg;
+package com.wxshop.weichat.msg.manage;
 
 import java.io.IOException;
 import java.util.Date;
@@ -30,7 +30,7 @@ import com.wxshop.weixin.WcWeiFuwuhao;
 
 @Controller
 @RequestMapping("/wxmsg")
-public class WeiMessageController 
+public class WeiMsgManageController 
 {
 	@Autowired
 	private IWeixinMessageService weiMessageService;
