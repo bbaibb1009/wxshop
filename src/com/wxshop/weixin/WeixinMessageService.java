@@ -365,7 +365,7 @@ public class WeixinMessageService implements IWeixinMessageService {
     	//不是关键字的就返回默认回复信息
     	else
     	{
-        	String sql = " SELECT b.WMG_ID, b.WMG_MSG_TYPE,b.WMG_CONTENT  FROM WC_WEI_FUWUHAO a  JOIN WC_WEI_MESSAGE b ON a.FWH_APP_ID = b.WMG_APP_ID   WHERE a.FWH_APP_ID = ? AND b.WMG_REPLY_TYPE = '2' ";
+        	String sql = " SELECT b.WMG_ID, b.WMG_MSG_TYPE,b.WMG_CONTENT  FROM WC_WEI_FUWUHAO a JOIN WC_WEI_MESSAGE b ON a.FWH_APP_ID = b.WMG_APP_ID WHERE a.FWH_APP_ID = ? AND b.WMG_REPLY_TYPE = '2' ";
         	List<Map<String,Object>> list = jdbcDao.queryForList(sql,new Object[]{appId});
         	if(list.size()>0)
         	{
