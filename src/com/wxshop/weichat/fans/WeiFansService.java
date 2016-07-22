@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.util.DateUtil;
-import com.wxshop.weixin.IWeiFuwuhaoService;
-import com.wxshop.weixin.WcWeiFuwuhao;
+import com.wxshop.weichat.fuwuhao.IWeiFuwuhaoService;
+import com.wxshop.weichat.fuwuhao.WcWeiFuwuhao;
 @Service
 @Transactional
 public class WeiFansService implements IWeiFansService {

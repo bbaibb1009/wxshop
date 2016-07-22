@@ -24,16 +24,17 @@ import com.wxshop.sys.WcShopAdmin;
 import com.wxshop.util.DateUtil;
 import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
-import com.wxshop.weixin.IWeiFuwuhaoService;
-import com.wxshop.weixin.IWeixinMessageService;
-import com.wxshop.weixin.WcWeiFuwuhao;
+import com.wxshop.weichat.fuwuhao.IWeiFuwuhaoService;
+import com.wxshop.weichat.fuwuhao.WcWeiFuwuhao;
+import com.wxshop.weichat.msg.request.IWeixinMessageService;
+import com.wxshop.wxchat.msg.WcWeiMessage;
 
 @Controller
 @RequestMapping("/wxmsg")
 public class WeiMsgManageController 
 {
 	@Autowired
-	private IWeixinMessageService weiMessageService;
+	private IWeixinMsgManageService weiMsgManageService;
 	
 	@Autowired 
 	private IMemcachedService memcachedservice;
@@ -45,7 +46,7 @@ public class WeiMsgManageController
 	@RequestMapping("/queryWcWeiMessage")
 	public String queryWcWeiMessage(@ModelAttribute("command") WcWeiMessage msg, HttpServletResponse response, HttpSession session, Model model)
 	{
-		model.addAttribute(SysConstant.PAGE_RESULT,weiMessageService.queryWcWeiMsg(msg));
+		model.addAttribute(SysConstant.PAGE_RESULT,weiMsgManageService.queryWcWeiMsg(msg));
 		return "/wxmsg/queryWcWeiMessage";
 	}
 	
@@ -54,7 +55,7 @@ public class WeiMsgManageController
 	{
 		WcWeiFuwuhao fuwuhao = weixinFuwuhaoService.getWeiFwhByAppId(appId);
 		msg.setWmgAppId_Q(appId);
-		model.addAttribute(SysConstant.PAGE_RESULT,weiMessageService.queryWcWeiMsg(msg));
+		model.addAttribute(SysConstant.PAGE_RESULT,weiMsgManageService.queryWcWeiMsg(msg));
 		model.addAttribute("command",msg);
 		model.addAttribute("fuwuhao", fuwuhao);
 		return "/wxmsg/queryWcWeiMessage" ;
@@ -67,7 +68,7 @@ public class WeiMsgManageController
 	@RequestMapping(value ="/toUpdWxMsg",method = RequestMethod.POST)
 	public String toUpdWxMsg(WcWeiMessage wxmsg_Q, Model model) throws IllegalArgumentException, IllegalAccessException
 	{
-		WcWeiMessage wxmsg = weiMessageService.getWcWeiMessageById(wxmsg_Q.getWmgId());
+		WcWeiMessage wxmsg = weiMsgManageService.getWcWeiMessageById(wxmsg_Q.getWmgId());
 		StringUtil.copyProperties(wxmsg_Q, wxmsg);
 		model.addAttribute("command", wxmsg);
 		return "/wxmsg/updWxMsg";
@@ -83,7 +84,7 @@ public class WeiMsgManageController
 	@RequestMapping(value="/updWxMsg",method = RequestMethod.POST)
 	public String updWxMsg(WcWeiMessage wxmsg_Q, HttpServletRequest request, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException 
 	{
-		weiMessageService.updWxMsg(wxmsg_Q);
+		weiMsgManageService.updWxMsg(wxmsg_Q);
 		redirectAttributes.addFlashAttribute("success", "回复消息修改成功!");
 		return "redirect:/wxmsg/queryWcWeiMessage/"+wxmsg_Q.getWmgAppId_Q();
 	}
@@ -110,7 +111,7 @@ public class WeiMsgManageController
 		msg.setWmgRegistor(adminReg.getWsaId());
 		msg.setWmgRegistdate(DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		msg.setWmgStatus("1000");
-		weiMessageService.addWcWeiMessage(msg);
+		weiMsgManageService.addWcWeiMessage(msg);
 		redirectAttributes.addFlashAttribute("success", "回复消息添加成功!");
 		return "redirect:/wxmsg/queryWcWeiMessage/"+msg.getWmgAppId_Q();
 	}
