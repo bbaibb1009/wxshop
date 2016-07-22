@@ -1,4 +1,4 @@
-package com.wxshop.wxchat.msg;
+package com.wxshop.weichat.msg.manage;
 
 import java.io.IOException;
 import java.util.Date;

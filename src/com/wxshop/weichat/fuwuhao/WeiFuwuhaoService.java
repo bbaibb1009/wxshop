@@ -1,4 +1,4 @@
-package com.wxshop.weixin;
+package com.wxshop.weichat.fuwuhao;
 
 import java.util.ArrayList;
 import java.util.List;
