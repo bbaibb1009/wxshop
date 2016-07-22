@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.util.DateUtil;
-import com.wxshop.weixin.IWeiFuwuhaoService;
-import com.wxshop.weixin.WcWeiFuwuhao;
+import com.wxshop.weichat.fuwuhao.IWeiFuwuhaoService;
+import com.wxshop.weichat.fuwuhao.WcWeiFuwuhao;
 
 @Service
 @Transactional
@@ -62,7 +62,7 @@ public class WeiAccessTokenService implements IWeiAccessTokenService {
 			if(accessToken!=null&&accessToken.length()>0)
 			{
 				this.disabledAccessToken(appId);
-				this.addAccessToken(accessToken,expires_in,appId,fuwuhao.getFwhAppId());
+				this.addAccessToken(accessToken,expires_in,fuwuhao.getFwhId(),fuwuhao.getFwhAppId());
 				return accessToken;
 			}
 			else
@@ -77,5 +77,25 @@ public class WeiAccessTokenService implements IWeiAccessTokenService {
 		}
 		
 	}
+	
+	public void disabledAccessToken(String appId)
+	{
+		String sql = " update WC_WEI_ACCESSTOKEN set WAT_STATUS = '0' where WAT_APPID = ? ";
+		jdbcDao.update(sql,new Object[]{appId});
+	}
+	
+	public void addAccessToken(String accessToken,int expires_in,Integer wecId,String appid)
+	{
+		WcWeiAccesstoken accToken = new WcWeiAccesstoken();
+		Date now = new Date();
+		now.setTime(now.getTime()+(expires_in*1000)); 
+		accToken.setWatToken(accessToken);
+		accToken.setWatExpiresIn(DateUtil.parseString(now, "yyyy-MM-dd HH:mm:ss"));
+		accToken.setWatWecId(wecId);
+		accToken.setWatAppid(appid);
+		accToken.setWatStatus("1");
+		hibernateDao.add(accToken);
+	}
+	
 	
 }
