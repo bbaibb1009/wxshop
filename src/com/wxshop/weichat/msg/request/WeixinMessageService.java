@@ -21,6 +21,7 @@ import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.weichat.fans.IWeiFansService;
 import com.wxshop.weichat.fuwuhao.IWeiFuwuhaoService;
+import com.wxshop.weichat.msg.manage.IWeixinMsgManageService;
 
 @Service
 @Transactional
@@ -38,160 +39,13 @@ public class WeixinMessageService implements IWeixinMessageService {
 	@Autowired
 	private IWeiFansService weiFansService;
 	
+	@Autowired
+	private IWeixinMsgManageService weimsgmanageservice;
+	
 	private static Logger log = Logger.getLogger(WeixinMessageService.class);
 	
-	/** 
-     * 处理微信发来的请求 
-     * @param request 
-     * @return 
-	 * @throws Exception 
-     */  						
-    public String processRequest(HttpServletRequest request,String token,String encodingAESKey,String appId,String type) throws Exception  {  
-        String respMessage 		= null;  
-        String encrypt_type 	= (String)request.getParameter("encrypt_type")==null?"":(String)request.getParameter("encrypt_type");
-    	String msg_signature 	= (String)request.getParameter("msg_signature")==null?"":(String)request.getParameter("msg_signature");
-    	String timestamp 		= (String)request.getParameter("timestamp")==null?"":(String)request.getParameter("timestamp");
-    	String nonce 			= (String)request.getParameter("nonce")==null?"":(String)request.getParameter("nonce");
-        // 默认返回的文本消息内容  
-        String respContent = "请求处理异常，请稍候尝试！";  
-        InputStream inputStream = request.getInputStream();
-        // xml请求解析  
-        Map<String, String> requestMap = new HashMap<String,String>();
-        //requestMap = com.oilchem.weixin.message.MessageUtil.parseXml(request, token, encodingAESKey, appId);  
-        //按照加密方式的不同进行消息的预处理
-        if(encrypt_type.equals("aes"))
-        {
-            requestMap = cn.pudding.weichat.message.MessageUtil.parseXmlAes(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
-        }
-        else
-        {
-            requestMap = cn.pudding.weichat.message.MessageUtil.parseXmlRaw(inputStream, encrypt_type, msg_signature, timestamp, nonce, token, encodingAESKey, appId);  
-        }
-        // 回复不同类型的结构1
-        WcWeiBaseMsgResp respMsg = fenleiReq(requestMap);  
-        // respMessage = MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce,type);
-        respMessage = cn.pudding.weichat.message.MessageUtil.baseMessageToXml(respMsg,encrypt_type,token,encodingAESKey,appId,msg_signature,timestamp,nonce);
-        return respMessage;  
-    }
+	
     
-    /** 
-     * 对微信发过来的请求进行分类
-     * @param request 
-     * @return 
-     */
-    public WcWeiBaseMsgResp fenleiReq(Map<String, String> requestMap)
-    {
-    	// 发送方帐号（open_id）  
-        String fromUserName = requestMap.get("FromUserName")==null?"":requestMap.get("FromUserName");  
-        // 公众帐号  
-        String toUserName 	= requestMap.get("ToUserName")==null?"":requestMap.get("ToUserName");  
-        // 消息类型  
-        String msgType 		= requestMap.get("MsgType")==null?"":requestMap.get("MsgType");  
-        //发过来的消息
-        String content		= requestMap.get("Content")==null?"":requestMap.get("Content");
-        String respContent = "";
-       WcWeiBaseMsgResp respMessage = new WcWeiBaseMsgResp();
-        respMessage.setToUserName(fromUserName);  
-        respMessage.setFromUserName(toUserName);  
-        respMessage.setCreateTime(new Date().getTime());  
-        respMessage.setFuncFlag(0);  
-       // log.error("消息类型:"+msgType);
-        // 文本消息  
-        if(msgType.equals(Constant.REQ_MESSAGE_TYPE_TEXT)) 
-        {  
-            //在这里将发送过来的消息进行分类处理
-        	if(content.startsWith("会议")||content.startsWith("隆众会议"))
-        	{
-        		WcWeiTextMsgResp txtMsg = new WcWeiTextMsgResp(respMessage);
-        		txtMsg.setContent("http://meeting.oilchem.net/");
-        		respMessage = txtMsg;
-        	}
-        	else if(content.startsWith("石化通")||content.startsWith("供求")||content.startsWith("供需")||content.startsWith("下载"))
-        	{
-        		//respMessage =  com.oilchem.weixin.message.TextMsgUtil.getDefualtTextMsg(contentReq);
-        	}
-        	else
-        	{
-        		//respMessage = TextMsgUtil.getDefualtTextMsg(respMessage);
-        	}
-        }  
-        // 图片消息  
-        else if (msgType.equals(Constant.REQ_MESSAGE_TYPE_IMAGE)) 
-        {  
-            respContent = "您发送的是图片消息！";  
-            respMessage.setMsgType(Constant.REQ_MESSAGE_TYPE_IMAGE);
-        }  
-        // 地理位置消息  
-        else if (msgType.equals(Constant.REQ_MESSAGE_TYPE_LOCATION)) 
-        {  
-            respContent = "您发送的是地理位置消息！";  
-            respMessage.setMsgType(Constant.REQ_MESSAGE_TYPE_LOCATION);
-        }  
-        // 链接消息  
-        else if (msgType.equals(Constant.REQ_MESSAGE_TYPE_LINK)) 
-        {  
-            respContent = "您发送的是链接消息！";  
-            respMessage.setMsgType(Constant.REQ_MESSAGE_TYPE_LINK);
-        }  
-        // 音频消息  
-        else if (msgType.equals(Constant.REQ_MESSAGE_TYPE_VOICE)) 
-        {  
-            respContent = "您发送的是音频消息！";  
-            respMessage.setMsgType(Constant.REQ_MESSAGE_TYPE_VOICE);
-        }  
-        // 事件推送  
-        else if (msgType.equals(Constant.REQ_MESSAGE_TYPE_EVENT)) 
-        {  
-            // 事件类型  
-            String eventType = requestMap.get("Event");  
-            //log.error("##########################事件类型:"+eventType);
-            // 订阅  
-            if (eventType.equals(Constant.EVENT_TYPE_SUBSCRIBE)) 
-            {  
-            	String EventKey = requestMap.get("EventKey"); 
-            	//log.error("##########################qrscene_:"+EventKey);
-            	if(EventKey.startsWith("qrscene_"))
-            	{
-            		String code = requestMap.get("EventKey").replace("qrscene_", "").trim();  
-                	//log.error("关注后："+code);
-                	//respMessage = gqService.getGqFxListUrl(code,respMessage);
-            	}
-            	else
-            	{
-            		respContent = 
-                        "您好！欢迎添加隆众资讯微信公共平台/:8-)/:8-)/:8-)。\n"+
-                        "为了更好的方便您的工作咨询，烦请告知您的姓名、公司名称、联系电话，以便接受更全面的信息服务/:gift/:gift/:gift。\n"+
-                        "回复【会议】即可知晓最新会议内容安排，如果您有更好的建议、需求，请拨打：0533-2591688       联系我们/磕头/磕头/磕头。\n"+
-                        "谢谢您的支持/:,@-D/:,@-D/:,@-D！\n"+
-                        "点击自定义菜单  石化通  即可免费下载隆众石化最新供需平台APP——【隆众石化通】/:gift/:gift/:gift\n"+
-                        "点击自定义菜单  短讯通  即可免费下载隆众资讯短信APP——【隆众短讯通】/:gift/:gift/:gift";  
-                    respMessage = cn.pudding.weichat.message.TextMsgUtil.getTextMsg(respMessage,respContent);
-            	}
-            }  
-            // 取消订阅  
-            else if (eventType.equals(Constant.EVENT_TYPE_UNSUBSCRIBE)) 
-            {  
-                // TODO 取消订阅后用户再收不到公众号发送的消息，因此不需要回复消息
-            	respMessage.setMsgType(Constant.EVENT_TYPE_UNSUBSCRIBE);
-            }  
-            // 自定义菜单点击事件  
-            else if (eventType.equals(Constant.EVENT_TYPE_CLICK)) 
-            {  
-                // TODO 自定义菜单权没有开放，暂不处理该类消息 
-            	respMessage.setMsgType(Constant.EVENT_TYPE_CLICK);
-            } 
-//            else if (eventType.equals(Constant.EVENT_TYPE_SCAN))
-//            {
-//            	//扫描事件
-//            	//扫描发现有识别码后
-//            	String code = requestMap.get("EventKey");  
-//            	//log.error("扫描后："+code);
-////            	respMessage = gqService.getGqFxListUrl(code,respMessage);
-//            }
-        }
-        
-    	return respMessage;
-    }
 
 	public String processRequest_Jar(HttpServletRequest request,String token,String encodingAESKey,String appId)throws IOException 
 	{
@@ -252,7 +106,7 @@ public class WeixinMessageService implements IWeixinMessageService {
         {  
             //在这里将发送过来的消息进行分类处理
         	//先根据appid 取出默认回复信息
-        	respMessage = this.queryDefaultMsgByAppId(respMessage,content,appId);
+        	respMessage = weimsgmanageservice.queryDefaultMsgByAppId(respMessage,content,appId);
         
         }  
         // 图片消息  
@@ -291,7 +145,7 @@ public class WeixinMessageService implements IWeixinMessageService {
                // 关注后就添加一条用户记录到数据库
             	String openId =  respMessage.getToUserName();
             	weiFansService.addFansBySubscribe(openId,appId);
-            	respMessage = this.querySubscribeMsgByAppId(respMessage,appId);
+            	respMessage = weimsgmanageservice.querySubscribeMsgByAppId(respMessage,appId);
             }  
             // 取消订阅  
             else if (eventType.equals(Constant.EVENT_TYPE_UNSUBSCRIBE)) 

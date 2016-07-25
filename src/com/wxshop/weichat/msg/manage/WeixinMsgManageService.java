@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.pudding.weichat.message.response.WcWeiBaseMsgResp;
 import cn.pudding.weichat.message.response.WcWeiTextMsgResp;
@@ -13,7 +15,8 @@ import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.util.Page;
 import com.wxshop.wxchat.msg.WcWeiMessage;
-
+@Service
+@Transactional
 public class WeixinMsgManageService implements IWeixinMsgManageService {
 
 	@Autowired 
@@ -199,25 +202,53 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
 			return null;
 		}
 	}
-//	
-//	public LzWeiMessage getSubScribeMsgByApp(String appId)
-//	{
-//		String sql = 
-//			" select a.WEC_SUBSCRIBE_MSG from LZ_WEI_ENTER a " +
-//			" where a.WEC_APP_ID = ?  ";
-//		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId});
-//		if(list.size()>0)
-//		{
-//			Map<String,Object> map = list.get(0);
-//			Integer wmgId = (Integer)map.get("WEC_SUBSCRIBE_MSG");
-//			LzWeiMessage msgWei = this.getLzWeiMessageById(wmgId); 
-//			return msgWei;
-//		}
-//		else
-//		{
-//			return null;
-//		}
-//	}
+	
+	public WcWeiMessage getSubScribeMsgByApp(String appId)
+	{
+		String sql = 
+			" select a.WEC_SUBSCRIBE_MSG from LZ_WEI_ENTER a " +
+			" where a.WEC_APP_ID = ?  ";
+		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId});
+		if(list.size()>0)
+		{
+			Map<String,Object> map = list.get(0);
+			Integer wmgId = (Integer)map.get("WEC_SUBSCRIBE_MSG");
+			WcWeiMessage msgWei = this.getWcWeiMessageById(wmgId); 
+			return msgWei;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public WcWeiBaseMsgResp  querySubscribeMsgByAppId(WcWeiBaseMsgResp respMessage,String appId)
+    {
+    	WcWeiMessage msg = this.getSubScribeMsgByApp(appId);
+    	//先判断content是不是关键字
+    	if(msg!=null)
+    	{
+    		String msgType = msg.getWmgMsgType();
+    		if(msgType.equals("2"))
+    		{
+    			WcWeiTextMsgResp msgResp = new WcWeiTextMsgResp(respMessage);
+    			msgResp.setContent(msg.getWmgContent());
+    			return msgResp;
+    		}
+    		else
+    		{
+    			//log.error("***********************318行：有关注回复 但不是文字消息***********************");
+    			return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+    		}
+    	}
+    	else
+    	{
+    		//log.error("***********************387行：没有设置关注回复***********************");
+			return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
+    		
+    	}
+     }
+	
 //	
 //
 //	public List<Map<String, Object>> queryKeywordListByWei(Integer wecId) {

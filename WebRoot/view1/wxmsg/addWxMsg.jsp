@@ -15,20 +15,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTree/zTreeStyle.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/icheck/all.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap-wysihtml5.css" />
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
-<script>
-	var path = "${pageContext.request.contextPath}";
-	$(document).ready(function(){
-		 $('input[type=radio]').iCheck({
-             radioClass: 	'iradio_minimal',
-             increaseArea: 	'10%'
-         });
-	});
-</script>
-
-
-
 </head>
 <body>
 <jsp:include page="/view1/login/menuFrame.jsp"></jsp:include>
@@ -58,7 +47,8 @@
 	            <div class="form-group">
 	            	<label for="wmgContent" class="col-lg-1 control-label">回复内容</label>
 	            	<div class="col-lg-3">
-	               	 	<f:input path="wmgContent" 		cssClass="form-control input-ms"/>
+	              		<textarea class="textarea_editor" rows="6" placeholder="Enter text ..."></textarea>
+	               	 	<f:input path="wmgContent" 	cssClass="form-control input-ms"/>
 	                </div>
 	            </div>
 	            <div class="form-group">
@@ -142,5 +132,18 @@
 <script src="${pageContext.request.contextPath}/view1/js/zTree/jquery.ztree.excheck-3.5.min.js?v=${applicationScope.sysStartUpTime}"></script>
 <script src="${pageContext.request.contextPath}/view1/js/icheck/icheck.js" ></script>
 <script src="${pageContext.request.contextPath}/view1/wxmsg/js/wxmsg.js"></script> 
+<script src="${pageContext.request.contextPath}/view1/js/wysihtml5-0.3.0.js"></script> 
+<script src="${pageContext.request.contextPath}/view1/js/bootstrap-wysihtml5.js"></script> 
+<script>
+	var path = "${pageContext.request.contextPath}";
+	$(document).ready(function(){
+		 $('input[type=radio]').iCheck({
+             radioClass: 	'iradio_minimal',
+             increaseArea: 	'10%'
+         });
+		 
+		 $('.textarea_editor').wysihtml5();
+	});
+</script>
 </body>
 </html>

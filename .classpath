@@ -51,7 +51,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.37-bin.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/oil-wei-1.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.9.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.5.0.jar"/>
@@ -86,5 +85,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xstream-1.3.1.jar"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_EM"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_CORE"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/wxmsg-1.2.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
