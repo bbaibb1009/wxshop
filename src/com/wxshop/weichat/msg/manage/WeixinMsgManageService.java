@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,8 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
 	@Autowired
 	private IHibernateDao hibernateDao;
 	   
+	private static Logger log = Logger.getLogger(WeixinMsgManageService.class);
+	
     public WcWeiBaseMsgResp queryDefaultMsgByAppId(WcWeiBaseMsgResp respMessage,String content,String appId)
     {
     	WcWeiMessage msg = this.getKeyWordMsgByContent(content, appId);
@@ -206,13 +209,13 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
 	public WcWeiMessage getSubScribeMsgByApp(String appId)
 	{
 		String sql = 
-			" select a.WEC_SUBSCRIBE_MSG from LZ_WEI_ENTER a " +
-			" where a.WEC_APP_ID = ?  ";
+			" select a.WMG_ID from WC_WEI_MESSAGE a " +
+			" where a.WMG_APP_ID = ? and a.WMG_REPLY_TYPE = '3' ";
 		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId});
 		if(list.size()>0)
 		{
 			Map<String,Object> map = list.get(0);
-			Integer wmgId = (Integer)map.get("WEC_SUBSCRIBE_MSG");
+			Integer wmgId = (Integer)map.get("WMG_ID");
 			WcWeiMessage msgWei = this.getWcWeiMessageById(wmgId); 
 			return msgWei;
 		}
@@ -237,15 +240,14 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
     		}
     		else
     		{
-    			//log.error("***********************318行：有关注回复 但不是文字消息***********************");
+    			log.error("***********************318行：有关注回复 但不是文字消息***********************");
     			return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
     		}
     	}
     	else
     	{
-    		//log.error("***********************387行：没有设置关注回复***********************");
+    		log.error("***********************387行：没有设置关注回复***********************");
 			return cn.pudding.weichat.message.TextMsgUtil.getDefualtTextMsg(respMessage);
-    		
     	}
      }
 	

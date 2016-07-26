@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/zTree/zTreeStyle.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/icheck/all.css"/>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap-wysihtml5.css" />
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'  >
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
@@ -37,18 +38,18 @@
              <h5>添加回复消息</h5>
           </div>
           <div class="widget-content ">
+          	
           	<f:form action="${pageContext.request.contextPath}/wxmsg/addWxMsg" cssClass="form-horizontal" onsubmit="return false;">
 	        	<div class="form-group">
             		<label for="wmgAppId" class="col-lg-1 control-label">所属APPID</label>
             		<div class="col-lg-3">
-               	 		<f:input path="wmgAppId" 	cssClass="form-control input-ms"/>
+               	 		<f:input path="wmgAppId" 	cssClass=" form-control input-ms"/>
                 	</div>
             	</div>
 	            <div class="form-group">
 	            	<label for="wmgContent" class="col-lg-1 control-label">回复内容</label>
-	            	<div class="col-lg-3">
-	              		<textarea class="textarea_editor" rows="6" placeholder="Enter text ..."></textarea>
-	               	 	<f:input path="wmgContent" 	cssClass="form-control input-ms"/>
+	            	<div class="col-lg-10">
+	              		<f:textarea path="wmgContent" cssClass="textarea_editor form-control input-ms" rows="6" placeholder="Enter text ..."></f:textarea>         	
 	                </div>
 	            </div>
 	            <div class="form-group">
@@ -94,7 +95,7 @@
 					<div class="col-lg-1"></div>
 					<div class="col-lg-3">
 						<button class="btn btn-info" onclick="addWxMsgSubmit();" >保存</button> 
-					</div>          	
+					</div> 
 	            </div>
             </f:form>
           </div>
