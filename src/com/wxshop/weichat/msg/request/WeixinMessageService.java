@@ -146,7 +146,7 @@ public class WeixinMessageService implements IWeixinMessageService {
             	String openId =  respMessage.getToUserName();
             	weiFansService.addFansBySubscribe(openId,appId);
             	respMessage = weimsgmanageservice.querySubscribeMsgByAppId(respMessage,appId);
-            }  
+            }
             // È¡Ïû¶©ÔÄ  
             else if (eventType.equals(Constant.EVENT_TYPE_UNSUBSCRIBE)) 
             {  
