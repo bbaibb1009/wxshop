@@ -209,13 +209,13 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
 	public WcWeiMessage getSubScribeMsgByApp(String appId)
 	{
 		String sql = 
-			" select a.FWH_IDT from WC_WEI_MESSAGE a " +
+			" select a.WMG_ID from WC_WEI_MESSAGE a " +
 			" where a.WMG_APP_ID = ? and a.WMG_REPLY_TYPE = '3' ";
 		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId});
 		if(list.size()>0)
 		{
 			Map<String,Object> map = list.get(0);
-			Integer wmgId = (Integer)map.get("FWH_ID");
+			Integer wmgId = (Integer)map.get("WMG_ID");
 			WcWeiMessage msgWei = this.getWcWeiMessageById(wmgId); 
 			return msgWei;
 		}

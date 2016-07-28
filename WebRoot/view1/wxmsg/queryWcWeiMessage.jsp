@@ -27,9 +27,8 @@
   <div id="content-header">
     <div id="breadcrumb"><a  href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">微信回复信息管理</a></div>
   </div>
- <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
+  <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
-  
   	<div class="row-fluid">
   		<table class="table table-bordered">
 			<tr>
@@ -38,15 +37,29 @@
 			</tr>  		
   		</table>
   	</div>
-    <div class="row-fluid">
-    	
-	   <input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/wxmsg/toAddWxMsg');" value="添加"/> 
-	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wmgIds', '${pageContext.request.contextPath}/wxmsg/delWxMsg');" value="删除"/>
-	   
+    
+    
+    <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-repeat"></i></span>
+            <h5>关注信息</h5>
+          </div>
+          <div class="widget-content nopadding">
+            
+          </div>
     </div>
+    
+    
     <div class="row-fluid">
         <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-repeat"></i></span>
+            <h5>关键字信息</h5>
+          </div>
+          <div>
+	   			<input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/wxmsg/toAddWxMsg');" value="添加"/> 
+	   			<input type="button" class="btn btn-primary" onclick="javascript:delChk('wmgIds', '${pageContext.request.contextPath}/wxmsg/delWxMsg');" value="删除"/>
+    	  </div>
           <div class="widget-content nopadding">
+          		
           	<f:form action="${pageContext.request.contextPath}/wxmsg/queryWcWeiMessage/${fuwuhao.fwhAppId}" onsubmit="return false;">
           	<f:hidden path="wmgId"/>
           	<f:hidden path="wmgAppId_Q"/>

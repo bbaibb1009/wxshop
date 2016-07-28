@@ -13,4 +13,5 @@ public interface IWeixinMsgManageService {
 	public void updWxMsg(WcWeiMessage wxmsg_Q);
 	public WcWeiBaseMsgResp queryDefaultMsgByAppId(WcWeiBaseMsgResp respMessage,String content,String appId);
 	public WcWeiBaseMsgResp  querySubscribeMsgByAppId(WcWeiBaseMsgResp respMessage,String appId);
+	public WcWeiMessage getSubScribeMsgByApp(String appId);
 }

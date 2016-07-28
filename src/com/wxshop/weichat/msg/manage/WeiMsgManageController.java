@@ -56,6 +56,7 @@ public class WeiMsgManageController
 		WcWeiFuwuhao fuwuhao = weixinFuwuhaoService.getWeiFwhByAppId(appId);
 		msg.setWmgAppId_Q(appId);
 		model.addAttribute(SysConstant.PAGE_RESULT,weiMsgManageService.queryWcWeiMsg(msg));
+		model.addAttribute("subscribeMsg", weiMsgManageService.getSubScribeMsgByApp(appId));
 		model.addAttribute("command",msg);
 		model.addAttribute("fuwuhao", fuwuhao);
 		return "/wxmsg/queryWcWeiMessage" ;
