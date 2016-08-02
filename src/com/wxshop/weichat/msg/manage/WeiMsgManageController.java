@@ -55,7 +55,7 @@ public class WeiMsgManageController
 	{
 		WcWeiFuwuhao fuwuhao = weixinFuwuhaoService.getWeiFwhByAppId(appId);
 		msg.setWmgAppId_Q(appId);
-		model.addAttribute(SysConstant.PAGE_RESULT,weiMsgManageService.queryWcWeiMsg(msg));
+		model.addAttribute(SysConstant.PAGE_RESULT,weiMsgManageService.queryKeyWordMsgByAppId(msg));
 		model.addAttribute("subscribeMsg", weiMsgManageService.getSubScribeMsgByApp(appId));
 		model.addAttribute("command",msg);
 		model.addAttribute("fuwuhao", fuwuhao);
@@ -118,4 +118,44 @@ public class WeiMsgManageController
 	}
 	
 	
+	/**
+	 * @功能介绍 跳转至添加关键字菜单
+	 * 
+	 * */
+	@RequestMapping(value ="/toAddWxkeyWordMsg/{appId}",method = RequestMethod.POST)
+	public String toAddWxkeyWordMsg(@ModelAttribute("command") WcWeiMessage msg ,@PathVariable String appId, Model model) throws IllegalArgumentException, IllegalAccessException
+	{  
+		WcWeiFuwuhao fuwuhao = weixinFuwuhaoService.getWeiFwhByAppId(appId);
+		msg.setWmgAppId(appId);
+		msg.setWmgReplyType("1");//关键字回复 固定类型
+		model.addAttribute("fuwuhao", fuwuhao);
+		return "/wxmsg/addWxKeywordMsg";
+	} 
+	
+	
+	@RequestMapping(value ="/addWxKeywordMsg", method = RequestMethod.POST)
+	public String addWxKeywordMsg(WcWeiMessage msg, HttpServletRequest request,HttpSession session, RedirectAttributes redirectAttributes)
+	    throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException
+	{
+		String keyWord =  msg.getWmgKeyWord();
+		if(keyWord==null || keyWord.trim().length()==0)
+		{
+			redirectAttributes.addFlashAttribute("error", "关键字不能为空!");
+			return "redirect:/wxmsg/queryWcWeiMessage/"+msg.getWmgAppId_Q();
+		}
+		
+		//先添加一条消息
+		WcShopAdmin adminReg = (WcShopAdmin)session.getAttribute(SysConstant.ADMIN_INFO);
+		msg.setWmgRegistor(adminReg.getWsaId());
+		msg.setWmgRegistdate(DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+		msg.setWmgStatus("1000");
+		weiMsgManageService.addWcWeiMessage(msg);
+		//添加完 然后再勾连关系
+		String[] keyWordArray = keyWord.split(",");
+		WcShopAdmin admin = (WcShopAdmin)session.getAttribute(SysConstant.ADMIN_INFO);
+		weiMsgManageService.addWcKeywordMessage(msg,keyWordArray,admin.getWsaId());
+		
+		redirectAttributes.addFlashAttribute("success", "关键字回复消息添加成功!");
+		return "redirect:/wxmsg/queryWcWeiMessage/"+msg.getWmgAppId();
+	}
 }

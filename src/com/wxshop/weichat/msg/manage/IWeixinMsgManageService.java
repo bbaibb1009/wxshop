@@ -12,6 +12,9 @@ public interface IWeixinMsgManageService {
 //	public List<Map<String,Object>> queryKeywordListByWei(Integer wecId);
 	public void updWxMsg(WcWeiMessage wxmsg_Q);
 	public WcWeiBaseMsgResp queryDefaultMsgByAppId(WcWeiBaseMsgResp respMessage,String content,String appId);
-	public WcWeiBaseMsgResp  querySubscribeMsgByAppId(WcWeiBaseMsgResp respMessage,String appId);
+	public WcWeiBaseMsgResp querySubscribeMsgByAppId(WcWeiBaseMsgResp respMessage,String appId);
+	public Page queryKeyWordMsgByAppId(WcWeiMessage msg);
 	public WcWeiMessage getSubScribeMsgByApp(String appId);
+	public void addWcKeywordMessage(WcWeiMessage msg,String[] keyWordArray,Integer adminId);
+	
 }

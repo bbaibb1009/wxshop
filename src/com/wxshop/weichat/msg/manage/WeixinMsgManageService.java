@@ -1,6 +1,7 @@
 package com.wxshop.weichat.msg.manage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import cn.pudding.weichat.message.response.WcWeiTextMsgResp;
 
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
+import com.wxshop.util.DateUtil;
 import com.wxshop.util.Page;
 import com.wxshop.wxchat.msg.WcWeiMessage;
 @Service
@@ -251,27 +253,52 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
     	}
      }
 	
-//	
-//
-//	public List<Map<String, Object>> queryKeywordListByWei(Integer wecId) {
-//		// TODO Auto-generated method stub
-//		String sql = 
-//			" select distinct  " +
-//			"  LEFT(a.kwd,LEN(a.kwd)-1) as kwd,b.WMG_CONTENT,b.WMG_ID ,a.WKG_WEC_ID,c.WKG_APP_ID " +
-//			"  from  " +
-//			"  (  " +
-//			" 	select bb.WMG_ID,cc.WKG_WEC_ID, (select  WKG_KEYWORDS+',' from LZ_WEI_KEYWORD_MESSAGE where WKG_WMG_ID = bb.WMG_ID FOR XML PATH('')) as kwd from LZ_WEI_MESSAGE bb left join LZ_WEI_KEYWORD_MESSAGE cc on bb.WMG_ID = cc.WKG_WMG_ID group by bb.WMG_ID ,cc.WKG_WEC_ID " +
-//			" ) a  " +
-//			" left join LZ_WEI_MESSAGE b on a.WMG_ID = b.WMG_ID  " +
-//			" join LZ_WEI_KEYWORD_MESSAGE c on c.WKG_WEC_ID = a.WKG_WEC_ID  " +
-//			" where c.WKG_WEC_ID = ? " ;
-//		return jdbcDao.queryForList(sql, new Object[]{wecId});
-//	}
-//
+	
+
+	public Page queryKeyWordMsgByAppId(WcWeiMessage msg)
+	{
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder( 
+			" 	select  " +
+			"  	b.WMG_CONTENT,b.WMG_ID ,c.WKG_APP_ID,c.WKG_KEYWORDS " 
+		);
+		StringBuilder sqlCnt = new StringBuilder(
+			"	select count(*) "
+		);
+		StringBuilder sqlConf = new StringBuilder(
+			"  	from WC_WEI_MESSAGE b   " +
+			" 	join WC_WEI_KEYWORD_MESSAGE c on  c.WKG_WMG_ID = b.WMG_ID   " +
+			" 	where c.WKG_APP_ID = ? "
+		);
+		List<Object> paraList = new ArrayList<Object>();
+		paraList.add(msg.getWmgAppId_Q());
+		sql.append(sqlConf);
+		sqlCnt.append(sqlConf);
+		Page page = new Page(sql.toString(),sqlCnt.toString(),msg.getCurrentPage(),msg.getPageSize(),paraList.toArray());
+		jdbcDao.queryForPage(page);
+		return page;
+	}
+
 	public void updWxMsg(WcWeiMessage msg) {
 		// TODO Auto-generated method stub
 		hibernateDao.update(msg);
 	}
-	
 
+	public void addWcKeywordMessage(WcWeiMessage msg, String[] keyWordArray,Integer adminId) {
+		// TODO Auto-generated method stub
+		String sql = new String(
+			" insert into 	WC_WEI_KEYWORD_MESSAGE 	(WKG_APP_ID,	WKG_KEYWORDS,	WKG_WMG_ID,	WKG_STATUS,	WKG_DESC,	WKG_REGISTOR,	WKG_REGISTDATE) " +
+			" 								values 	(			?,				?,			?,			?,			?,		?,			?	) "
+		);
+		List<Object[]> paralist = new ArrayList<Object[]>();
+		for(int i = 0;i<keyWordArray.length;i++)
+		{
+			String keyWord = keyWordArray[i];
+			paralist.add(new Object[]{msg.getWmgAppId(),keyWord,msg.getWmgId(),"1000","",adminId,DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss")});
+		}
+		jdbcDao.batchUpdate(sql, paralist);
+		
+	}
+	
+	
 }

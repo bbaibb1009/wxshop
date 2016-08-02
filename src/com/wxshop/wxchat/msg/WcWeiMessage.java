@@ -39,6 +39,8 @@ public class WcWeiMessage implements java.io.Serializable {
 	
 	private String currentPage;
 	private String pageSize;
+	
+	private String wmgKeyWord;
 
 	// Constructors
 
@@ -221,7 +223,17 @@ public class WcWeiMessage implements java.io.Serializable {
 	public void setWmgAppId_Q(String wmgAppIdQ) {
 		wmgAppId_Q = wmgAppIdQ;
 	}
+	
+	@Transient
+	public String getWmgKeyWord() {
+		return wmgKeyWord;
+	}
 
+	public void setWmgKeyWord(String wmgKeyWord) {
+		this.wmgKeyWord = wmgKeyWord;
+	}
+
+	
 	
 	
 }

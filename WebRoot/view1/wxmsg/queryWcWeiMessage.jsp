@@ -37,14 +37,19 @@
 			</tr>  		
   		</table>
   	</div>
-    
-    
     <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-repeat"></i></span>
-            <h5>关注信息</h5>
+            <h5>关注回复</h5>
           </div>
-          <div class="widget-content nopadding">
-            
+          <div class="widget-content">
+           	 <ul class="recent-posts">
+	             <li>
+	                <div class="article-post">
+	                  <div class="fr"><a href="#" class="btn btn-primary btn-mini">编辑</a>  <a href="#" class="btn btn-danger btn-mini">删除</a></div>
+	                  <p> ${subscribeMsg.wmgContent}</p>
+	                </div>
+	             </li>
+            </ul>
           </div>
     </div>
     
@@ -52,59 +57,30 @@
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-repeat"></i></span>
-            <h5>关键字信息</h5>
+            <h5>关键字回复</h5>
           </div>
-          <div>
-	   			<input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/wxmsg/toAddWxMsg');" value="添加"/> 
-	   			<input type="button" class="btn btn-primary" onclick="javascript:delChk('wmgIds', '${pageContext.request.contextPath}/wxmsg/delWxMsg');" value="删除"/>
-    	  </div>
+         
           <div class="widget-content nopadding">
           		
           	<f:form action="${pageContext.request.contextPath}/wxmsg/queryWcWeiMessage/${fuwuhao.fwhAppId}" onsubmit="return false;">
           	<f:hidden path="wmgId"/>
           	<f:hidden path="wmgAppId_Q"/>
+          	<div class="stat-boxes">
+	   			<input type="button" class="btn btn-primary" onclick="toAdd('${pageContext.request.contextPath}/wxmsg/toAddWxkeyWordMsg/${fuwuhao.fwhAppId}');" value="添加关键字消息"/> 
+	   			<input type="button" class="btn btn-primary" onclick="javascript:delChk('wmgIds', '${pageContext.request.contextPath}/wxmsg/delWxMsg');" value="删除"/>
+    	  	</div>
             <table class="table table-bordered ">
                 <tr>
                   <th class="small" width="2%"><input type="checkbox" onclick="chkall(this.checked, 'wmgIds');"/></th>
-                  <th class="small" width="20%">回复内容</th>
-                  <th class="small" width="7%">回复类型</th>
-                  <th class="small" width="7%">消息类型</th>
-                  <th class="small" width="5%">加密类型</th>
-                  <th class="small" width="5%">状态</th>
-                  <th class="small" width="20%">备注</th>
-                  <th class="small" width="7%">录入人</th>
-                  <th class="small" width="10%">录入时间</th>
-                  <th class="small" width="50%">操作</th>
+                  <th class="small" width="35%">关键字</th>
+                  <th class="small" width="45%">回复内容</th>
+                  <th class="small" width="10%">操作</th>
                 </tr>
                 <c:forEach items="${pageResult.resultList}" var="msg">
                 <tr>
                 	<td class="text-center small"><input type="checkbox"  name="wsaIds" value="${msg.WMG_ID}"/></td>
+                	<td class="text-center small">${msg.WKG_KEYWORDS}</td>
                   	<td class="text-center small"><a class="text-primary" href="javacript:alert('haha');">${msg.WMG_CONTENT}</a></td>
-                    <td class="text-center small">
-                    <c:if test="${msg.WMG_REPLY_TYPE=='1'}">关键字回复</c:if>
-                    <c:if test="${msg.WMG_REPLY_TYPE=='2'}">默认回复</c:if>
-                    <c:if test="${msg.WMG_REPLY_TYPE=='3'}">关注回复</c:if>
-                    </td>
-                    <td class="text-center small">
-                    <c:if test="${msg.WMG_MSG_TYPE=='1'}">图文信息</c:if>
-                    <c:if test="${msg.WMG_MSG_TYPE=='2'}">文字信息</c:if>
-                    <c:if test="${msg.WMG_MSG_TYPE=='3'}">图片信息</c:if>
-                    <c:if test="${msg.WMG_MSG_TYPE=='4'}">语音信息</c:if>
-                    <c:if test="${msg.WMG_MSG_TYPE=='5'}">视频信息</c:if>
-                    <c:if test="${msg.WMG_MSG_TYPE=='6'}">音乐信息</c:if>
-                    </td>
-                  	<td class="text-center small">
-                  	 <c:if test="${msg.WMG_AES_TYPE=='1'}">加密</c:if>
-                    <c:if test="${msg.WMG_AES_TYPE=='2'}">明文</c:if>
-                    <c:if test="${msg.WMG_AES_TYPE=='3'}">兼容</c:if>
-                  	</td>
-                  	<td class="text-center small">
-                  		<c:if test="${msg.WMG_STATUS=='1000'}">正常</c:if>
-                    	<c:if test="${msg.WMG_STATUS=='2000'}">异常</c:if>
-                  	</td>
-                  	<td class="text-center small">${msg.WMG_DESC}</td>
-                  	<td class="text-center small">${msg.WMG_REGISTOR}</td>
-                  	<td class="text-center small">${msg.WMG_REGISTDATE}</td>
                   	<td class="text-center small">
                   		<a href="#" onclick="javascript:toUpd('wmgId', ${msg.WMG_ID}, '${pageContext.request.contextPath}/wxmsg/toUpdWxMsg');" class="btn btn-primary btn-xs">修改</a>
                   	</td>
