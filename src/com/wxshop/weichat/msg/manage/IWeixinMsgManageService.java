@@ -16,5 +16,7 @@ public interface IWeixinMsgManageService {
 	public Page queryKeyWordMsgByAppId(WcWeiMessage msg);
 	public WcWeiMessage getSubScribeMsgByApp(String appId);
 	public void addWcKeywordMessage(WcWeiMessage msg,String[] keyWordArray,Integer adminId);
+	public String getKeyWordStringById(Integer wmgId);
+	public void delWcKeywordMessage(WcWeiMessage wxmsg_Q);
 	
 }

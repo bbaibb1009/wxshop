@@ -106,6 +106,9 @@ public class WeixinMessageService implements IWeixinMessageService {
         {  
             //在这里将发送过来的消息进行分类处理
         	//先根据appid 取出默认回复信息
+        	//先判断是不是关键字
+        	
+        	
         	respMessage = weimsgmanageservice.queryDefaultMsgByAppId(respMessage,content,appId);
         
         }  

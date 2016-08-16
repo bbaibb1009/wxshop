@@ -158,4 +158,49 @@ public class WeiMsgManageController
 		redirectAttributes.addFlashAttribute("success", "关键字回复消息添加成功!");
 		return "redirect:/wxmsg/queryWcWeiMessage/"+msg.getWmgAppId();
 	}
+	
+	
+	/**
+	 * @功能介绍 跳转至修改菜单
+	 * 
+	 * */
+	@RequestMapping(value ="/toUpdWxkeywordMsg",method = RequestMethod.POST)
+	public String toUpdWxkeywordMsg(WcWeiMessage wxmsg_Q, Model model) throws IllegalArgumentException, IllegalAccessException
+	{
+		WcWeiMessage wxmsg = weiMsgManageService.getWcWeiMessageById(wxmsg_Q.getWmgId());
+		StringUtil.copyProperties(wxmsg_Q, wxmsg);
+		String wmgKeyWord = weiMsgManageService.getKeyWordStringById(wxmsg_Q.getWmgId());
+		wxmsg.setWmgKeyWord(wmgKeyWord);
+		model.addAttribute("command", wxmsg);
+		return "/wxmsg/updWxKeywordMsg";
+	}
+	
+	
+	/**
+	 * @throws IOException 
+	 * @throws JsonGenerationException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 * @功能介绍 修改菜单保存
+	 * */
+	@RequestMapping(value="/updWxKeywordMsg",method = RequestMethod.POST)
+	public String updWxKeywordMsg(WcWeiMessage wxmsg_Q, HttpServletRequest request,HttpSession session, RedirectAttributes redirectAttributes) throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException 
+	{
+		String keyWord =  wxmsg_Q.getWmgKeyWord();
+		if(keyWord==null || keyWord.trim().length()==0)
+		{
+			redirectAttributes.addFlashAttribute("error", "关键字不能为空!");
+			return "redirect:/wxmsg/queryWcWeiMessage/"+wxmsg_Q.getWmgAppId_Q();
+		}
+		//删除对应的关键字关系
+		weiMsgManageService.delWcKeywordMessage(wxmsg_Q);
+		//添加完 然后再勾连关系
+		String[] keyWordArray = keyWord.split(",");
+		WcShopAdmin admin = (WcShopAdmin)session.getAttribute(SysConstant.ADMIN_INFO);
+		weiMsgManageService.addWcKeywordMessage(wxmsg_Q,keyWordArray,admin.getWsaId());
+		
+		weiMsgManageService.updWxMsg(wxmsg_Q);
+		redirectAttributes.addFlashAttribute("success", "回复消息修改成功!");
+		return "redirect:/wxmsg/queryWcWeiMessage/"+wxmsg_Q.getWmgAppId_Q();
+	}
 }
