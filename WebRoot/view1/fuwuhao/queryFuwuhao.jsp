@@ -45,6 +45,7 @@
 	          <div class="widget-content nopadding">
 	            <ul class=" recent-fuwuhao">
 	              <c:forEach items="${pageResult.resultList}" var="fuwuhao">	
+		              <%-- 
 		              <li>
 		                <div class="" style="padding-bottom: 20px;"> 
 		                	<input type="checkbox" name="fwhIds" style="float: left;margin-left:-30px;margin-top:-30px;"/>
@@ -54,12 +55,27 @@
 		                  	<p style="padding:15px;float:left;"><a href="#">${fuwuhao.FWH_DESC}</a> </p>
 		                </div>
 		                <div class="article-post" style="margin-top: -10px;padding-bottom:10px;">
-		                  <div class="fr"><a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> 
+		                  <div class="fr">
+		                  <a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> 
 		                  <a href="#" class="btn btn-success btn-mini">粉丝</a> 
-		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">消息</a></div>
+		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">消息</a>
+		                  </div>
+		                </div>
+		              </li>
+		              --%>
+		              <li>
+		                <div class="user-thumb"> <input type="checkbox" name="fwhIds" style="float: left;margin-left:-30px;margin-top:-30px;"/> ${fuwuhao.FWH_APP_NAME}<img width="40" height="40" alt="User" src="${pageContext.request.contextPath}/view1/img/demo/av1.jpg"> </div>
+		                <div class="article-post">
+		                  <div class="fr">
+		                  <a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> 
+		                  <a href="#" class="btn btn-success btn-mini">粉丝</a> 
+		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">消息</a>
+		                  </div>
+		                  <p><a href="#">${fuwuhao.FWH_DESC}</a> </p>
 		                </div>
 		              </li>
 	              </c:forEach>
+	               
 	            </ul>
 	          </div>
 	        </div>

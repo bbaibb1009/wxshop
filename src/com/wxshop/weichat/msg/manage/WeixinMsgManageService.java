@@ -39,14 +39,14 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
     		String msgType = msg.getWmgMsgType();
     		if(msgType.equals("2"))
     		{
-    			//log.error("***********************318行：是关键字且是文本信息***********************");
+    			log.error("***********************318行：是关键字且是文本信息***********************");
     			WcWeiTextMsgResp msgResp = new WcWeiTextMsgResp(respMessage);
     			msgResp.setContent(msg.getWmgContent());
     			return msgResp;
     		}
     		else if(msgType.equals("2"))
     		{
-    			//log.error("***********************318行：是关键字且是图文信息***********************");
+    			log.error("***********************318行：是关键字且是图文信息***********************");
     			//LzNewsMsgResp msgResp = new LzNewsMsgResp(respMessage);
     			WcWeiTextMsgResp msgResp = new WcWeiTextMsgResp(respMessage);
     			msgResp.setContent(msg.getWmgContent());
@@ -189,10 +189,13 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
 //	
 	public WcWeiMessage getKeyWordMsgByContent(String content,String appId)
 	{
+		
+		log.error("content:"+content);
+		log.error("appId:"+appId);
 		String sql = 
 			" select a.WKG_WMG_ID " +
 			" from WC_WEI_KEYWORD_MESSAGE a " +
-			" join WC_WEI_FUWUHAO b on a.WKG_WEC_ID = b.FWH_ID  " +
+			" join WC_WEI_FUWUHAO b on a.WKG_APP_ID = b.FWH_APP_ID  " +
 			" where b.FWH_APP_ID = ? and a.WKG_KEYWORDS = ? ";
 		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId,content});
 		if(list.size()>0)
@@ -294,10 +297,32 @@ public class WeixinMsgManageService implements IWeixinMsgManageService {
 		for(int i = 0;i<keyWordArray.length;i++)
 		{
 			String keyWord = keyWordArray[i];
-			paralist.add(new Object[]{msg.getWmgAppId(),keyWord,msg.getWmgId(),"1000","",adminId,DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss")});
+			
+			//先检查该关键字和ID的关联关系是否存在
+			String sql1 = new String("select count(*) from WC_WEI_KEYWORD_MESSAGE where WKG_KEYWORDS = ? and WKG_APP_ID = ? ");
+			int count = jdbcDao.queryForInt(sql1, new Object[]{keyWord,msg.getWmgAppId()});
+			if(count ==0)
+			{
+				paralist.add(new Object[]{msg.getWmgAppId(),keyWord,msg.getWmgId(),"1000","",adminId,DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss")});
+				
+			}
 		}
 		jdbcDao.batchUpdate(sql, paralist);
 		
+	}
+
+	public String getKeyWordStringById(Integer wmgId) {
+		// TODO Auto-generated method stub
+		String sql = new String(
+			" select Group_concat(WKG_KEYWORDS SEPARATOR ',') from WC_WEI_KEYWORD_MESSAGE a  where a.WKG_WMG_ID = ? ");
+		String keyWordString = jdbcDao.queryForString(sql,new Object[]{wmgId});
+		return keyWordString;
+	}
+
+	public void delWcKeywordMessage(WcWeiMessage wxmsgQ) {
+		// TODO Auto-generated method stub
+		String sql = new String(" delete from WC_WEI_KEYWORD_MESSAGE where WKG_WMG_ID = ? ");
+		jdbcDao.delete(sql, new Object[]{wxmsgQ.getWmgId()});
 	}
 	
 	

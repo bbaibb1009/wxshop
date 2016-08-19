@@ -90,6 +90,11 @@
   	</listener-class>
   </listener>
   
+  <!-- 防止内存泄露 -->  
+  <listener>  
+	<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
+  </listener>
+  
   <!-- session最长不活动时间 -->
   <session-config>
   	<session-timeout>60</session-timeout>

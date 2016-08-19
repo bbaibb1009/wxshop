@@ -82,7 +82,7 @@
                 	<td class="text-center small">${msg.WKG_KEYWORDS}</td>
                   	<td class="text-center small"><a class="text-primary" href="javacript:alert('haha');">${msg.WMG_CONTENT}</a></td>
                   	<td class="text-center small">
-                  		<a href="#" onclick="javascript:toUpd('wmgId', ${msg.WMG_ID}, '${pageContext.request.contextPath}/wxmsg/toUpdWxMsg');" class="btn btn-primary btn-xs">修改</a>
+                  		<a href="#" onclick="javascript:toUpd('wmgId', ${msg.WMG_ID}, '${pageContext.request.contextPath}/wxmsg/toUpdWxkeywordMsg');" class="btn btn-primary btn-xs">修改</a>
                   	</td>
                 </tr>
                 </c:forEach> 
