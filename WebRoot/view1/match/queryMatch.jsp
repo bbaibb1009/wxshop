@@ -24,35 +24,35 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">服务号查询</a></div>
+    <div id="breadcrumb"><a href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">赛事信息</a></div>
   </div>
   <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/fuwuhao/toAddFuwuhao'" value="配置一个新的服务号"/> 
-	   <input type="button" class="btn btn-danger" onclick="javascript:delChk('fwhIds', '${pageContext.request.contextPath}/fuwuhao/delFuwuhao');" value="服务号注销"/>
+	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/match/toAddMatch'" 			value="添加赛事"/> 
+	   <input type="button" class="btn btn-danger" 	onclick="javascript:delChk('fwhIds', '${pageContext.request.contextPath}/match/delMatch');" 	value="赛事作废"/>
     </div>
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/fuwuhao/queryFuwuhao" onsubmit="return false;">
-          	<f:hidden path="fwhId"/>
+          	<f:form action="${pageContext.request.contextPath}/match/queryMatch" onsubmit="return false;">
+          	<f:hidden path="wmaId"/>
 	        <div class="span6">
 	          <div class="widget-title"> <span class="icon"> <i class="icon-file"></i> </span>
-	            <h5>公众号</h5>
+	            <h5>赛事</h5>
 	          </div>
 	          <div class="widget-content nopadding">
 	            <ul class="recent-fuwuhao">
-	              <c:forEach items="${pageResult.resultList}" var="fuwuhao">	
+	              <c:forEach items="${pageResult.resultList}" var="match">	
 		              <li class="clearfix">
-		                <div><input type="checkbox" name="fwhIds"/><h3>${fuwuhao.FWH_APP_NAME}</h3></div>
-		                <div>${fuwuhao.FWH_DESC}</div>
+		                <div><input type="checkbox" name="wmaIds"/><h3>${match.WMA_NAME}</h3></div>
+		                <div>${match.WMA_GAME_PROJECT}</div>
 		                <div class="pull-right">
 		                  <div>
-		                  <a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> 
-		                  <a href="#" class="btn btn-success btn-mini">粉丝</a> 
-		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">消息</a>
+		                  <a href="javascript:toUpd('wmaId', ${fuwuhao.WMA_ID}, '${pageContext.request.contextPath}/match/toUpdMatch');" class="btn btn-primary btn-mini">修改</a> 
+		                  <a href="#" class="btn btn-success btn-mini" onclick="javascript:">项目</a> 
+		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">活动</a>
 		                  </div>
 
 		                </div>
@@ -92,7 +92,7 @@
 <script src="${pageContext.request.contextPath}/view1/js/jquery.dataTables.1.10.9.min.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/js/matrix.tables.js"></script> 
 <script src="${pageContext.request.contextPath}/view1/menu/js/menu.js" ></script>
-<script src="${pageContext.request.contextPath}/view1/fuwuhao/js/fuwuhao.js" ></script>
+<script src="${pageContext.request.contextPath}/view1/match/js/match.js" ></script>
 <jsp:include page="/view1/common/modal-dialog.jsp"></jsp:include>
 </body>
 </html>

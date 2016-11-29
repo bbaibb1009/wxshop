@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+*{ padding:0; margin:0}
+h3{ font-size:14px;}
+img{ border:none; padding:0; margin:0;} ul{ list-style:none;}
+.c{ clear:both;} textarea{ font-size:12px;}
+a { text-decoration:none;} a:hover{ text-decoration:underline; }
+body{ font-family: Arial, "宋体"; font-size:12px; background:url(../images/bg.jpg) repeat-x ; }
+.wrapper{ width:980px; margin:0 auto;}
+.header{ height:99px;  overflow:hidden; background:url(../images/hbg.jpg) repeat-x;}
+.func{ float:right; color:#666; padding-top:5px;}
+.func a{ color:#666;}
+#navMenu {DISPLAY: block;  OVERFLOW: hidden;  height:30px; line-height:30px;}
+#navMenu .onelink {}
+#navMenu LI {BACKGROUND-POSITION: 0px center; padding-right:1px; FLOAT: left; background:url(../images/gap.jpg) no-repeat right;   BACKGROUND-REPEAT: no-repeat; TEXT-ALIGN: center; height:30px;}
+#navMenu LI A {DISPLAY: block;  COLOR: #333;  text-align:center; width:115px; }
+#navMenu LI A:hover { TEXT-DECORATION: none; }
+#navMenu LI.hover A {}
+.dropMenu {MARGIN-TOP: -1px; Z-INDEX: 100;  VISIBILITY: hidden; PADDING-BOTTOM: 6px; MARGIN-LEFT: 0px; WIDTH: 115px;   POSITION: absolute; TOP: 0px; BACKGROUND-COLOR: #ccc;}
+.dropMenu LI {MARGIN-TOP: 2px; padding:0;MARGIN-BOTTOM: 4px}
+.dropMenu LI A {PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: 4px; WIDTH:100%; COLOR: #333; PADDING-TOP: 4px;TEXT-ALIGN: center}
+.dropMenu LI A:hover{ background-color:#333; color:#fff; text-decoration:none;}
+UNKNOWN {BORDER-TOP-STYLE: none}
+
+.hhtitle{ background:url(../images/hhtitle.jpg) no-repeat center center;}
+.hatitle{ background:url(../images/hatitle.jpg) no-repeat center center;}
+.hntitle{ background:url(../images/hntitle.jpg) no-repeat center center;}
+.hptitle{ background:url(../images/hptitle.jpg) no-repeat center center;}
+.hjtitle{ background:url(../images/hjtitle.jpg) no-repeat center center;}
+.hctitle{ background:url(../images/hctitle.jpg) no-repeat center center;}
+.sear{ float:right; padding-top:2px; }
+.seartext{ background:url(../images/seartext.jpg) no-repeat; width:120px; height:23px; padding-left:28px; line-height:23px; border:none; color:#666;}
+.searbutton{ background:url(../images/searbutton.jpg) no-repeat; width:45px; height:23px; border:none;}
+
+.banner{ background:url(../images/bgap.jpg) repeat-x; padding-bottom:9px;}
+.tdao{ background:url(../images/boxl.jpg) no-repeat; width:168px; height:242px; float:left;}
+.hnews{ background:url(../images/boxc.jpg) no-repeat; width:525px; height:242px; float:left; margin-left:9px;}
+.hc{ background:url(../images/boxr.jpg) no-repeat; width:268px; height:242px; float:right;}
+.hlist{ line-height:28px; padding-top:35px; padding-left:15px;}
+.hlist li{ background:url(../images/arrow.jpg) no-repeat 0 12px; padding-left:15px;}
+.hlist li a{ color:#444;}
+.htitle{ padding-top:15px; padding-bottom:25px; padding-right:15px;}
+.htitle a{ float:right;}
+.hnlist { line-height:27px; float:left; padding-right:15px; padding-left:20px;}
+.hnlist li{ background:url(../images/icon.jpg) no-repeat 0 9px; padding-left:15px;}
+.hnlist li a{ color:#666;}
+.hpic{ width:224px; height:137px; float:left; border: 1px solid #eee; margin-left:15px;}
+.hlogin{ padding:15px 15px; clear:both;}
+.button{ border:none; text-align:center; color:#fff; background:url(../images/button.jpg) no-repeat; width:39px; height:23px; line-height:23px;}
+.mytext{ background:url(../images/intext.jpg) no-repeat; width:114px; height:23px; border:none;}
+
+.sort{ width:222px; background:url(../images/sortbg.jpg) repeat-y; overflow:hidden; float:left;}
+.smain{ background:url(../images/ibg.jpg) repeat-x;}
+.sbanner{ text-align:center;}
+.sortlist{  padding:0 18px; min-height:200px; height:auto !important; height:200px; overflow:visible;}
+.sortlist li{   line-height:28px; border-bottom:1px solid #d9d9d9;}
+.sortlist li a{ color:#333; display:block; background:url(../images/sicon.jpg) no-repeat 5px center; padding-left:20px;}
+.sortlist li a:hover{ color:#b60005; }
+.sortlist ul li a{ background:none;}
+.main_l{padding:0 18px; min-height:200px; height:auto !important; height:200px; overflow:visible;}
+.m1{line-height:28px; border-bottom:1px solid #d9d9d9;}
+.m1 a{color:#333; display:block; background:url(../images/sicon.jpg) no-repeat 5px center; padding-left:20px;}
+.m1 a:hover{color:#b60005;}
+.m2{line-height:28px; border-bottom:1px solid #d9d9d9;}
+.m2 a{color:#333; display:block; padding-left:20px;}
+.m2 a:hover{color:#b60005;}
+
+.right{ width:731px; padding:0 10px; border:1px solid #d2d2d2; float:right; border-top:none; overflow:hidden;}
+.guide{ background:#f2f2f2; line-height:22px; text-align:right; padding:0 10px;color:#666;}
+.guide a{ color:#666;} 
+.content{ min-height:350px; height:auto !important; height:350px; overflow:visible; line-height:22px; color:#333; }
+/*新闻*/
+.news{ padding:0 10px;}
+.news li{ line-height:28px; color:#666; background:url(../images/jicon.gif) no-repeat 0 10px; padding-left:15px; border-bottom:1px dotted #e4e5e6;}
+.news li span{ float:right;}
+.news li a{ color:#333;}
+.ntitle{ text-align:center; font-size:14px; color:#4D3D0A;}
+.news_other{ border-bottom:1px dotted #e4e5e6; text-align:center; line-height:25px; font-size:12px; color:#666; margin-bottom:10px;}
+.netitle{ text-align:center; line-height:30px; font-size:16px; color:#545454;}
+.setitle{ text-align:center; line-height:20px; font-size:13px; color:#666; font-weight:normal; font-weight:bold;}
+/*招聘*/
+.wtable{ width:660px; margin:0 auto;  border:1px solid #f6f6f6;border-top:1px solid #f10000;}
+.tbg td,.tbg th{ background:#f6f6f6; border-right:1px solid #fff;  }
+.wtable tr th{color:#999; font-weight:normal;width:80px;padding:5px;}
+.wtable tr td{ padding:5px; color:#666;}
+.ypgw{ background:url(../images/jbutton.jpg) no-repeat; width:88px; height:20px; cursor:pointer; display:block; float:right;}
+/*产品*/
+.prolist li{ padding:10px 9px; float:left;}
+.prolist li a{ display:block; width:161px; height:139px; border:1px solid #b5b5b5;}
+.prolist li p{ background:url(../images/ptbg.jpg) repeat-x; width:163px; height:23px; line-height:23px; text-align:center; overflow:hidden; color:#333;}
+
+.footer{  line-height:30px; color:#666;  clear:both; padding-left:15px; padding-top:10px;}
+.footer span{ float:right; padding-right:20px;}
