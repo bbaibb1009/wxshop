@@ -1,0 +1,63 @@
+.bandeauDiaporama {
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    height: 367px;
+    position: relative;
+    margin: 0 auto;
+}
+.bandeauDiaporama p{
+    margin: 0px;
+    padding: 0px;
+}
+.bandeauDiaporama li {
+    list-style: none;
+}
+.bandeauDiaporama li a {
+    position: absolute;
+    left: 50%;
+    margin-left: -960px;
+
+}
+
+
+
+.bandeauDiaporama .diapo{
+    width:100%;
+    height:100%;
+}
+.bandeauDiaporama .diapo .img{
+    width:100%;
+    height:100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+.bandeauDiaporama .diapo .img a{
+    width:100%;
+    height:100%;
+    display: block;
+}
+
+#slider_buttons {
+    position: absolute;
+    z-index: 100;
+    left: 50%;
+    top: 340px;
+    width: 496px;
+}
+#slider_buttons div {
+    float: right;
+}
+#slider_buttons a {
+    background: url(../images/round.gif);
+    display: block;
+    float: left;
+    width: 11px;
+    height: 11px;
+    margin: 0 0 0 8px;
+    text-indent: -3000px;
+    cursor: pointer;
+}
+#slider_buttons a:hover, #slider_buttons a:active, #slider_buttons a.active {
+    background: url(../images/roundon.gif);
+} 
