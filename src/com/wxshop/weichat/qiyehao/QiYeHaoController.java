@@ -56,7 +56,7 @@ public class QiYeHaoController {
 	private static Logger log 		= Logger.getLogger(QiYeHaoController.class);
 	
 	/***
-	 * 回调链接:企业号回调地址验证
+	 * 回调链接:企业号所开发的应用的回调地址验证
 	 * upd_author:	yChoco
 	 * upd_time:	2015-09-29
 	 * upd_history: [150929][yChoco][创建该应用]

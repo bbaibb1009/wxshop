@@ -1,6 +1,7 @@
 package com.wxshop.weichat.fuwuhao;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.wxshop.sys.WcShopAdmin;
+import com.wxshop.util.DateUtil;
 import com.wxshop.util.StringUtil;
 import com.wxshop.util.SysConstant;
 
@@ -63,6 +65,26 @@ public class FuwuhaoController
 	{
 		fuwuhaoService.updFuwuhao(fuwuhao_Q);
 		redirectAttributes.addFlashAttribute("success", "公众号修改成功!");
+		return "redirect:/fuwuhao/queryFuwuhao";
+	}
+	
+	
+	
+	@RequestMapping("/toAddFuwuhao")
+	public String toAddFuwuhao(@ModelAttribute("command") WcWeiFuwuhao fuwuhao, Model model)
+	{
+		return "/fuwuhao/addFuwuhao";
+	}
+	
+	@RequestMapping(value="/addFuwuhao",method = RequestMethod.POST)
+	public String addFuwuhao(WcWeiFuwuhao fuwuhao_Q, HttpServletRequest request,HttpSession session, RedirectAttributes redirectAttributes)throws IllegalArgumentException, IllegalAccessException, JsonParseException, JsonMappingException, JsonGenerationException, IOException 
+	{
+		WcShopAdmin admin = (WcShopAdmin)session.getAttribute(SysConstant.ADMIN_INFO);
+		fuwuhao_Q.setFwhStatus("1000");
+		fuwuhao_Q.setFwhRegistdate(DateUtil.parseString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+		fuwuhao_Q.setFwhRegistor(admin.getWsaId());
+		fuwuhaoService.addFuWuhao(fuwuhao_Q);
+		redirectAttributes.addFlashAttribute("success", "公众号添加成功!");
 		return "redirect:/fuwuhao/queryFuwuhao";
 	}
 	

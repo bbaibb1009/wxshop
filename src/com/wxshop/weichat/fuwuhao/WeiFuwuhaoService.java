@@ -64,6 +64,13 @@ public class WeiFuwuhaoService implements IWeiFuwuhaoService {
 			return null;
 		}
 	}
+
+	public void addFuWuhao(WcWeiFuwuhao fuwuhaoQ) {
+		// TODO Auto-generated method stub
+		hibernateDao.add(fuwuhaoQ);
+	}
+	
+	
 	
 	
 
