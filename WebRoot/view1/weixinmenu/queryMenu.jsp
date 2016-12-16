@@ -24,7 +24,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"><a href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">服务号查询</a></div>
+    <div id="breadcrumb"><a href="${pageContext.request.contextPath}/admin/adminLoginSuccess" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>首页</a> <a href="#" class="current">自定义菜单查询</a></div>
   </div>
   <jsp:include page="/view1/common/alertMsg.jsp"></jsp:include>
   <div class="container-fluid">
@@ -50,11 +50,7 @@
 		                <div>${fuwuhao.FWH_DESC}</div>
 		                <div class="pull-right">
 		                  <div>
-		                  <a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a>
-		                  <a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/weixinmenu/toUpdWeiXinMenu');" class="btn btn-primary btn-mini">菜单</a>
-		                  
-		                  
-		                   
+		                  <a href="javascript:toUpd('fwhId', ${fuwuhao.FWH_ID}, '${pageContext.request.contextPath}/fuwuhao/toUpdFuwuhao');" class="btn btn-primary btn-mini">修改</a> 
 		                  <a href="#" class="btn btn-success btn-mini">粉丝</a> 
 		                  <a href="#" onclick="javascript:toReplyMsg('${fuwuhao.FWH_APP_ID}')" class="btn btn-danger btn-mini">消息</a>
 		                  </div>

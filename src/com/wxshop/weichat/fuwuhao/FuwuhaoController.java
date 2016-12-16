@@ -65,4 +65,6 @@ public class FuwuhaoController
 		redirectAttributes.addFlashAttribute("success", "公众号修改成功!");
 		return "redirect:/fuwuhao/queryFuwuhao";
 	}
+	
+	
 }

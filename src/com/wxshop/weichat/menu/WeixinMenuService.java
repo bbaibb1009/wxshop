@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oilchem.spring.common.dao.IHibernateDao;
-import com.oilchem.spring.common.dao.IJdbcDao;
-import com.oilchem.spring.weixin.pojo.LzWeiMenu;
-import com.oilchem.util.Page;
-import com.oilchem.weixin.http.HttpUtil;
+import cn.pudding.weichat.http.HttpUtil;
+
+import com.wxshop.common.dao.IHibernateDao;
+import com.wxshop.common.dao.IJdbcDao;
+import com.wxshop.util.Page;
 @Service
 @Transactional
 public class WeixinMenuService implements IWeixinMenuService {
@@ -30,10 +30,10 @@ public class WeixinMenuService implements IWeixinMenuService {
     public static String menu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";  
 	private static Logger log = Logger.getLogger(WeixinMenuService.class);
 	
-	public Page queryMenu(LzWeiMenu menu) {
+	public Page queryMenu(WcWeiMenu menu) {
 		// TODO 远程获取菜单信息
-		String sql = "select WMU_ID,WMU_APP_ID,WMU_JSON,WMU_DESC,WMU_STATUS ,WMU_REGISTOR_DATE from LZ_WEI_MENU ";
-		String sqlCnt = " select count(*) from LZ_WEI_MENU ";
+		String sql = "select WMU_ID,WMU_APP_ID,WMU_JSON,WMU_DESC,WMU_STATUS ,WMU_REGISTOR_DATE from WC_WEI_MENU ";
+		String sqlCnt = " select count(*) from WC_WEI_MENU ";
 		List<Object> paraList = new ArrayList<Object>();
 	
 		Page page = new Page(sql.toString(),sqlCnt.toString(),menu.getCurrentPage(),menu.getPageSize(),paraList.toArray());
@@ -41,7 +41,7 @@ public class WeixinMenuService implements IWeixinMenuService {
 		return page;
 	}
 
-	public int addMenu(LzWeiMenu menu, String accessToken) {
+	public int addMenu(WcWeiMenu menu, String accessToken) {
 		// TODO Auto-generated method stub
 		int result = 0;  
         // 拼装创建菜单的url  
@@ -56,7 +56,7 @@ public class WeixinMenuService implements IWeixinMenuService {
             }  
             else
             {
-            	addLzWeiMenu(menu);
+            	addWcWeiMenu(menu);
             }
         }  
         return result;  
@@ -64,14 +64,14 @@ public class WeixinMenuService implements IWeixinMenuService {
 	
 	
 	
-	public LzWeiMenu getMenuById(Integer wmuId) {
+	public WcWeiMenu getMenuById(Integer wmuId) {
 		// TODO Auto-generated method stub
-		return hibernateDao.get(LzWeiMenu.class, wmuId);
+		return hibernateDao.get(WcWeiMenu.class, wmuId);
 	}
 
-	public void addLzWeiMenu(LzWeiMenu menu)
+	public void addWcWeiMenu(WcWeiMenu menu)
 	{
-		String sql = "select count(*) from LZ_WEI_MENU menu where menu.WMU_APP_ID = ? ";
+		String sql = "select count(*) from WC_WEI_MENU menu where menu.WMU_APP_ID = ? ";
 		int num = jdbcDao.queryForInt(sql,new Object[]{menu.getWmuAppId()});
 		if(num>0 && menu.getWmuId()!=null)
 		{
@@ -83,14 +83,14 @@ public class WeixinMenuService implements IWeixinMenuService {
 		}
 	}
 	
-	public LzWeiMenu getMenuByAppId(String appId)
+	public WcWeiMenu getMenuByAppId(String appId)
 	{
-		String sql = " select menu.WMU_ID,menu.WMU_APP_ID,menu.WMU_JSON,menu.WMU_DESC,menu.WMU_STATUS  from LZ_WEI_MENU menu where menu.WMU_APP_ID = ? ";
+		String sql = " select menu.WMU_ID,menu.WMU_APP_ID,menu.WMU_JSON,menu.WMU_DESC,menu.WMU_STATUS  from WC_WEI_MENU menu where menu.WMU_APP_ID = ? ";
 		List<Map<String,Object>> list = jdbcDao.queryForList(sql, new Object[]{appId});
 		if(list.size()>0)
 		{
 			Map<String,Object> map = list.get(0);
-			LzWeiMenu menu = new LzWeiMenu();
+			WcWeiMenu menu = new WcWeiMenu();
 			menu.setWmuId((Integer)map.get("WMU_ID"));
 			menu.setWmuAppId((String)map.get("WMU_APP_ID"));
 			menu.setWmuJson((String)map.get("WMU_JSON"));

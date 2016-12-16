@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,7 +33,7 @@ public class WeixinMenuController {
 	public String queryMenu(@ModelAttribute("command") WcWeiMenu menu,Model model)
 	{
 		model.addAttribute(SysConstant.PAGE_RESULT, weixinMenuService.queryMenu(menu));
-		return "/weixin/queryMenu";
+		return "/weixinmenu/queryMenu";
 	}
 	
 	@RequestMapping(value = "/toAddMenu")
@@ -73,6 +72,7 @@ public class WeixinMenuController {
 		String  appId_curent = menu.getWmuAppId();
 		String  appSecret_current = menu.getWmuAppSecret();
 		String 	jsonMenu = menu.getWmuJson();
+		
 		AccessToken at = AccessTokenUtil.getAccessToken(appId_curent,appSecret_current);  
 	    if (null != at) {  
 	        // 调用接口创建菜单  
@@ -104,11 +104,11 @@ public class WeixinMenuController {
 		return "/weixin/updMenu";
 	} 
 	
-	@RequestMapping("/toUpdWeiXinMenu/{appId}")
-	public String toUpdWeiXinMenu(@ModelAttribute("command") WcWeiFuwuhao fuwuhao,@PathVariable String appId,Model model) 
+	@RequestMapping(value = "/toUpdWeiXinMenu",method = RequestMethod.POST)
+	public String toUpdWeiXinMenu(WcWeiFuwuhao fuwuhao_Q, Model model) 
 	{
 		
-		fuwuhao = weiFuwuhaoservice.getWeiFwhByAppId(appId);
+		WcWeiFuwuhao fuwuhao = weiFuwuhaoservice.getFuwuhaoById(fuwuhao_Q.getFwhId());
 		WcWeiMenu menu = weixinMenuService.getMenuByAppId(fuwuhao.getFwhAppId());
 		
 		if(menu!=null)
@@ -117,16 +117,17 @@ public class WeixinMenuController {
 			menu.setWmuAppSecret(fuwuhao.getFwhAppSecret());
 			model.addAttribute("weiEnter", fuwuhao);
 			model.addAttribute("command", menu);
-			return "/weixin/updMenuByWeiEnter";
+			return "/weixinmenu/updMenuByWeiEnter";
 		}
 		else
 		{
 			menu = new WcWeiMenu();
 			menu.setWmuAppId(fuwuhao.getFwhAppId());
 			menu.setWmuWecId(fuwuhao.getFwhId());
+			menu.setWmuAppSecret(fuwuhao.getFwhAppSecret());
 			model.addAttribute("weiEnter", fuwuhao);
 			model.addAttribute("command", menu);
-			return "/weixin/addMenuByWeiEnter";
+			return "/weixinmenu/addMenuByWeiEnter";
 		}
 	}
 	
