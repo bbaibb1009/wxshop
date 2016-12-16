@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/uniform.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/jquery.gritter.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/weichat.css" >
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'>
 <script src="${pageContext.request.contextPath}/view1/js/jquery.min.js"></script> 
 <script type="text/javascript">
@@ -46,7 +47,10 @@
 	            <ul class="recent-fuwuhao">
 	              <c:forEach items="${pageResult.resultList}" var="fuwuhao">	
 		              <li class="clearfix">
-		                <div><input type="checkbox" name="fwhIds"/><h3>${fuwuhao.FWH_APP_NAME}</h3></div>
+		                <c:if test="${fuwuhao.FWH_ACCOUNT_TYPE==1}"><span class="icon_mp_kind subscribe"></span></c:if>
+		                <c:if test="${fuwuhao.FWH_ACCOUNT_TYPE==2}"><span class="icon_mp_kind service"></span></c:if>
+		                <c:if test="${fuwuhao.FWH_ACCOUNT_TYPE==3}"><span class="icon_mp_kind enterprise"></span></c:if>
+		                <h3>${fuwuhao.FWH_APP_NAME}</h3>
 		                <div>${fuwuhao.FWH_DESC}</div>
 		                <div class="pull-right">
 		                  <div>

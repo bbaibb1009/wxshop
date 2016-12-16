@@ -36,16 +36,10 @@
      <div class="span6">
       <div class="widget-box">
       	  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-             <h5>修改公众号</h5>
+             <h5>配置新的公众号</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/fuwuhao/updFuwuhao" cssClass="form-horizontal" onsubmit="return false;">
-          	<f:hidden path="fwhId"/>
-          	<f:hidden path="fwhRegistor"/>
-          	<f:hidden path="fwhRegistdate"/>
-           	<f:hidden path="fwhStatus"/>
- 			<f:hidden path="currentPage"/>
-  			<f:hidden path="pageSize"/>
+          	<f:form action="${pageContext.request.contextPath}/fuwuhao/addFuwuhao" cssClass="form-horizontal" onsubmit="return false;">
             <div class="form-group">
             	<label for="fwhAppName" class="col-lg-1 control-label">应用名称</label>
             	<div class="col-lg-3">
