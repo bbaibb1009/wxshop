@@ -27,4 +27,12 @@ public interface IShopAdminService {
 	public void updShopAdmin(WcShopAdmin admin)  throws JsonParseException, JsonMappingException, JsonGenerationException, IOException;
 	
 	public void addShopAdmin(WcShopAdmin admin);
+	
+	/**
+	 * 功能介绍:根据用户名获取认账系统中的账号,离职的、删除的，休假的，未审核的除外
+	 * 
+	 * @author yChoco
+	 * @upd_history [20151109][yChoco][将原来的离职 删除 休假 未审核都排除掉]
+	 * */
+	public WcShopAdmin queryAdminByUsername(String username);
 }

@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+
+
+.icon_mp_kind {
+	float:left;
+    display: block;
+    margin-right:30px;
+    height: 107px;
+
+    vertical-align: middle;
+    width: 107px;
+}
+
+
+
+
+.icon_mp_kind.service {
+    background: rgba(0, 0, 0, 0) url("../img/page_login_z324d6c.png") no-repeat scroll 0 -280px;
+}
+
+.icon_mp_kind.subscribe {
+    background: rgba(0, 0, 0, 0) url("../img/page_login_z324d6c.png") no-repeat scroll 0 -170px;
+}
+.icon_mp_kind.app {
+    background: rgba(0, 0, 0, 0) url("../img/page_login_z324d6c.png") no-repeat scroll 0 -681px;
+}
+.icon_mp_kind.enterprise {
+    background: rgba(0, 0, 0, 0) url("../img/page_login_z324d6c.png") no-repeat scroll 0 -390px;
+
+}

@@ -24,6 +24,9 @@ import com.wxshop.util.StringUtil;
 @Transactional
 public class ShopAdminService implements IShopAdminService {
 
+	
+
+
 	@Autowired
 	private IMemcachedService memcachedservice;
 
@@ -237,6 +240,15 @@ public class ShopAdminService implements IShopAdminService {
 		
 	}
 	
-	
+	public WcShopAdmin queryAdminByUsername(String username) {
+		WcShopAdmin result = null;
+		List<WcShopAdmin> list = hibernateDao.query("from WcShopAdmin where WsaUsername = ?", 
+			new Object[]{username});
+		if( list.size() > 0 )
+		{
+			result = list.get(0);
+		}
+		return result;
+	}
 	
 }
