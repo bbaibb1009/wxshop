@@ -45,6 +45,8 @@ public class WcShopAdmin implements java.io.Serializable {
 	private String randomStr;
 	private Integer wsaDept;
 	private String wsaDeptName;
+	private String wsaMobile;
+	
 	// Constructors
 
 	/** default constructor */
@@ -239,6 +241,16 @@ public class WcShopAdmin implements java.io.Serializable {
 
 	public void setWsaDept(Integer wsaDept) {
 		this.wsaDept = wsaDept;
+	}
+	
+	
+	@Column(name = "WSA_MOBILE", length = 20)
+	public String getWsaMobile() {
+		return wsaMobile;
+	}
+
+	public void setWsaMobile(String wsaMobile) {
+		this.wsaMobile = wsaMobile;
 	}
 
 	@Transient

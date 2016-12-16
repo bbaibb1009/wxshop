@@ -46,7 +46,7 @@ if(KeyWord<=1){alert("请输入关键字");return false;}
         </ul>
         </div><!--navMenu-->
         
-        <ul class="dropMenu" id="dropmenu1" style="top: 99px; left: 586px; clip: rect(0px, auto, 213.843px, 0px); visibility: hidden;">  
+        <ul class="dropMenu" id="dropmenu1">  
 			 
                       <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=8&amp;CateID=8&amp;CurrCateID=8">董事长致辞</a></li>                                                                  <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=12&amp;CateID=12&amp;CurrCateID=12">公司简介</a></li>                                                                  <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=10&amp;CateID=10&amp;CurrCateID=10">组织结构</a></li>                                                                  <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=9&amp;CateID=9&amp;CurrCateID=9">企业文化</a></li>                                                                  <li><a href="http://www.shashang.net/honor.aspx?BaseinfoCateid=11&amp;CateID=11&amp;CurrCateID=11">荣誉资质</a></li>                                                                  <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=27&amp;CateID=27&amp;CurrCateID=27">品牌合作</a></li>                                                                  <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=28&amp;CateID=28&amp;CurrCateID=28">视频</a></li>                                            
 
@@ -81,57 +81,25 @@ if(KeyWord<=1){alert("请输入关键字");return false;}
  
 <div class="smain">
     <div class="sbanner">
-    <img src="/view/fxq1/images/abanner.jpg" width="1000" height="240"></div><!--banner-->
+    <img src="/view/fxq1/images/nbanner.jpg" width="1000" height="240"></div><!--banner-->
   <div class="wrapper" style="padding:15px 0;">
     <div class="sort">
-    	<h3><img src="/view/fxq1/images/natitle.jpg" width="222" height="61"></h3>
+    	<h3><img src="/view/fxq1/images/nntitle.jpg" width="222" height="61"></h3>
         <ul class="sortlist" id="leftmenu">
-                     
-                      <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=8&amp;CateID=8&amp;CurrCateID=8">董事长致辞</a></li>                      <ul id="divCate8" style="display:none; padding:0;">                                              </ul>                                            <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=12&amp;CateID=12&amp;CurrCateID=12">公司简介</a></li>                      <ul id="divCate12" style="display:none; padding:0;">                                              </ul>                                            <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=10&amp;CateID=10&amp;CurrCateID=10">组织结构</a></li>                      <ul id="divCate10" style="display:none; padding:0;">                                              </ul>                                            <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=9&amp;CateID=9&amp;CurrCateID=9">企业文化</a></li>                      <ul id="divCate9" style="display:none; padding:0;">                        
-                        <li style="background:none; _padding:0;*+padding:0;"><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=32&amp;CateID=32&amp;CurrCateID=9" title="愿景规划">愿景规划</a></li>                                                <li style="background:none; _padding:0;*+padding:0;"><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=33&amp;CateID=33&amp;CurrCateID=9" title="企业精神">企业精神</a></li>                                                <li style="background:none; _padding:0;*+padding:0;"><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=34&amp;CateID=34&amp;CurrCateID=9" title="公司标志">公司标志</a></li>                                              </ul>                                            <li><a href="http://www.shashang.net/honor.aspx?BaseinfoCateid=11&amp;CateID=11&amp;CurrCateID=11">荣誉资质</a></li>                      <ul id="divCate11" style="display:none; padding:0;">                                              </ul>                                            <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=27&amp;CateID=27&amp;CurrCateID=27">品牌合作</a></li>                      <ul id="divCate27" style="display:none; padding:0;">                                              </ul>                                            <li><a href="http://www.shashang.net/about.aspx?BaseinfoCateid=28&amp;CateID=28&amp;CurrCateID=28">视频</a></li>                      <ul id="divCate28" style="display:none; padding:0;">                                              </ul>                      
-
+                      
+<li><a href="http://www.shashang.net/news.aspx?newsCateID=18&amp;CateID=18">公司新闻</a></li><li><a href="http://www.shashang.net/news.aspx?newsCateID=19&amp;CateID=19">专题报道</a></li><li><a href="http://www.shashang.net/news.aspx?newsCateID=20&amp;CateID=20">媒体资料</a></li><li><a href="http://www.shashang.net/news.aspx?newsCateID=29&amp;CateID=29">视频</a></li>
+  
       </ul>
-      <script language="javascript" type="text/javascript">
-    var objCurrCate = "";
-    function ShowCate(id)
-    {
-        if(objCurrCate != "")
-        {
-            document.getElementById("divCate" + objCurrCate).style.display = "none";
-        }
-        document.getElementById("divCate" + id).style.display = "block";
-        objCurrCate = id;
-    }
-    objCurrCate =  + "";
-    if(objCurrCate != "")
-    {
-        try
-        {
-            document.getElementById("divCate" + objCurrCate).style.display = "block";
-			
-        }
-        catch(e)
-        {
-            objCurrCate="";
-        }
-    }
-</script>
+      
         <p><img src="/view/fxq1/images/phone.jpg" width="222" height="138"></p>
     </div>
     <div class="right">
     	<h3 style="padding-bottom:8px;"><img src="/view/fxq1/images/zs.jpg" width="731" height="19"></h3>
-        <div class="guide"><a href="http://www.shashang.net/index.aspx">首页</a>&gt;<a href="http://www.shashang.net/about.aspx">关于沙头角</a></div>
+        <div class="guide"><a href="http://www.shashang.net/index.aspx">首页</a>&gt;<a href="http://www.shashang.net/news.aspx">新闻中心</a></div>
         <div class="content" style="padding:15px;">
-        	
-           <span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-沙商贸公司已经走过了三十余年的风雨历程。几代沙商贸人发扬“开拓、敬业、诚信、实效”的企业精神，自主经营、艰苦创业、不断创新，使沙商贸一步步发展成
-为以商业贸易为主、开展多种经营的综合型企业。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;面对新的机遇和挑战，
-沙商贸公司以坚定的信心开始新的改革与发展。以对市场的深刻理解和对客户的特殊关注为基础，按照“稳定、挖潜、拓展、提高、增效”的工作方针，沙商贸公司
-正努力通过一系列的变革和资源整合，精心打造以商贸业务为核心的各大业务板块，努力拓展经营，精心构筑为客户服务的平台。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-“成为广大客户通向美好生活的桥梁”是沙商贸公司发展的愿景，是我们矢志不渝、努力迈进的方向。在这一目标下，沙商贸公司将致力于培养高素质的管理层和员
-工队伍，追求公司的科学经营和规范管理；积极参与市场竞争，面向国际、国内两个市场，有效利用多方面的资源，为客户、为社会提供高品质的商品和服务，实现
-公司的持续、健康、协调、快速发展。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;衷心地感谢您与我们一道，共同创造一个生机勃勃、和谐美好的未来！<br></span>     
-  
+        	  
+         <h4 class="netitle"> 公司举办法律知识讲座</h4>          <h4 class="setitle"><span class="date"> 发布时间:2016-11-16</span>&nbsp;&nbsp;&nbsp;作者：公司办公室 </h4> <div style="padding:0 20px; padding-top:10px;line-height:22px; color:#666;"><p>&nbsp; &nbsp; &nbsp; &nbsp; 公司于11月11日在七楼职工之家举办法律知识讲座，邀请公司法律顾问吴威律师、刘涓律师前来授课，通过本次活动提高了员工的法律风险防范意识，80多人参加了讲座。</p><p style="text-align: center;"><img src="news_detail_files/201611161-14421549047.jpg" alt=""><br></p><p style="text-align: center;"><br></p><p style="text-align: center;"><img src="news_detail_files/20161116-14420872560.jpg" alt=""><br></p></div>
+     
         </div>
     </div><!--right-->
 
