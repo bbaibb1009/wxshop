@@ -59,9 +59,10 @@
              <h5>修改团队</h5>
           </div>
           <div class="widget-content ">
-          	<f:form action="${pageContext.request.contextPath}/shop/dept/updDept" cssClass="form-horizontal" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/dept/updShopDept" cssClass="form-horizontal" onsubmit="return false;">
           	<f:hidden path="wdpId"/>
-          	
+          	<f:hidden path="wdpRegistor"/>
+          	<f:hidden path="wdpRegistdate"/>
             <div class="form-group">
             	<label for="wdpName" class="col-lg-1 control-label">名称</label>
             	<div class="col-lg-3">

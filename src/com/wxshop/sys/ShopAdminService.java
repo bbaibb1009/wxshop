@@ -140,6 +140,8 @@ public class ShopAdminService implements IShopAdminService {
 		addShopAdminOther(admin);
 		// 更新缓存 管理员可能由有部门修改为无部门，此时也需更新缓存
 		hibernateDao.flush();
+		memcachedservice.setDeptAll();
+		memcachedservice.setShopAdminNameAll();
 	
 	}
 	
@@ -200,8 +202,8 @@ public class ShopAdminService implements IShopAdminService {
 		
 		// 更新缓存 管理员可能由有部门修改为无部门，此时也需更新缓存
 		hibernateDao.flush();
-		//memcachedservice.setDeptAll();
-		//memcachedservice.setAdminNameAll();
+		memcachedservice.setDeptAll();
+		memcachedservice.setShopAdminNameAll();
 	}
 	
 	

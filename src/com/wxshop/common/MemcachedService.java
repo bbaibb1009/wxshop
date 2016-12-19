@@ -42,9 +42,9 @@ public class MemcachedService implements IMemcachedService
 			log.error("memcached清空失败");
 		}
 		setShopMenuAll();
-		log.info("微信商家管理-系统菜单存入memcached成功");
+		log.info("系统菜单存入memcached成功");
 		setShopAdminNameAll();
-		log.info("微信商家管理员姓名存入memcached成功");
+		log.info("姓名存入memcached成功");
 		setDeptAll() ;
 		log.info("部门存入memcached成功");
 		setSingleDeptAll();
@@ -183,7 +183,8 @@ public class MemcachedService implements IMemcachedService
 	public List<Map<String, Object>> getSingleDeptAll() 
 	{
 		List<Map<String, Object>> singleDeptList = (List<Map<String, Object>>) memCachedClient.get(SysConstant.SINGLE_DEPT_ALL);
-		if (singleDeptList == null) {
+		if (singleDeptList == null) 
+		{
 			singleDeptList = deptService.querySingleDeptToCache();
 			setSingleDeptAll(singleDeptList);
 		}
