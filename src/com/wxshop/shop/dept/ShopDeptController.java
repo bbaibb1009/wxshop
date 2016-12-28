@@ -88,6 +88,9 @@ public class ShopDeptController
 	{
 		WcShopDept dept = deptService.getShopDeptById(dept_Q.getWdpId());
 		StringUtil.copyProperties(dept_Q, dept);
+		
+		WcShopAdmin admin = adminService.getShopAdminById(dept.getWdpAdminId());
+		dept.setWdpAdminName(admin.getWsaName());
 		model.addAttribute("command", dept);
 		return "/dept/updShopDept";
 	} 

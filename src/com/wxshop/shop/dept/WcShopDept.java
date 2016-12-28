@@ -18,6 +18,10 @@ public class WcShopDept implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer wdpId;
 	private String wdpName;
 	private Integer wdpLevel;

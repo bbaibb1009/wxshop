@@ -60,7 +60,11 @@
 		<c:if test="${menu1.WSM_ISPARENT == '1'}">
 		<c:set var="menu1Class" value="submenu"></c:set>
 		</c:if>
-		<li class="${menu1Class}">
+		<c:set var="menu1Display" value=""></c:set>
+		<c:if test="${menu1.WSM_ID == adminMenuId1Cust}">
+		<c:set var="menu1Display" value="open"></c:set>
+		</c:if>
+		<li class="${menu1Class} ${menu1Display}"  id="${menu1.WSM_ID}">
 			<a href="#" onclick=""><i class="icon icon-home"></i><span> ${menu1.WSM_NAME}</span></a>
 			<c:if test="${menu1.WSM_ISPARENT == '1'}">
 				<ul id="${menu1.WSM_ID}">
@@ -70,13 +74,22 @@
 							<c:if test="${menu2.WSM_ISPARENT == '1'}">
 							<c:set var="menu2Class" value="submenu"></c:set>
 							</c:if>
-							<li class="${menu2Class}">
-								<a href="javascript: goUrl(${menu2.WSM_ID},'${menu2.WSM_URL }');">${menu2.WSM_NAME}</a>
+							
+							<c:set var="menu2Display" value=""></c:set>
+							<c:if test="${menu2.WSM_ID == adminMenuId2Cust}">
+							<c:set var="menu2Display" value="active"></c:set>
+							</c:if>
+							<li class="${menu2Class} ${menu2Display}" id="${menu2.WSM_ID} ">
+								<a href="javascript: goUrl(${menu2.WSM_ID},'${menu2.WSM_URL}');">${menu2.WSM_NAME}</a>
 								<c:if test="${menu2.WSM_ISPARENT == '1'}">
 									<ul id="${menu2.WSM_ID}">
 										<c:forEach items="${adminMenusLevel3Cust}" var="menu3">
 										<c:if test="${menu3.WSM_PARENT_ID==menu2.WSM_ID}">
-											<li>
+											<c:set var="menu3Display" value=""></c:set>
+											<c:if test="${menu3.WSM_ID == adminMenuId3Cust}">
+											<c:set var="menu3Display" value="active"></c:set>
+											</c:if>
+											<li id="${menu3.WSM_ID}" class="${menu3Display}">
 												<a href="${pageContext.request.contextPath}${menu3.WSM_URL}">${menu3.WSM_NAME}</a>
 											</li>
 										</c:if>

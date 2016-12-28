@@ -1,15 +1,15 @@
-ï»¿
-// jsä¸­åˆ é™¤å­—ç¬¦ä¸²ä¸¤è¾¹çš„ç©ºæ ¼
+
+// jsÖĞÉ¾³ı×Ö·û´®Á½±ßµÄ¿Õ¸ñ
 String.prototype.trim = function()
 {
 	return this.replace(/(^\s*)|(\s*$)/g, "");
 }
-// åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦æ˜¯æ•°å­—
+// ÅĞ¶Ï×Ö·û´®ÊÇ·ñÊÇÊı×Ö
 String.prototype.isNumber = function()
 {
 	return (this.search(/^\d+$/g) == 0);
 }
-// åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦æ˜¯æµ®ç‚¹ç±»å‹
+// ÅĞ¶Ï×Ö·û´®ÊÇ·ñÊÇ¸¡µãÀàĞÍ
 String.prototype.isFloat = function()
 {
 	var patrn = /^-?\d+\.{0,1}\d{0,}$/;
@@ -89,17 +89,32 @@ function showAdminMenu3(menuId1, menuId2)
 function goUrl(adminMenuId2, url)
 {
 	var adminMenuId1 = -1;
-	
-	var adminLeft = $("#sidebar").children().filter("li"); 
+	//var adminMenuId2 = -1;
+	var adminLeft = $("#sidebar").children("ul").children();
 	for( var i = 0; i < adminLeft.length; i++ )
 	{
-		if( adminLeft[i].style.display == "" )
+	
+		if( $(adminLeft[i]).hasClass("open"))
 		{
 			adminMenuId1 = adminLeft[i].id;
 		}
 	}
 	
+	
+//	var ulAry = document.getElementById(adminMenuId1).getElementsByTagName("li");
+//	for( var i = 0; i < ulAry.length; i++ )
+//	{
+//		
+//		if( $(ulAry[i]).hasClass("active"))
+//		{
+//			adminMenuId2 = ulAry[i].id;
+//			alert(ulAry[i].id);
+//		}
+//	}
+	
+	//alert(path + "/admin/goUrl/" + adminMenuId1 + "/" + adminMenuId2 + "/" + url.replace(/\//g, "|"));
 	window.location.href = path + "/admin/goUrl/" + adminMenuId1 + "/" + adminMenuId2 + "/" + url.replace(/\//g, "|");
+		
 }
 
 function divAutoHeight()
@@ -115,7 +130,7 @@ function divAutoHeight()
 	$("#adminRight").css("min-height", divHeight);
 }
 
-// å‚æ•°ä¸­åŒ…å«.çš„ï¼Œå¿…é¡»ä»¥/ç»“å°¾
+// ²ÎÊıÖĞ°üº¬.µÄ£¬±ØĞëÒÔ/½áÎ²
 function specialEncode(str)
 {
 	str = encodeURI(encodeURI(str));
@@ -132,7 +147,7 @@ function showMyDialog(sURL, obj, dWidth, dHeight)
 {
 	if( $.browser.webkit && parseInt($.browser.version.split(".")[0]) > 36 )
 	{
-		alert("æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒæ­¤åŠŸèƒ½ï¼Œè¯·ä½¿ç”¨åˆ«çš„æµè§ˆå™¨");
+		alert("ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö´Ë¹¦ÄÜ£¬ÇëÊ¹ÓÃ±ğµÄä¯ÀÀÆ÷");
 		return;
 	}
 	sURL += "?timestamp=" + new Date().getTime();
@@ -182,7 +197,7 @@ function getParentWindow()
 
 function sysTimeout()
 {
-	alert("ç³»ç»Ÿè¶…æ—¶ï¼Œè¯·é‡æ–°ç™»å½•");
+	alert("ÏµÍ³³¬Ê±£¬ÇëÖØĞÂµÇÂ¼");
 	var parentWindow = getParentWindow();
 	if( parentWindow == undefined )
 	{

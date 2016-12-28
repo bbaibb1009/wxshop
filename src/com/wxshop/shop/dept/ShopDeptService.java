@@ -29,6 +29,8 @@ public class ShopDeptService implements IShopDeptService{
 	public void addDept(WcShopDept dept) {
 		// TODO Auto-generated method stub
 		hibernateDao.add(dept);
+		hibernateDao.flush();
+		memcachedservice.setDeptAll() ;
 	}
 
 	public void delDept(String[] wdpIds) {
@@ -36,6 +38,9 @@ public class ShopDeptService implements IShopDeptService{
 		String wdpIdStr = StringUtils.arrayToCommaDelimitedString(wdpIds);
 		String sql = "delete from WC_SHOP_DEPT where WDP_ID in ("+wdpIdStr+")";
 		jdbcDao.delete(sql);
+		
+
+		memcachedservice.setDeptAll() ;
 	}
 
 	public WcShopDept getShopDeptById(Integer id) {
@@ -72,6 +77,8 @@ public class ShopDeptService implements IShopDeptService{
 	public void updShopDept(WcShopDept deptQ) {
 		// TODO Auto-generated method stub
 		hibernateDao.update(deptQ);
+		hibernateDao.flush();
+		memcachedservice.setDeptAll() ;
 	}
 
 	public List<Map<String, Object>> queryDeptToCache() {

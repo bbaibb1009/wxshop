@@ -39,7 +39,7 @@
     <div class="row-fluid">
         <div class="widget-box">
           <div class="widget-content nopadding">
-          	<f:form action="${pageContext.request.contextPath}/shop/admin/queryShopAdmin" onsubmit="return false;">
+          	<f:form action="${pageContext.request.contextPath}/shop/dept/queryDept" onsubmit="return false;">
           	<f:hidden path="wdpId"/>
           	<f:hidden path="wdpRegistdate"/>
           	<f:hidden path="wdpRegistor"/>
