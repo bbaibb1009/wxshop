@@ -89,7 +89,7 @@
 											<c:if test="${menu3.WSM_ID == adminMenuId3Cust}">
 											<c:set var="menu3Display" value="active"></c:set>
 											</c:if>
-											<li id="${menu3.WSM_ID}" class="${menu3Display}">
+											<li  id="${menu3.WSM_ID}" class="${menu3Display}">
 												<a href="${pageContext.request.contextPath}${menu3.WSM_URL}">${menu3.WSM_NAME}</a>
 											</li>
 										</c:if>

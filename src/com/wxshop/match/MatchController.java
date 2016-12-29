@@ -21,11 +21,17 @@ public class MatchController
 	@Autowired
 	private IMatchService matchService;
 	
+	@RequestMapping("/")
+	public String index(@ModelAttribute("command") WcMatch match, HttpSession session, Model model)
+	{
+		return "/match/index" ;
+	}
+	
 	@RequestMapping("/queryMatch")
 	public String queryMatch(@ModelAttribute("command") WcMatch match, HttpSession session, Model model)
 	{
 		model.addAttribute(SysConstant.PAGE_RESULT,matchService.queryMatch(match));
-		return "/match/queryMatch" ;
+		return "/match/queryMatch";
 	}
 	
 	
