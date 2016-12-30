@@ -34,47 +34,51 @@ public class SysFilter extends OncePerRequestFilter
 		}
 	}
 
-	public void doFilterInternal(
-			HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException
+	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)	throws ServletException, IOException
 	{
 		String reqUri = request.getRequestURI();
+		//检查报名
+		
 		if( reqUri.startsWith("/wxshop") )
 		{
 			reqUri = reqUri.substring(reqUri.indexOf("/", 1), reqUri.length());
 		}
-		WcShopAdmin admin = null;
-		admin = (WcShopAdmin) request.getSession().getAttribute(SysConstant.ADMIN_INFO);
-		if( admin != null || PatternMatchUtils.simpleMatch(excepts, reqUri) || (reqUri.contains(".") && ! reqUri.toLowerCase().endsWith(".jsp")) )
+		//前台的过滤暂时忽略
+		if(reqUri.startsWith("/my"))
 		{
-			// 把request保存在线程局部变量中
-//			SysConstant.REQUEST_LOCAL.set(request);
-			// 执行目标方法
 			filterChain.doFilter(request, response);
-			// 清空线程局部变量
-//			SysConstant.REQUEST_LOCAL.remove();
 		}
-		else 
+		else
 		{
-			if( request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest") )
+
+			WcShopAdmin admin = null;
+			admin = (WcShopAdmin) request.getSession().getAttribute(SysConstant.ADMIN_INFO);
+			if( admin != null || PatternMatchUtils.simpleMatch(excepts, reqUri) || (reqUri.contains(".") && ! reqUri.toLowerCase().endsWith(".jsp")) )
 			{
-				response.setStatus(999);
+				// 把request保存在线程局部变量中
+//				SysConstant.REQUEST_LOCAL.set(request);
+				// 执行目标方法
+				filterChain.doFilter(request, response);
+				// 清空线程局部变量
+//				SysConstant.REQUEST_LOCAL.remove();
 			}
 			else 
 			{
-				if( ! reqUri.contains("/add") && ! reqUri.contains("/upd") && ! reqUri.contains("/del") )
+				if( request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest") )
 				{
-					Cookie cookieUri = new Cookie(SysConstant.LOGIN_REDIRECT_URI_WX, reqUri);
-					cookieUri.setMaxAge(SysConstant.COOKIE_AGE);
-					cookieUri.setPath("/");
-					response.addCookie(cookieUri);
+					response.setStatus(999);
 				}
-				
-				request.setAttribute("msgCode", "1");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/view1/common/msg.jsp");
-				dispatcher.forward(request, response);
-				
+				else 
+				{
+					//提示未登录
+					request.setAttribute("msgCode", "1");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/view1/common/msg.jsp");
+					dispatcher.forward(request, response);
+					
+				}
 			}
+			
 		}
+		
 	}
 }
