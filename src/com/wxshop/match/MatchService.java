@@ -28,10 +28,14 @@ public class MatchService implements IMatchService {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder(
 			" select " +
-			" a.WMA_ID,	a.WMA_NAME," +
-			" a.WMA_PLACE,a.WMA_RUNTIME," +
-			" a.WMA_GAME_PROJECT,a.WMA_YEAR," +
-			" a.WMA_SESSION_INDEX,a.WMA_LAST_SESSION_ID," +
+			" a.WMA_ID," +
+			" a.WMA_NAME," +
+			" a.WMA_PLACE," +
+			" a.WMA_RUNTIME," +
+			" a.WMA_GAME_PROJECT," +
+			" a.WMA_YEAR," +
+			" a.WMA_SESSION_INDEX," +
+			" a.WMA_LAST_SESSION_ID," +
 			" a.WMA_EMERGENCY_CONTRACT,	a.WMA_EMERGENCY_PHONE," +
 			" a.WMA_STATUS,	a.WMA_DESC,	a.WMA_REGISTOR,a.WMA_REGIST_DATE ");
 		StringBuilder sqlCnt = new StringBuilder(
