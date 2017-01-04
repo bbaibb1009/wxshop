@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * WcMacthActivity entity. @author MyEclipse Persistence Tools
@@ -41,6 +42,10 @@ public class WcMacthActivity implements java.io.Serializable {
 	private String wtaRegistDate;
 	
 	private Integer wtaImg;
+	
+	private String currentPage;
+	private String pageSize;
+	private String[] wtaIds;
 
 	// Constructors
 
@@ -288,6 +293,33 @@ public class WcMacthActivity implements java.io.Serializable {
 	public void setWtaImg(Integer wtaImg) {
 		this.wtaImg = wtaImg;
 	}
+	
+	
+    @Transient 
+	public String getCurrentPage() {
+		return currentPage;
+	}
 
+	public void setCurrentPage(String currentPage) {
+		this.currentPage = currentPage;
+	}
+    @Transient 
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+    @Transient 
+	public String[] getWtaIds() {
+		return wtaIds;
+	}
+
+	public void setWtaIds(String[] wtaIds) {
+		this.wtaIds = wtaIds;
+	}
+
+	
 	
 }
