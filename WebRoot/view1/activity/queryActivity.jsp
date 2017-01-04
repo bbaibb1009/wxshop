@@ -28,7 +28,7 @@
   <div class="container-fluid">
     <hr>
     <div class="btn-group">
-	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/activity/toAddActivity'" value="添加"/> 
+	   <input type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/my/toAddActivity/1'" value="添加"/> 
 	   <input type="button" class="btn btn-primary" onclick="javascript:delChk('wsmIds', '${pageContext.request.contextPath}/activity/delActivity');" value="删除"/>
     </div>
     <div class="row-fluid">
