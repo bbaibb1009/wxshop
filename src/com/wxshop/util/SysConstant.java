@@ -108,6 +108,10 @@ public class SysConstant
 	
 	public static String xiaoshou = "3";
 	
+	public static String GLOBAL_TITLE_HTML = "globalTitle";
+	
+	public static String SESSIONID_LOGIN = "sessionIdLogin";
+	
 }
 
 

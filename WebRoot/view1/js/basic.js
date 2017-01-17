@@ -197,7 +197,7 @@ function getParentWindow()
 
 function sysTimeout()
 {
-	alert("系统超时，请重新登录");
+	alert("\u7cfb\u7edf\u8d85\u65f6\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55");
 	var parentWindow = getParentWindow();
 	if( parentWindow == undefined )
 	{

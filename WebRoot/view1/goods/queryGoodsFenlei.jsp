@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <html>
 <head>
-<title>微商城管理后台</title>
+<title>${applicationScope.globalTitle}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/view1/css/bootstrap.css" />

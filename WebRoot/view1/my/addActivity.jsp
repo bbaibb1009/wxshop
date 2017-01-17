@@ -39,22 +39,22 @@
 		    </div>
 		    <div class="input-row">
 			    <label><i class="icon-uniE952 "></i>&nbsp;金额</label>
-			    <input type="text" placeholder="请输入金额" required>
+			    <input type="text" placeholder="请输入金额" required/>
 			    <div class="form_hint">收费活动，金额不能空着</div>
 		    </div>
 			<div class="input-row">
 			    <label><i class="icon-uniE96B"></i>&nbsp;人数</label>
-			    <input type="text" placeholder="空着就是不限人数" required>
+			    <input type="text" placeholder="空着就是不限人数" required/>
 			    <div class="form_hint">请填写数字</div>
 			</div>
 			<div class="input-row">
 			    <label><i class="icon-uniE96C"></i>&nbsp;时间</label>
-			    <input type="text" placeholder="请填写" required >
+			    <input type="text" placeholder="请填写" required/>
 			    <div class="form_hint">请填写具体时间</div>
 			</div>
 			<div class="input-row">
 			    <label><i class="icon-uniE902"></i>&nbsp;地点</label>
-			    <input type="text" placeholder="地点" required>
+			    <input type="text" placeholder="地点" required/>
 			    <div class="form_hint">请填写</div>
 			</div>			                 
         	<div class="input-row">

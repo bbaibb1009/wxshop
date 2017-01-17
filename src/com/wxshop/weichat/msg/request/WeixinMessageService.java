@@ -95,6 +95,7 @@ public class WeixinMessageService implements IWeixinMessageService {
         String msgType 		= requestMap.get("MsgType")==null?"":requestMap.get("MsgType");  
         //发过来的消息
         String content		= requestMap.get("Content")==null?"":requestMap.get("Content");
+        log.error(content);
         String respContent 	= "";
         WcWeiBaseMsgResp 	respMessage = new WcWeiBaseMsgResp();
         respMessage.setToUserName(fromUserName);  
@@ -163,6 +164,14 @@ public class WeixinMessageService implements IWeixinMessageService {
                 // TODO 自定义菜单权没有开放，暂不处理该类消息 
             	respMessage.setMsgType(Constant.EVENT_TYPE_CLICK);
             }  
+            //扫码事件
+            else if(eventType.equals(Constant.EVENT_TYPE_SCAN))
+            {
+            	//
+            	
+            	
+            	
+            }
         }
         return respMessage;
     }

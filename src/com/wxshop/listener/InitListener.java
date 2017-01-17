@@ -32,5 +32,6 @@ public class InitListener implements ServletContextListener
 	{
 		javax.servlet.ServletContext applicationContext = webApplicationContext.getServletContext();
 		applicationContext.setAttribute(SysConstant.SYS_STARTUP,webApplicationContext.getStartupDate());
+		applicationContext.setAttribute(SysConstant.GLOBAL_TITLE_HTML,"21\u5929\u56e2");
 	}
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.pudding.weichat.accesstoken.AccessTokenUtil;
+
 import com.wxshop.common.dao.IHibernateDao;
 import com.wxshop.common.dao.IJdbcDao;
 import com.wxshop.util.DateUtil;
@@ -56,7 +58,7 @@ public class WeiAccessTokenService implements IWeiAccessTokenService {
 		try
 		{
 			WcWeiFuwuhao fuwuhao = fuwuhaoService.getWeiFwhByAppId(appId);
-			JSONObject jsonObject = cn.pudding.weichat.accesstoken.AccessTokenUtil.getAccessTokenJson(fuwuhao.getFwhAppId(), fuwuhao.getFwhAppSecret());
+			JSONObject jsonObject = AccessTokenUtil.getAccessTokenJson(fuwuhao.getFwhAppId(), fuwuhao.getFwhAppSecret());
 			String accessToken 	= jsonObject.getString("access_token");
 			int expires_in  	= jsonObject.getInt("expires_in");
 			if(accessToken!=null&&accessToken.length()>0)

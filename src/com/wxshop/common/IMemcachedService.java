@@ -33,6 +33,8 @@ public interface IMemcachedService
 	
 	public List<Map<String,Object>> getSingleDeptAll();
 	
+	public String setSceneIdBySession(String sessionID);
+	
 	
 	
 }

@@ -40,7 +40,8 @@
   		<param-value>
   		/,/admin/adminLogin,/admin/adminLoginSpark,/admin/toForgetPwd,/admin/forgetPwd,/admin/toResetPwd,/admin/resetPwd,/admin/toRegisterAdmin,/admin/registerAdmin,
   		/weimember/toBindMember/*,/weimember/bindMember,/weimember/toMemberIndex/*,/goods/queryGoodsFenlei/*,/admin/toMsg,
-  		/shop/menu/queryMenu,/shop/menu/toAddShopMenu,/shop/menu/addShopMenu,/test/test,/shop/admin/queryShopAdmin,/shop/menu/toUpdShopMenu,/shop/menu/getParentMenuTree/*/*,/shop/menu/updShopMenu,/weixinmsg/getServeEchoTest/*
+  		/shop/menu/queryMenu,/shop/menu/toAddShopMenu,/shop/menu/addShopMenu,/test/test,/shop/admin/queryShopAdmin,
+  		/shop/menu/toUpdShopMenu,/shop/menu/getParentMenuTree/*/*,/shop/menu/updShopMenu,/weixinmsg/getServeEchoTest/*,/qrCode/getLoginWeiQrcode
   		</param-value>
   	</init-param>
   </filter>

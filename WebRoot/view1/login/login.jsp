@@ -22,8 +22,11 @@
 					alert(alertMsg);
 				}
 			});
+			
+			//做一个回车的相应按钮 
+			
 		</script>
-	<title>登录</title>
+	<title>${applicationScope.globalTitle}</title>
 </head>
 <body>
 	<div id="loginbox">    
@@ -45,19 +48,19 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">扫码</a></span>
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover" >扫码</a></span>
                     <span class="pull-right"><a type="button" href="javascript:void(0);" onclick="javascript:login();" class="btn btn-success">登陆</a></span>
                 </div>
             </f:form>
             <form id="recoverform" action="#" class="form-vertical">
 				<p class="normal_text">微信扫一扫</p>
                     <div class="controls">
-                        <div class="main_input_box">
-                            	这是一个二维码
+                        <div class="main_input_box" id="sceneImg">
+                            这是一个二维码
                         </div>
                     </div>
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; 继续登录</a></span>
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo;继续登录</a></span>
                     <%-- <span class="pull-right"><a class="btn btn-info"/>保存</a></span>--%>
                 </div>
             </form>

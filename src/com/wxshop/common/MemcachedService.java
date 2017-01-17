@@ -1,5 +1,6 @@
 package com.wxshop.common;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -190,6 +191,18 @@ public class MemcachedService implements IMemcachedService
 		}
 		return singleDeptList;
 	}
+
+
+	public String setSceneIdBySession(String sessionID) {
+		// TODO Auto-generated method stub
+		List<String> list =  (List<String>)memCachedClient.get(SysConstant.SESSIONID_LOGIN);
+		if(list==null)list = new ArrayList<String>();
+		list.add(sessionID);
+		memCachedClient.set(SysConstant.SESSIONID_LOGIN,list);
+		return Integer.toString(list.size()-1);
+	}
+	
+	
 	
 }
 
